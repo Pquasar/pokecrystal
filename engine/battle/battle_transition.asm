@@ -620,7 +620,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 ; Loading is done bit by bit
 	and a
 	jr z, .done
-	sla a
+	add a
 	jr nc, .no_load
 	ld [hl], BATTLETRANSITION_SQUARE
 .no_load

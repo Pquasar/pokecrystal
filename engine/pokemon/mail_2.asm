@@ -6,11 +6,6 @@
 	const LITEBLUEMAIL_INDEX ; 2
 	const PORTRAITMAIL_INDEX ; 3
 	const LOVELY_MAIL_INDEX  ; 4
-	const EON_MAIL_INDEX     ; 5
-	const MORPH_MAIL_INDEX   ; 6
-	const BLUESKY_MAIL_INDEX ; 7
-	const MUSIC_MAIL_INDEX   ; 8
-	const MIRAGE_MAIL_INDEX  ; 9
 DEF NUM_MAIL EQU const_value
 
 ReadPartyMonMail:
@@ -139,11 +134,6 @@ MailGFXPointers:
 	dbw LITEBLUEMAIL, LoadLiteBlueMailGFX
 	dbw PORTRAITMAIL, LoadPortraitMailGFX
 	dbw LOVELY_MAIL,  LoadLovelyMailGFX
-	dbw EON_MAIL,     LoadEonMailGFX
-	dbw MORPH_MAIL,   LoadMorphMailGFX
-	dbw BLUESKY_MAIL, LoadBlueSkyMailGFX
-	dbw MUSIC_MAIL,   LoadMusicMailGFX
-	dbw MIRAGE_MAIL,  LoadMirageMailGFX
 	assert_table_length NUM_MAIL
 	db -1 ; end
 
@@ -726,7 +716,6 @@ MailGFX_PlaceMessage:
 	cp PORTRAITMAIL_INDEX
 	jr z, .place_author
 	hlcoord 6, 14
-	cp MORPH_MAIL_INDEX
 	jr z, .place_author
 	hlcoord 5, 14
 

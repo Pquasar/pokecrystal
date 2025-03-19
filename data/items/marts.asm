@@ -56,16 +56,16 @@ MartCherrygroveDex:
 
 MartViolet:
 	db 10 ; # items
-	db POKE_BALL
-	db POTION
-	db ESCAPE_ROPE
-	db ANTIDOTE
-	db PARLYZ_HEAL
-	db AWAKENING
-	db X_DEFEND
-	db X_ATTACK
-	db X_SPEED
-	db FLOWER_MAIL
+	db LEFTOVERS
+	db GOLD_BERRY
+	db MIRACLEBERRY
+	db SILVERPOWDER
+	db SHARP_BEAK
+	db POISON_BARB
+	db MYSTIC_WATER
+	db BLACKBELT_I
+	db CHARCOAL
+	db TWISTEDSPOON
 	db -1 ; end
 
 MartAzalea:
@@ -135,34 +135,34 @@ MartGoldenrod4F:
 
 MartGoldenrod5F1:
 	db 3 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db TM_ICE_PUNCH
+	db TM_EXPLOSION
+	db TM_EXPLOSION
+	db TM_EXPLOSION
 	db -1 ; end
 
 MartGoldenrod5F2:
 	db 4 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db TM_ICE_PUNCH
-	db TM_HEADBUTT
+	db TM_EXPLOSION
+	db TM_EXPLOSION
+	db TM_EXPLOSION
+	db TM_LIGHT_SCREEN
 	db -1 ; end
 
 MartGoldenrod5F3:
 	db 4 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db TM_ICE_PUNCH
-	db TM_ROCK_SMASH
+	db TM_EXPLOSION
+	db TM_EXPLOSION
+	db TM_EXPLOSION
+	db TM_LIGHT_SCREEN
 	db -1 ; end
 
 MartGoldenrod5F4:
 	db 5 ; # items
-	db TM_THUNDERPUNCH
-	db TM_FIRE_PUNCH
-	db TM_ICE_PUNCH
-	db TM_HEADBUTT
-	db TM_ROCK_SMASH
+	db TM_EXPLOSION
+	db TM_EXPLOSION
+	db TM_EXPLOSION
+	db TM_LIGHT_SCREEN
+	db TM_LIGHT_SCREEN
 	db -1 ; end
 
 MartOlivine:

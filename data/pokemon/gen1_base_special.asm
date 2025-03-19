@@ -3,19 +3,19 @@
 KantoMonSpecials:
 	table_width 1
 	db  65 ; BULBASAUR
-	db  80 ; IVYSAUR
+	db  80 ; LEAFEON
 	db 100 ; VENUSAUR
 	db  50 ; CHARMANDER
-	db  65 ; CHARMELEON
+	db  65 ; SYLVEON
 	db  85 ; CHARIZARD
 	db  50 ; SQUIRTLE
-	db  65 ; WARTORTLE
+	db  65 ; GLACEON
 	db  85 ; BLASTOISE
 	db  20 ; CATERPIE
-	db  25 ; METAPOD
+	db  25 ; YANMEGA
 	db  80 ; BUTTERFREE
 	db  20 ; WEEDLE
-	db  25 ; KAKUNA
+	db  25 ; MAMOSWINE
 	db  45 ; BEEDRILL
 	db  35 ; PIDGEY
 	db  50 ; PIDGEOTTO
@@ -49,7 +49,7 @@ KantoMonSpecials:
 	db 100 ; VILEPLUME
 	db  55 ; PARAS
 	db  80 ; PARASECT
-	db  40 ; VENONAT
+	db  90 ; LICKILICKY
 	db  90 ; VENOMOTH
 	db  45 ; DIGLETT
 	db  70 ; DUGTRIO
@@ -70,7 +70,7 @@ KantoMonSpecials:
 	db  35 ; MACHOP
 	db  50 ; MACHOKE
 	db  65 ; MACHAMP
-	db  70 ; BELLSPROUT
+	db  70 ; HONCHKROW
 	db  85 ; WEEPINBELL
 	db 100 ; VICTREEBEL
 	db 100 ; TENTACOOL
@@ -97,7 +97,7 @@ KantoMonSpecials:
 	db 115 ; HAUNTER
 	db 130 ; GENGAR
 	db  30 ; ONIX
-	db  90 ; DROWZEE
+	db  90 ; GLISCOR
 	db 115 ; HYPNO
 	db  25 ; KRABBY
 	db  50 ; KINGLER
@@ -117,7 +117,7 @@ KantoMonSpecials:
 	db 105 ; CHANSEY
 	db 100 ; TANGELA
 	db  40 ; KANGASKHAN
-	db  70 ; HORSEA
+	db  70 ; RHYPERIOR
 	db  95 ; SEADRA
 	db  50 ; GOLDEEN
 	db  80 ; SEAKING

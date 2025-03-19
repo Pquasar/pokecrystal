@@ -13,7 +13,7 @@ SilverCaveRoom1MaxElixer:
 	itemball MAX_ELIXER
 
 SilverCaveRoom1Protein:
-	itemball PROTEIN
+	itemball NUGGET
 
 SilverCaveRoom1EscapeRope:
 	itemball ESCAPE_ROPE

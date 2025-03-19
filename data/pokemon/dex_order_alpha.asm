@@ -15,7 +15,7 @@ AlphabeticalPokedexOrder:
 	db BAYLEEF
 	db BEEDRILL
 	db BELLOSSOM
-	db BELLSPROUT
+	db HONCHKROW
 	db BLASTOISE
 	db BLISSEY
 	db BULBASAUR
@@ -25,7 +25,7 @@ AlphabeticalPokedexOrder:
 	db CHANSEY
 	db CHARIZARD
 	db CHARMANDER
-	db CHARMELEON
+	db SYLVEON
 	db CHIKORITA
 	db CHINCHOU
 	db CLEFABLE
@@ -47,7 +47,7 @@ AlphabeticalPokedexOrder:
 	db DRAGONAIR
 	db DRAGONITE
 	db DRATINI
-	db DROWZEE
+	db GLISCOR
 	db DUGTRIO
 	db DUNSPARCE
 	db EEVEE
@@ -88,13 +88,13 @@ AlphabeticalPokedexOrder:
 	db HITMONTOP
 	db HO_OH
 	db HOOTHOOT
-	db HOPPIP
-	db HORSEA
+	db MAGNEZONE
+	db RHYPERIOR
 	db HOUNDOOM
-	db HOUNDOUR
+	db MAGMORTAR
 	db HYPNO
 	db IGGLYBUFF
-	db IVYSAUR
+	db LEAFEON
 	db JIGGLYPUFF
 	db JOLTEON
 	db JUMPLUFF
@@ -102,7 +102,7 @@ AlphabeticalPokedexOrder:
 	db KABUTO
 	db KABUTOPS
 	db KADABRA
-	db KAKUNA
+	db MAMOSWINE
 	db KANGASKHAN
 	db KINGDRA
 	db KINGLER
@@ -112,7 +112,7 @@ AlphabeticalPokedexOrder:
 	db LAPRAS
 	db LARVITAR
 	db LEDIAN
-	db LEDYBA
+	db PORYGON_Z
 	db LICKITUNG
 	db LUGIA
 	db MACHAMP
@@ -126,12 +126,12 @@ AlphabeticalPokedexOrder:
 	db MAGNETON
 	db MANKEY
 	db MANTINE
-	db MAREEP
+	db TANGROWTH
 	db MARILL
 	db MAROWAK
 	db MEGANIUM
 	db MEOWTH
-	db METAPOD
+	db YANMEGA
 	db MEW
 	db MEWTWO
 	db MILTANK
@@ -140,7 +140,7 @@ AlphabeticalPokedexOrder:
 	db MR__MIME
 	db MUK
 	db MURKROW
-	db NATU
+	db AMBIPOM
 	db NIDOKING
 	db NIDOQUEEN
 	db NIDORAN_F
@@ -194,7 +194,7 @@ AlphabeticalPokedexOrder:
 	db SEADRA
 	db SEAKING
 	db SEEL
-	db SENTRET
+	db ELECTIVIRE
 	db SHELLDER
 	db SHUCKLE
 	db SKARMORY
@@ -209,7 +209,7 @@ AlphabeticalPokedexOrder:
 	db SNORLAX
 	db SNUBBULL
 	db SPEAROW
-	db SPINARAK
+	db WEAVILE
 	db SQUIRTLE
 	db STANTLER
 	db STARMIE
@@ -218,8 +218,8 @@ AlphabeticalPokedexOrder:
 	db SUDOWOODO
 	db SUICUNE
 	db SUNFLORA
-	db SUNKERN
-	db SWINUB
+	db TOGEKISS
+	db MISMAGIUS
 	db TANGELA
 	db TAUROS
 	db TEDDIURSA
@@ -236,13 +236,13 @@ AlphabeticalPokedexOrder:
 	db URSARING
 	db VAPOREON
 	db VENOMOTH
-	db VENONAT
+	db LICKILICKY
 	db VENUSAUR
 	db VICTREEBEL
 	db VILEPLUME
 	db VOLTORB
 	db VULPIX
-	db WARTORTLE
+	db GLACEON
 	db WEEDLE
 	db WEEPINBELL
 	db WEEZING

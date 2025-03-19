@@ -180,4 +180,24 @@ BattleCommandPointers:
 	dw BattleCommand_SuperEffectiveLoopText
 	dw BattleCommand_StartLoop
 	dw BattleCommand_Curl
+	dw BattleCommand_DragonUp
+	dw BattleCommand_DoubleAcrobatics
+	dw BattleCommand_BrickBreak
+	dw BattleCommand_QuiverDance
+	dw BattleCommand_SuckerPunch
+	dw BattleCommand_DoBurn
+	dw BattleCommand_Stockpile
+	dw BattleCommand_GyroBall
+	dw BattleCommand_BulkUp
+	dw BattleCommand_CalmMind
+	dw BattleCommand_Coil
+	dw BattleCommand_StartHail
+	dw BattleCommand_Hex
+	dw BattleCommand_HoneClaws
+	dw BattleCommand_Growth
+	dw BattleCommand_LowKick
+	dw BattleCommand_KnockOff
+	dw BattleCommand_KnockOffDamage
+	dw BattleCommand_StealthRock
+	dw BattleCommand_ClearSmog
 	assert_table_length NUM_EFFECT_COMMANDS

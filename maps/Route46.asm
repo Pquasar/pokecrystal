@@ -90,7 +90,7 @@ TrainerPicnickerErin1:
 	checkevent EVENT_GOT_CALCIUM_FROM_ERIN
 	iftrue .GotCalciumAlready
 	scall Route46RematchGiftF
-	verbosegiveitem CALCIUM
+	verbosegiveitem NUGGET
 	iffalse ErinNoRoomForCalcium
 	setevent EVENT_GOT_CALCIUM_FROM_ERIN
 	sjump Route46NumberAcceptedF
@@ -102,7 +102,7 @@ TrainerPicnickerErin1:
 	opentext
 	writetext PicnickerErin2BeatenText
 	waitbutton
-	verbosegiveitem CALCIUM
+	verbosegiveitem NUGGET
 	iffalse ErinNoRoomForCalcium
 	clearevent EVENT_ERIN_CALCIUM
 	setevent EVENT_GOT_CALCIUM_FROM_ERIN

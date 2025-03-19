@@ -21,7 +21,7 @@ AzaleaGymBugsyScript:
 	waitbutton
 	closetext
 	winlosstext BugsyText_ResearchIncomplete, 0
-	loadtrainer BUGSY, BUGSY1
+	loadtrainer JASMINE, JASMINE1
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_BUGSY
@@ -41,7 +41,7 @@ AzaleaGymBugsyScript:
 	setevent EVENT_BEAT_BUG_CATCHER_JOSH
 	writetext BugsyText_HiveBadgeSpeech
 	promptbutton
-	verbosegiveitem TM_FURY_CUTTER
+	verbosegiveitem TM_ROCK_SLIDE
 	iffalse .NoRoomForFuryCutter
 	setevent EVENT_GOT_TM49_FURY_CUTTER
 	writetext BugsyText_FuryCutterSpeech
@@ -68,10 +68,7 @@ AzaleaGymActivateRockets:
 	jumpstd RadioTowerRocketsScript
 
 TrainerTwinsAmyandmay1:
-	trainer TWINS, AMYANDMAY1, EVENT_BEAT_TWINS_AMY_AND_MAY, TwinsAmyandmay1SeenText, TwinsAmyandmay1BeatenText, 0, .AfterScript
-
-.AfterScript:
-	endifjustbattled
+	faceplayer
 	opentext
 	writetext TwinsAmyandmay1AfterBattleText
 	waitbutton
@@ -79,10 +76,7 @@ TrainerTwinsAmyandmay1:
 	end
 
 TrainerTwinsAmyandmay2:
-	trainer TWINS, AMYANDMAY2, EVENT_BEAT_TWINS_AMY_AND_MAY, TwinsAmyandmay2SeenText, TwinsAmyandmay2BeatenText, 0, .AfterScript
-
-.AfterScript:
-	endifjustbattled
+	faceplayer
 	opentext
 	writetext TwinsAmyandmay2AfterBattleText
 	waitbutton
@@ -90,10 +84,7 @@ TrainerTwinsAmyandmay2:
 	end
 
 TrainerBugCatcherBenny:
-	trainer BUG_CATCHER, BUG_CATCHER_BENNY, EVENT_BEAT_BUG_CATCHER_BENNY, BugCatcherBennySeenText, BugCatcherBennyBeatenText, 0, .AfterScript
-
-.AfterScript:
-	endifjustbattled
+	faceplayer
 	opentext
 	writetext BugCatcherBennyAfterBattleText
 	waitbutton
@@ -101,10 +92,7 @@ TrainerBugCatcherBenny:
 	end
 
 TrainerBugCatcherAl:
-	trainer BUG_CATCHER, AL, EVENT_BEAT_BUG_CATCHER_AL, BugCatcherAlSeenText, BugCatcherAlBeatenText, 0, .AfterScript
-
-.AfterScript:
-	endifjustbattled
+	faceplayer
 	opentext
 	writetext BugCatcherAlAfterBattleText
 	waitbutton
@@ -112,10 +100,7 @@ TrainerBugCatcherAl:
 	end
 
 TrainerBugCatcherJosh:
-	trainer BUG_CATCHER, JOSH, EVENT_BEAT_BUG_CATCHER_JOSH, BugCatcherJoshSeenText, BugCatcherJoshBeatenText, 0, .AfterScript
-
-.AfterScript:
-	endifjustbattled
+	faceplayer
 	opentext
 	writetext BugCatcherJoshAfterBattleText
 	waitbutton
@@ -374,9 +359,9 @@ AzaleaGym_MapEvents:
 
 	def_object_events
 	object_event  5,  7, SPRITE_BUGSY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, AzaleaGymBugsyScript, -1
-	object_event  5,  3, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 2, TrainerBugCatcherBenny, -1
-	object_event  8,  8, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBugCatcherAl, -1
-	object_event  0,  2, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 3, TrainerBugCatcherJosh, -1
-	object_event  4, 10, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerTwinsAmyandmay1, -1
-	object_event  5, 10, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 1, TrainerTwinsAmyandmay2, -1
+	object_event  5,  3, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 2, TrainerBugCatcherBenny, -1
+	object_event  8,  8, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 3, TrainerBugCatcherAl, -1
+	object_event  0,  2, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 3, TrainerBugCatcherJosh, -1
+	object_event  4, 10, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 1, TrainerTwinsAmyandmay1, -1
+	object_event  5, 10, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 1, TrainerTwinsAmyandmay2, -1
 	object_event  7, 13, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, AzaleaGymGuideScript, -1

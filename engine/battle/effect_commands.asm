@@ -196,9 +196,9 @@ BattleCommand_CheckTurn:
 
 	; Flame Wheel and Sacred Fire thaw the user.
 	ld a, [wCurPlayerMove]
-	cp FLAME_WHEEL
-	jr z, .not_frozen
 	cp SACRED_FIRE
+	jr z, .not_frozen
+	cp SCALD
 	jr z, .not_frozen
 
 	ld hl, FrozenSolidText
@@ -423,9 +423,9 @@ CheckEnemyTurn:
 
 	; Flame Wheel and Sacred Fire thaw the user.
 	ld a, [wCurEnemyMove]
-	cp FLAME_WHEEL
-	jr z, .not_frozen
 	cp SACRED_FIRE
+	jr z, .not_frozen
+	cp SCALD
 	jr z, .not_frozen
 
 	ld hl, FrozenSolidText
@@ -1077,7 +1077,6 @@ BattleCommand_DoTurn:
 	ret
 
 .continuousmoves
-	db EFFECT_RAZOR_WIND
 	db EFFECT_SKY_ATTACK
 	db EFFECT_SKULL_BASH
 	db EFFECT_SOLARBEAM
@@ -1115,6 +1114,37 @@ CheckMimicUsed:
 
 .mimic
 	and a
+	ret
+
+
+SandstormSpDefBoost:
+; First, check if Sandstorm is active.
+	ld a, [wBattleWeather]
+	cp WEATHER_SANDSTORM
+	ret nz
+
+; Then, check the opponent's types.
+	ld hl, wEnemyMonType1
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld hl, wBattleMonType1
+.ok
+	ld a, [hli]
+	cp ROCK
+	jr z, .start_boost
+	ld a, [hl]
+	cp ROCK
+	ret nz
+
+.start_boost
+	ld h, b
+	ld l, c
+	srl b
+	rr c
+	add hl, bc
+	ld b, h
+	ld c, l
 	ret
 
 BattleCommand_Critical:
@@ -1166,7 +1196,8 @@ BattleCommand_Critical:
 	bit SUBSTATUS_FOCUS_ENERGY, a
 	jr z, .CheckCritical
 
-; +1 critical level
+; +2 critical level
+	inc c
 	inc c
 
 .CheckCritical:
@@ -1179,8 +1210,7 @@ BattleCommand_Critical:
 	pop bc
 	jr nc, .ScopeLens
 
-; +2 critical level
-	inc c
+; +1 critical level
 	inc c
 
 .ScopeLens:
@@ -1210,6 +1240,10 @@ INCLUDE "data/moves/critical_hit_moves.asm"
 INCLUDE "data/battle/critical_hit_chances.asm"
 
 INCLUDE "engine/battle/move_effects/triple_kick.asm"
+
+INCLUDE "engine/battle/move_effects/low_kick.asm"
+
+INCLUDE "engine/battle/move_effects/knock_off.asm"
 
 BattleCommand_Stab:
 ; STAB = Same Type Attack Bonus
@@ -1243,6 +1277,11 @@ BattleCommand_Stab:
 .go
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVarAddr
+	and TYPE_MASK
+	cp FREEZEDRY
+	jp nz, .okfreezedry
+	ld a, ICE
+.okfreezedry
 	ld [wCurType], a
 
 	push hl
@@ -1252,12 +1291,6 @@ BattleCommand_Stab:
 	pop bc
 	pop de
 	pop hl
-
-	push de
-	push bc
-	farcall DoBadgeTypeBoosts
-	pop bc
-	pop de
 
 	ld a, [wCurType]
 	cp b
@@ -1290,6 +1323,7 @@ BattleCommand_Stab:
 .SkipStab:
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
+	and TYPE_MASK
 	ld b, a
 	ld hl, TypeMatchups
 
@@ -1399,16 +1433,17 @@ BattleCheckTypeMatchup:
 	ld hl, wEnemyMonType1
 	ldh a, [hBattleTurn]
 	and a
-	jr z, CheckTypeMatchup
+	jr z, .get_type
 	ld hl, wBattleMonType1
+.get_type
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar ; preserves hl, de, and bc
 	; fallthrough
 CheckTypeMatchup:
-; BUG: AI makes a false assumption about CheckTypeMatchup (see docs/bugs_and_glitches.md)
 	push hl
 	push de
 	push bc
-	ld a, BATTLE_VARS_MOVE_TYPE
-	call GetBattleVar
+	and TYPE_MASK
 	ld d, a
 	ld b, [hl]
 	inc hl
@@ -1562,6 +1597,9 @@ BattleCommand_CheckHit:
 	call .ThunderRain
 	ret z
 
+	call .BlizzardHail
+	ret z
+
 	call .XAccuracy
 	ret nz
 
@@ -1675,8 +1713,6 @@ BattleCommand_CheckHit:
 
 	cp EARTHQUAKE
 	ret z
-	cp FISSURE
-	ret z
 	cp MAGNITUDE
 	ret z
 
@@ -1718,22 +1754,16 @@ BattleCommand_CheckHit:
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 
-	cp GUST
-	ret z
 	cp WHIRLWIND
 	ret z
 	cp THUNDER
 	ret z
-	cp TWISTER
-	ret
 
 .DigMoves:
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 
 	cp EARTHQUAKE
-	ret z
-	cp FISSURE
 	ret z
 	cp MAGNITUDE
 	ret
@@ -1747,6 +1777,17 @@ BattleCommand_CheckHit:
 
 	ld a, [wBattleWeather]
 	cp WEATHER_RAIN
+	ret
+
+.BlizzardHail:
+; Return z if the current move always hits in hail, and it is hailing.
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_BLIZZARD
+	ret nz
+
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
 	ret
 
 .XAccuracy:
@@ -1886,8 +1927,6 @@ BattleCommand_LowerSub:
 
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
-	cp EFFECT_RAZOR_WIND
-	jr z, .charge_turn
 	cp EFFECT_SKY_ATTACK
 	jr z, .charge_turn
 	cp EFFECT_SKULL_BASH
@@ -2226,13 +2265,30 @@ GetFailureResultText:
 	and EFFECTIVENESS_MASK
 	ret z
 
+	ldh a, [hBattleTurn]
+	and a
+	jp z, .player_miss
+
+	ld hl, wEnemyMonMaxHP
+	ld a, [hli]
+	ld b, [hl]
+	jp .go
+.player_miss:
+	ld hl, wBattleMonMaxHP
+	ld a, [hli]
+	ld b, [hl]
+
+.go:
+	ld hl, wCurDamage
+	ld [hl], a
+	inc hl
+	ld [hl], b
+
 	ld hl, wCurDamage
 	ld a, [hli]
 	ld b, [hl]
-rept 3
 	srl a
 	rr b
-endr
 	ld [hl], b
 	dec hl
 	ld [hli], a
@@ -2505,21 +2561,24 @@ DittoMetalPowder:
 	pop bc
 	ret nz
 
-; BUG: Metal Powder can increase damage taken with boosted (Special) Defense (see docs/bugs_and_glitches.md)
-	ld a, c
-	srl a
-	add c
-	ld c, a
+	ld h, b
+	ld l, c
+	srl b
+	rr c
+	add hl, bc
+	ld b, h
+	ld c, l
+
+	ld a, HIGH(MAX_STAT_VALUE)
+	cp b
+	jr c, .cap
+	ret nz
+	ld a, LOW(MAX_STAT_VALUE)
+	cp c
 	ret nc
 
-	srl b
-	ld a, b
-	and a
-	jr nz, .done
-	inc b
-.done
-	scf
-	rr c
+.cap
+	ld bc, MAX_STAT_VALUE
 	ret
 
 BattleCommand_DamageStats:
@@ -2574,6 +2633,8 @@ PlayerAttackDamage:
 	ld b, a
 	ld c, [hl]
 
+	call SandstormSpDefBoost
+
 	ld a, [wEnemyScreens]
 	bit SCREENS_LIGHT_SCREEN, a
 	jr z, .specialcrit
@@ -2601,11 +2662,15 @@ PlayerAttackDamage:
 	call ThickClubBoost
 
 .done
+	push hl
+	call DittoMetalPowder
+	pop hl
+
 	call TruncateHL_BC
 
 	ld a, [wBattleMonLevel]
 	ld e, a
-	call DittoMetalPowder
+
 
 	ld a, 1
 	and a
@@ -2642,10 +2707,6 @@ TruncateHL_BC:
 	inc l
 
 .finish
-; BUG: Reflect and Light Screen can make (Special) Defense wrap around above 1024 (see docs/bugs_and_glitches.md)
-	ld a, [wLinkMode]
-	cp LINK_COLOSSEUM
-	jr z, .done
 ; If we go back to the loop point,
 ; it's the same as doing this exact
 ; same check twice.
@@ -2653,7 +2714,6 @@ TruncateHL_BC:
 	or b
 	jr nz, .loop
 
-.done
 	ld b, l
 	ret
 
@@ -2772,6 +2832,16 @@ SpeciesItemBoost:
 ; BUG: Thick Club and Light Ball can make (Special) Attack wrap around above 1024 (see docs/bugs_and_glitches.md)
 	sla l
 	rl h
+	ld a, HIGH(MAX_STAT_VALUE)
+	cp h
+	jr c, .cap
+	ret nz
+	ld a, LOW(MAX_STAT_VALUE)
+	cp l
+	ret nc
+
+.cap
+	ld hl, MAX_STAT_VALUE
 	ret
 
 EnemyAttackDamage:
@@ -2818,6 +2888,8 @@ EnemyAttackDamage:
 	ld b, a
 	ld c, [hl]
 
+	call SandstormSpDefBoost
+
 	ld a, [wPlayerScreens]
 	bit SCREENS_LIGHT_SCREEN, a
 	jr z, .specialcrit
@@ -2842,11 +2914,15 @@ EnemyAttackDamage:
 	call ThickClubBoost
 
 .done
+	push hl
+	call DittoMetalPowder
+	pop hl
+
 	call TruncateHL_BC
 
 	ld a, [wEnemyMonLevel]
 	ld e, a
-	call DittoMetalPowder
+
 
 	ld a, 1
 	and a
@@ -3003,6 +3079,11 @@ BattleCommand_DamageCalc:
 	ld b, a
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
+	and TYPE_MASK
+	cp FREEZEDRY
+	jr nz, .okfrzdry
+	ld a, ICE
+.okfrzdry
 	cp b
 	jr nz, .DoneItem
 
@@ -3595,8 +3676,6 @@ BattleCommand_SleepTarget:
 	jp nz, PrintDidntAffect2
 
 	ld hl, DidntAffect1Text
-	call .CheckAIRandomFail
-	jr c, .fail
 
 	ld a, [de]
 	and a
@@ -3636,34 +3715,6 @@ BattleCommand_SleepTarget:
 	call AnimateFailedMove
 	pop hl
 	jp StdBattleTextbox
-
-.CheckAIRandomFail:
-	; Enemy turn
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .dont_fail
-
-	; Not in link battle
-	ld a, [wLinkMode]
-	and a
-	jr nz, .dont_fail
-
-	ld a, [wInBattleTowerBattle]
-	and a
-	jr nz, .dont_fail
-
-	; Not locked-on by the enemy
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_LOCK_ON, a
-	jr nz, .dont_fail
-
-	call BattleRandom
-	cp 25 percent + 1 ; 25% chance AI fails
-	ret c
-
-.dont_fail
-	xor a
-	ret
 
 BattleCommand_PoisonTarget:
 	call CheckSubstituteOpp
@@ -3731,27 +3782,6 @@ BattleCommand_Poison:
 	and a
 	jr nz, .failed
 
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .dont_sample_failure
-
-	ld a, [wLinkMode]
-	and a
-	jr nz, .dont_sample_failure
-
-	ld a, [wInBattleTowerBattle]
-	and a
-	jr nz, .dont_sample_failure
-
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_LOCK_ON, a
-	jr nz, .dont_sample_failure
-
-	call BattleRandom
-	cp 25 percent + 1 ; 25% chance AI fails
-	jr c, .failed
-
-.dont_sample_failure
 	call CheckSubstituteOpp
 	jr nz, .failed
 	ld a, [wAttackMissed]
@@ -4343,41 +4373,12 @@ BattleCommand_StatDown:
 ; Sharply lower the stat if applicable.
 	ld a, [wLoweredStat]
 	and $f0
-	jr z, .ComputerMiss
+	jr z, .GotAmountToLower
 	dec b
-	jr nz, .ComputerMiss
+	jr nz, .GotAmountToLower
 	inc b
 
-.ComputerMiss:
-; Computer opponents have a 25% chance of failing.
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .DidntMiss
-
-	ld a, [wLinkMode]
-	and a
-	jr nz, .DidntMiss
-
-	ld a, [wInBattleTowerBattle]
-	and a
-	jr nz, .DidntMiss
-
-; Lock-On still always works.
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_LOCK_ON, a
-	jr nz, .DidntMiss
-
-; Attacking moves that also lower accuracy are unaffected.
-	ld a, BATTLE_VARS_MOVE_EFFECT
-	call GetBattleVar
-	cp EFFECT_ACCURACY_DOWN_HIT
-	jr z, .DidntMiss
-
-	call BattleRandom
-	cp 25 percent + 1 ; 25% chance AI fails
-	jr c, .Failed
-
-.DidntMiss:
+.GotAmountToLower
 	call CheckSubstituteOpp
 	jr nz, .Failed
 
@@ -4625,7 +4626,130 @@ INCLUDE "data/battle/stat_names.asm"
 StatLevelMultipliers:
 INCLUDE "data/battle/stat_multipliers.asm"
 
+BattleCommand_DragonUp:
+
+; Attack
+	call ResetMiss
+	call BattleCommand_AttackUp
+	call BattleCommand_StatUpMessage
+
+; Speed
+	call ResetMiss
+	call BattleCommand_SpeedUp
+	jp   BattleCommand_StatUpMessage
+
+BattleCommand_Stockpile:
+
+; Defense
+	call ResetMiss
+	call BattleCommand_DefenseUp
+	call BattleCommand_StatUpMessage
+
+; Special Defense
+	call ResetMiss
+	call BattleCommand_SpecialDefenseUp
+	jp BattleCommand_StatUpMessage
+
+BattleCommand_BulkUp:
+
+; Defense
+	call ResetMiss
+	call BattleCommand_DefenseUp
+	call BattleCommand_StatUpMessage
+
+; Attack
+	call ResetMiss
+	call BattleCommand_AttackUp
+	jp BattleCommand_StatUpMessage
+
+BattleCommand_Growth:
+
+	ld a, [wBattleWeather]
+	cp WEATHER_SUN
+	jp z, .sungrowth
+
+; Special Attack
+	call ResetMiss
+	call BattleCommand_SpecialAttackUp
+	call BattleCommand_StatUpMessage
+
+; Attack
+	call ResetMiss
+	call BattleCommand_AttackUp
+	jp BattleCommand_StatUpMessage
+
+.sungrowth
+
+; Special Attack 2
+	call ResetMiss
+	call BattleCommand_SpecialAttackUp2
+	call BattleCommand_StatUpMessage
+
+; Attack 2
+	call ResetMiss
+	call BattleCommand_AttackUp2
+	jp BattleCommand_StatUpMessage
+
+BattleCommand_HoneClaws:
+
+; Accuracy
+	call ResetMiss
+	call BattleCommand_AccuracyUp
+	call BattleCommand_StatUpMessage
+
+; Attack
+	call ResetMiss
+	call BattleCommand_AttackUp
+	jp BattleCommand_StatUpMessage
+
+BattleCommand_CalmMind:
+
+; Special Defense
+	call ResetMiss
+	call BattleCommand_SpecialDefenseUp
+	call BattleCommand_StatUpMessage
+
+; Special Attack
+	call ResetMiss
+	call BattleCommand_SpecialAttackUp
+	jp BattleCommand_StatUpMessage
+
+BattleCommand_QuiverDance:
+
+; Special Defense
+	call ResetMiss
+	call BattleCommand_SpecialDefenseUp
+	call BattleCommand_StatUpMessage
+
+; Special Attack
+	call ResetMiss
+	call BattleCommand_SpecialAttackUp
+	call BattleCommand_StatUpMessage
+
+; Speed
+	call ResetMiss
+	call BattleCommand_SpeedUp
+	jp BattleCommand_StatUpMessage
+
+BattleCommand_Coil:
+
+; Attack
+	call ResetMiss
+	call BattleCommand_AttackUp
+	call BattleCommand_StatUpMessage
+
+; Defense
+	call ResetMiss
+	call BattleCommand_DefenseUp
+	call BattleCommand_StatUpMessage
+
+; Accuracy
+	call ResetMiss
+	call BattleCommand_AccuracyUp
+	jp BattleCommand_StatUpMessage
+
 BattleCommand_AllStatsUp:
+
 ; Attack
 	call ResetMiss
 	call BattleCommand_AttackUp
@@ -4783,8 +4907,6 @@ CalcPlayerStats:
 	ld a, NUM_BATTLE_STATS
 	call CalcBattleStats
 
-	ld hl, BadgeStatBoosts
-	call CallBattleCore
 
 	call BattleCommand_SwitchTurn
 
@@ -5049,6 +5171,8 @@ BattleCommand_ForceSwitch:
 	call StdBattleTextbox
 
 	ld hl, SpikesDamage
+	call CallBattleCore
+	ld hl, StealthRockDamage
 	jp CallBattleCore
 
 .switch_fail
@@ -5146,6 +5270,8 @@ BattleCommand_ForceSwitch:
 	call StdBattleTextbox
 
 	ld hl, SpikesDamage
+	call CallBattleCore
+	ld hl, StealthRockDamage
 	jp CallBattleCore
 
 .fail
@@ -5334,25 +5460,25 @@ BattleCommand_EndLoop:
 	ret
 
 BattleCommand_FakeOut:
-	ld a, [wAttackMissed]
+	ldh a, [hBattleTurn]
 	and a
-	ret nz
-
+	jr z, .player
+	ld a, [wEnemyTurnsTaken]
+	jr .proceed
+.player
+	ld a, [wPlayerTurnsTaken]
+.proceed
+	cp 1
+	jp nz, .fail
 	call CheckSubstituteOpp
 	jr nz, .fail
 
-	ld a, BATTLE_VARS_STATUS_OPP
-	call GetBattleVar
-	and 1 << FRZ | SLP_MASK
-	jr nz, .fail
-
-	call CheckOpponentWentFirst
-	jr z, FlinchTarget
+	jr FlinchTarget
 
 .fail
-	ld a, 1
-	ld [wAttackMissed], a
-	ret
+	call AnimateFailedMove
+	call PrintButItFailed
+	jp EndMoveEffect
 
 BattleCommand_FlinchTarget:
 	call CheckSubstituteOpp
@@ -5555,9 +5681,6 @@ BattleCommand_Charge:
 	text_asm
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	cp RAZOR_WIND
-	ld hl, .BattleMadeWhirlwindText
-	jr z, .done
 
 	cp SOLARBEAM
 	ld hl, .BattleTookSunlightText
@@ -5657,77 +5780,18 @@ BattleCommand_TrapTarget:
 	jp StdBattleTextbox
 
 .Traps:
-	dbw BIND,      UsedBindText      ; 'used BIND on'
-	dbw WRAP,      WrappedByText     ; 'was WRAPPED by'
-	dbw FIRE_SPIN, FireSpinTrapText  ; 'was trapped!'
-	dbw CLAMP,     ClampedByText     ; 'was CLAMPED by'
-	dbw WHIRLPOOL, WhirlpoolTrapText ; 'was trapped!'
+	dbw BIND,        UsedBindText      ; 'used BIND on'
+	dbw WRAP,        WrappedByText     ; 'was WRAPPED by'
+	dbw FIRE_SPIN,   FireSpinTrapText  ; 'was trapped!'
+	dbw CLAMP,       ClampedByText     ; 'was CLAMPED by'
+	dbw WHIRLPOOL,   WhirlpoolTrapText ; 'was trapped!'
+	dbw INFESTATION, InfestedByText    ; 'was INFESTED by'
 
 INCLUDE "engine/battle/move_effects/mist.asm"
 
 INCLUDE "engine/battle/move_effects/focus_energy.asm"
 
-BattleCommand_Recoil:
-	ld hl, wBattleMonMaxHP
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_hp
-	ld hl, wEnemyMonMaxHP
-.got_hp
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	ld d, a
-; get 1/4 damage or 1 HP, whichever is higher
-	ld a, [wCurDamage]
-	ld b, a
-	ld a, [wCurDamage + 1]
-	ld c, a
-	srl b
-	rr c
-	srl b
-	rr c
-	ld a, b
-	or c
-	jr nz, .min_damage
-	inc c
-.min_damage
-	ld a, [hli]
-	ld [wHPBuffer1 + 1], a
-	ld a, [hl]
-	ld [wHPBuffer1], a
-	dec hl
-	dec hl
-	ld a, [hl]
-	ld [wHPBuffer2], a
-	sub c
-	ld [hld], a
-	ld [wHPBuffer3], a
-	ld a, [hl]
-	ld [wHPBuffer2 + 1], a
-	sbc b
-	ld [hl], a
-	ld [wHPBuffer3 + 1], a
-	jr nc, .dont_ko
-	xor a
-	ld [hli], a
-	ld [hl], a
-	ld hl, wHPBuffer3
-	ld [hli], a
-	ld [hl], a
-.dont_ko
-	hlcoord 10, 9
-	ldh a, [hBattleTurn]
-	and a
-	ld a, 1
-	jr z, .animate_hp_bar
-	hlcoord 2, 2
-	xor a
-.animate_hp_bar
-	ld [wWhichHPBar], a
-	predef AnimateHPBar
-	call RefreshBattleHuds
-	ld hl, RecoilText
-	jp StdBattleTextbox
+INCLUDE "engine/battle/move_effects/recoil.asm"
 
 BattleCommand_ConfuseTarget:
 	call GetOpponentItem
@@ -5848,27 +5912,7 @@ BattleCommand_Paralyze:
 	jp StdBattleTextbox
 
 .no_item_protection
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .dont_sample_failure
 
-	ld a, [wLinkMode]
-	and a
-	jr nz, .dont_sample_failure
-
-	ld a, [wInBattleTowerBattle]
-	and a
-	jr nz, .dont_sample_failure
-
-	ld a, [wPlayerSubStatus5]
-	bit SUBSTATUS_LOCK_ON, a
-	jr nz, .dont_sample_failure
-
-	call BattleRandom
-	cp 25 percent + 1 ; 25% chance AI fails
-	jr c, .failed
-
-.dont_sample_failure
 	ld a, BATTLE_VARS_STATUS_OPP
 	call GetBattleVarAddr
 	and a
@@ -5922,6 +5966,7 @@ CheckMoveTypeMatchesTarget:
 
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
+	and TYPE_MASK
 	cp NORMAL
 	jr z, .normal
 
@@ -5958,6 +6003,52 @@ EndRechargeOpp:
 	ret
 
 INCLUDE "engine/battle/move_effects/rage.asm"
+
+BattleCommand_KnockOffDamage:
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wEnemyMonItem
+	jr z, .got_item
+	ld hl, wBattleMonItem
+.got_item
+	ld a, [hl]
+	and a
+	ret z
+
+	ld hl, wCurDamage
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	push bc
+	srl b
+	rr c
+	pop hl
+	add hl, bc
+	ld a, h
+	ld [wCurDamage], a
+	ld a, l
+	ld [wCurDamage + 1], a
+	ret
+
+BattleCommand_DoubleAcrobatics:
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wBattleMonItem
+	jr z, .got_item
+	ld hl, wEnemyMonItem
+.got_item
+	ld a, [hl]
+	and a
+	ret nz
+	jr DoubleDamage
+
+BattleCommand_Hex:
+	ld a, BATTLE_VARS_STATUS_OPP
+	call GetBattleVar
+	and a
+	ret z
+	jp DoubleDamage
+
 
 BattleCommand_DoubleFlyingDamage:
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
@@ -5998,6 +6089,43 @@ INCLUDE "engine/battle/move_effects/disable.asm"
 INCLUDE "engine/battle/move_effects/pay_day.asm"
 
 INCLUDE "engine/battle/move_effects/conversion.asm"
+
+BattleCommand_ClearSmog:
+	ld a, BASE_STAT_LEVEL
+	push af
+	ld hl, wEnemyStatLevels
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .reset_enemy_stats
+	ld hl, wPlayerStatLevels
+
+.reset_enemy_stats
+	call .Fill
+
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .resetenemy
+	call CalcPlayerStats
+	jr .go
+
+.resetenemy
+	call CalcEnemyStats
+	jr .go
+.go
+	pop af
+	ldh [hBattleTurn], a
+	call AnimateCurrentMove
+
+	ld hl, EliminatedStatsText
+	jp StdBattleTextbox
+
+.Fill:
+	ld b, NUM_LEVEL_STATS
+.next
+	ld [hli], a
+	dec b
+	jr nz, .next
+	ret
 
 BattleCommand_ResetStats:
 	ld a, BASE_STAT_LEVEL
@@ -6345,6 +6473,8 @@ INCLUDE "engine/battle/move_effects/endure.asm"
 
 INCLUDE "engine/battle/move_effects/spikes.asm"
 
+INCLUDE "engine/battle/move_effects/stealth_rock.asm"
+
 INCLUDE "engine/battle/move_effects/foresight.asm"
 
 INCLUDE "engine/battle/move_effects/perish_song.asm"
@@ -6440,16 +6570,6 @@ BattleCommand_TimeBasedHealContinue:
 	pop bc
 	jr z, .Full
 
-; Don't factor in time of day in link battles.
-	ld a, [wLinkMode]
-	and a
-	jr nz, .Weather
-
-	ld a, [wTimeOfDay]
-	cp b
-	jr z, .Weather
-	dec c ; double
-
 .Weather:
 	ld a, [wBattleWeather]
 	and a
@@ -6495,16 +6615,18 @@ BattleCommand_TimeBasedHealContinue:
 	jp StdBattleTextbox
 
 .Multipliers:
-	dw GetEighthMaxHP
+	dw GetQuarterMaxHP
 	dw GetQuarterMaxHP
 	dw GetHalfMaxHP
-	dw GetMaxHP
+	dw GetTwoThirdMaxHP
 
 INCLUDE "engine/battle/move_effects/hidden_power.asm"
 
 INCLUDE "engine/battle/move_effects/rain_dance.asm"
 
 INCLUDE "engine/battle/move_effects/sunny_day.asm"
+
+INCLUDE "engine/battle/move_effects/hail.asm"
 
 INCLUDE "engine/battle/move_effects/belly_drum.asm"
 
@@ -6544,6 +6666,14 @@ INCLUDE "engine/battle/move_effects/future_sight.asm"
 
 INCLUDE "engine/battle/move_effects/thunder.asm"
 
+INCLUDE "engine/battle/move_effects/brick_break.asm"
+
+INCLUDE "engine/battle/move_effects/sucker_punch.asm"
+
+INCLUDE "engine/battle/move_effects/gyro_ball.asm"
+
+INCLUDE "engine/battle/move_effects/burn.asm"
+
 CheckHiddenOpponent:
 ; BUG: Lock-On and Mind Reader don't always bypass Fly and Dig (see docs/bugs_and_glitches.md)
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
@@ -6573,6 +6703,25 @@ GetOpponentItem:
 	ld b, [hl]
 	jp GetItemHeldEffect
 
+CheckFullHP:
+; z: yes, nz: no
+	ld hl, wEnemyMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_hp
+	ld hl, wBattleMonHP
+.got_hp
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	cp b
+	ret nz
+	ld a, [hl]
+	cp c
+	ret
+
 GetItemHeldEffect:
 ; Return the effect of item b in bc.
 	ld a, b
@@ -6580,6 +6729,9 @@ GetItemHeldEffect:
 	ret z
 
 	push hl
+	cp GOLD_BERRY
+	jr z, .GoldBerry
+
 	ld hl, ItemAttributes + ITEMATTR_EFFECT
 	dec a
 	ld c, a
@@ -6591,6 +6743,31 @@ GetItemHeldEffect:
 	ld b, l
 	ld c, h
 	pop hl
+	ret
+
+.GoldBerry:
+	ld hl, wEnemyMonMaxHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .got_max_hp
+	ld hl, wBattleMonMaxHP
+.got_max_hp
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	pop hl
+	srl b
+	rr c
+	srl b
+	rr c
+IF 0
+	ld a, c
+	and a
+	jr nz, .finish_effect
+	inc c
+.finish_effect
+ENDC
+	ld b, HELD_BERRY
 	ret
 
 AnimateCurrentMoveEitherSide:

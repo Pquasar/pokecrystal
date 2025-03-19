@@ -41,10 +41,10 @@ CeladonPrizeRoom_tmcounterloop:
 .DoubleTeam:
 	checkcoins CELADONGAMECORNERPRIZEROOM_TM32_COINS
 	ifequal HAVE_LESS, CeladonPrizeRoom_notenoughcoins
-	getitemname STRING_BUFFER_3, TM_DOUBLE_TEAM
+	getitemname STRING_BUFFER_3, TM_CALM_MIND
 	scall CeladonPrizeRoom_askbuy
 	iffalse CeladonPrizeRoom_CancelPurchaseScript
-	giveitem TM_DOUBLE_TEAM
+	giveitem TM_CALM_MIND
 	iffalse CeladonPrizeRoom_notenoughroom
 	takecoins CELADONGAMECORNERPRIZEROOM_TM32_COINS
 	sjump CeladonPrizeRoom_purchased

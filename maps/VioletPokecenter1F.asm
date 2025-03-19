@@ -11,6 +11,7 @@ VioletPokecenter1F_MapScripts:
 	def_callbacks
 
 VioletPokecenterNurse:
+	giveitem GOLD_BERRY
 	jumpstd PokecenterNurseScript
 
 VioletPokecenter1F_ElmsAideScript:

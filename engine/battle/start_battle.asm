@@ -65,7 +65,7 @@ PlayBattleMusic:
 	cp BATTLETYPE_ROAMING
 	jp z, .done
 
-	; Are we fighting a trainer?
+; Are we fighting a trainer?
 	ld a, [wOtherTrainerClass]
 	and a
 	jr nz, .trainermusic
@@ -78,7 +78,7 @@ PlayBattleMusic:
 	ld de, MUSIC_JOHTO_WILD_BATTLE
 	ld a, [wTimeOfDay]
 	cp NITE_F
-	jr nz, .done
+	jp nz, .done
 	ld de, MUSIC_JOHTO_WILD_BATTLE_NIGHT
 	jr .done
 
@@ -99,6 +99,14 @@ PlayBattleMusic:
 	jr z, .done
 	cp GRUNTF
 	jr z, .done
+	cp EXECUTIVEM
+	jr z, .done
+	cp EXECUTIVEF
+	jr z, .done
+
+	ld de, MUSIC_KANTO_CHAMPION
+	cp BLUE
+	jr z, .done
 
 	ld de, MUSIC_KANTO_GYM_LEADER_BATTLE
 	farcall IsKantoGymLeader
@@ -106,6 +114,7 @@ PlayBattleMusic:
 
 	; IsGymLeader also counts CHAMPION, RED, and the Kanto gym leaders
 	; but they have been taken care of before this
+	;ld de, MUSIC_JOHTO_GYM_LEADER_BATTLE
 	ld de, MUSIC_JOHTO_GYM_LEADER_BATTLE
 	farcall IsGymLeader
 	jr c, .done
@@ -122,6 +131,11 @@ PlayBattleMusic:
 	jr c, .done
 	ld de, MUSIC_CHAMPION_BATTLE
 	jr .done
+
+	ld de, MUSIC_KANTO_ELITE_FOUR
+	ld a, [wOtherTrainerID]
+	cp LI
+	jr z, .done
 
 .othertrainer
 	ld a, [wLinkMode]

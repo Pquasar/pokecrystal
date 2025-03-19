@@ -1,19 +1,19 @@
 FramesPointers:
 	table_width 2
 	dw BulbasaurFrames
-	dw IvysaurFrames
+	dw LeafeonFrames
 	dw VenusaurFrames
 	dw CharmanderFrames
-	dw CharmeleonFrames
+	dw SylveonFrames
 	dw CharizardFrames
 	dw SquirtleFrames
-	dw WartortleFrames
+	dw GlaceonFrames
 	dw BlastoiseFrames
 	dw CaterpieFrames
-	dw MetapodFrames
+	dw YanmegaFrames
 	dw ButterfreeFrames
 	dw WeedleFrames
-	dw KakunaFrames
+	dw MamoswineFrames
 	dw BeedrillFrames
 	dw PidgeyFrames
 	dw PidgeottoFrames
@@ -47,7 +47,7 @@ FramesPointers:
 	dw VileplumeFrames
 	dw ParasFrames
 	dw ParasectFrames
-	dw VenonatFrames
+	dw LickilickyFrames
 	dw VenomothFrames
 	dw DiglettFrames
 	dw DugtrioFrames
@@ -68,7 +68,7 @@ FramesPointers:
 	dw MachopFrames
 	dw MachokeFrames
 	dw MachampFrames
-	dw BellsproutFrames
+	dw HonchkrowFrames
 	dw WeepinbellFrames
 	dw VictreebelFrames
 	dw TentacoolFrames
@@ -95,7 +95,7 @@ FramesPointers:
 	dw HaunterFrames
 	dw GengarFrames
 	dw OnixFrames
-	dw DrowzeeFrames
+	dw GliscorFrames
 	dw HypnoFrames
 	dw KrabbyFrames
 	dw KinglerFrames
@@ -115,7 +115,7 @@ FramesPointers:
 	dw ChanseyFrames
 	dw TangelaFrames
 	dw KangaskhanFrames
-	dw HorseaFrames
+	dw RhyperiorFrames
 	dw SeadraFrames
 	dw GoldeenFrames
 	dw SeakingFrames
@@ -160,13 +160,13 @@ FramesPointers:
 	dw TotodileFrames
 	dw CroconawFrames
 	dw FeraligatrFrames
-	dw SentretFrames
+	dw ElectivireFrames
 	dw FurretFrames
 	dw HoothootFrames
 	dw NoctowlFrames
-	dw LedybaFrames
+	dw PorygonZFrames
 	dw LedianFrames
-	dw SpinarakFrames
+	dw WeavileFrames
 	dw AriadosFrames
 	dw CrobatFrames
 	dw ChinchouFrames
@@ -176,9 +176,9 @@ FramesPointers:
 	dw IgglybuffFrames
 	dw TogepiFrames
 	dw TogeticFrames
-	dw NatuFrames
+	dw AmbipomFrames
 	dw XatuFrames
-	dw MareepFrames
+	dw TangrowthFrames
 	dw FlaaffyFrames
 	dw AmpharosFrames
 	dw BellossomFrames
@@ -186,11 +186,11 @@ FramesPointers:
 	dw AzumarillFrames
 	dw SudowoodoFrames
 	dw PolitoedFrames
-	dw HoppipFrames
+	dw MagnezoneFrames
 	dw SkiploomFrames
 	dw JumpluffFrames
 	dw AipomFrames
-	dw SunkernFrames
+	dw TogekissFrames
 	dw SunfloraFrames
 	dw YanmaFrames
 	dw WooperFrames
@@ -219,7 +219,7 @@ FramesPointers:
 	dw UrsaringFrames
 	dw SlugmaFrames
 	dw MagcargoFrames
-	dw SwinubFrames
+	dw MismagiusFrames
 	dw PiloswineFrames
 	dw CorsolaFrames
 	dw RemoraidFrames
@@ -227,7 +227,7 @@ FramesPointers:
 	dw DelibirdFrames
 	dw MantineFrames
 	dw SkarmoryFrames
-	dw HoundourFrames
+	dw MagmortarFrames
 	dw HoundoomFrames
 	dw KingdraFrames
 	dw PhanpyFrames

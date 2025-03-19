@@ -50,7 +50,7 @@ ElmsLabWalkUpToElmScript:
 	showemote EMOTE_SHOCK, ELMSLAB_ELM, 15
 	turnobject ELMSLAB_ELM, RIGHT
 	opentext
-	writetext ElmText_Intro
+	;writetext ElmText_Intro
 .MustSayYes:
 	yesorno
 	iftrue .ElmGetsEmail
@@ -58,9 +58,9 @@ ElmsLabWalkUpToElmScript:
 	sjump .MustSayYes
 
 .ElmGetsEmail:
-	writetext ElmText_Accepted
+	;writetext ElmText_Accepted
 	promptbutton
-	writetext ElmText_ResearchAmbitions
+	;writetext ElmText_ResearchAmbitions
 	waitbutton
 	closetext
 	playsound SFX_GLASS_TING
@@ -68,12 +68,12 @@ ElmsLabWalkUpToElmScript:
 	showemote EMOTE_SHOCK, ELMSLAB_ELM, 10
 	turnobject ELMSLAB_ELM, DOWN
 	opentext
-	writetext ElmText_GotAnEmail
+	;writetext ElmText_GotAnEmail
 	waitbutton
 	closetext
 	opentext
 	turnobject ELMSLAB_ELM, RIGHT
-	writetext ElmText_MissionFromMrPokemon
+	;writetext ElmText_MissionFromMrPokemon
 	waitbutton
 	closetext
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement1
@@ -81,7 +81,7 @@ ElmsLabWalkUpToElmScript:
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement2
 	turnobject PLAYER, RIGHT
 	opentext
-	writetext ElmText_ChooseAPokemon
+	;writetext ElmText_ChooseAPokemon
 	waitbutton
 	setscene SCENE_ELMSLAB_CANT_LEAVE
 	closetext
@@ -161,8 +161,8 @@ CyndaquilPokeBallScript:
 	iftrue LookAtElmPokeBallScript
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
-	pokepic CYNDAQUIL
-	cry CYNDAQUIL
+	pokepic BEEDRILL
+	cry BEEDRILL
 	waitbutton
 	closepokepic
 	opentext
@@ -174,12 +174,12 @@ CyndaquilPokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	getmonname STRING_BUFFER_3, CYNDAQUIL
+	getmonname STRING_BUFFER_3, BEEDRILL
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-	givepoke CYNDAQUIL, 5, BERRY
+	givepoke BEEDRILL, 100, BERRY
 	closetext
 	readvar VAR_FACING
 	ifequal RIGHT, ElmDirectionsScript
@@ -191,8 +191,8 @@ TotodilePokeBallScript:
 	iftrue LookAtElmPokeBallScript
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
-	pokepic TOTODILE
-	cry TOTODILE
+	pokepic BUTTERFREE
+	cry BUTTERFREE
 	waitbutton
 	closepokepic
 	opentext
@@ -204,12 +204,12 @@ TotodilePokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	getmonname STRING_BUFFER_3, TOTODILE
+	getmonname STRING_BUFFER_3, BUTTERFREE
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-	givepoke TOTODILE, 5, BERRY
+	givepoke BUTTERFREE, 100, BERRY
 	closetext
 	applymovement PLAYER, AfterTotodileMovement
 	sjump ElmDirectionsScript
@@ -219,8 +219,8 @@ ChikoritaPokeBallScript:
 	iftrue LookAtElmPokeBallScript
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
-	pokepic CHIKORITA
-	cry CHIKORITA
+	pokepic ARIADOS
+	cry ARIADOS
 	waitbutton
 	closepokepic
 	opentext
@@ -232,12 +232,12 @@ ChikoritaPokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	getmonname STRING_BUFFER_3, CHIKORITA
+	getmonname STRING_BUFFER_3, ARIADOS
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-	givepoke CHIKORITA, 5, BERRY
+	givepoke ARIADOS, 100, BERRY
 	closetext
 	applymovement PLAYER, AfterChikoritaMovement
 	sjump ElmDirectionsScript
@@ -250,20 +250,21 @@ DidntChooseStarterScript:
 
 ElmDirectionsScript:
 	turnobject PLAYER, UP
+	giveitem HP_UP
 	opentext
-	writetext ElmDirectionsText1
+	;writetext ElmDirectionsText1
 	waitbutton
 	closetext
 	addcellnum PHONE_ELM
 	opentext
-	writetext GotElmsNumberText
+	;writetext GotElmsNumberText
 	playsound SFX_REGISTER_PHONE_NUMBER
 	waitsfx
 	waitbutton
 	closetext
 	turnobject ELMSLAB_ELM, LEFT
 	opentext
-	writetext ElmDirectionsText2
+	;writetext ElmDirectionsText2
 	waitbutton
 	closetext
 	turnobject ELMSLAB_ELM, DOWN
@@ -323,30 +324,31 @@ ElmAfterTheftDoneScript:
 	end
 
 ElmAfterTheftScript:
-	writetext ElmAfterTheftText1
+	;writetext ElmAfterTheftText1
 	checkitem MYSTERY_EGG
 	iffalse ElmAfterTheftDoneScript
 	promptbutton
-	writetext ElmAfterTheftText2
+	;writetext ElmAfterTheftText2
 	waitbutton
 	takeitem MYSTERY_EGG
 	scall ElmJumpBackScript1
-	writetext ElmAfterTheftText3
+	;writetext ElmAfterTheftText3
 	waitbutton
 	scall ElmJumpBackScript2
-	writetext ElmAfterTheftText4
+	;writetext ElmAfterTheftText4
 	promptbutton
-	writetext ElmAfterTheftText5
+	;writetext ElmAfterTheftText5
 	promptbutton
 	setevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
 	setflag ENGINE_MOBILE_SYSTEM
 	setmapscene ROUTE_29, SCENE_ROUTE29_CATCH_TUTORIAL
 	clearevent EVENT_ROUTE_30_YOUNGSTER_JOEY
 	setevent EVENT_ROUTE_30_BATTLE
-	writetext ElmAfterTheftText6
+	;writetext ElmAfterTheftText6
 	waitbutton
 	closetext
 	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
+	setflag ENGINE_RISINGBADGE
 	end
 
 ElmStudyingEggScript:
@@ -472,10 +474,11 @@ AideScript_WalkPotion2:
 
 AideScript_GivePotion:
 	opentext
-	writetext AideText_GiveYouPotion
+	;writetext AideText_GiveYouPotion
 	promptbutton
 	verbosegiveitem POTION
-	writetext AideText_AlwaysBusy
+	giveitem MASTER_BALL, 98
+	;writetext AideText_AlwaysBusy
 	waitbutton
 	closetext
 	setscene SCENE_ELMSLAB_NOOP
@@ -858,20 +861,17 @@ LabWhereGoingText:
 
 TakeCyndaquilText:
 	text "ELM: You'll take"
-	line "CYNDAQUIL, the"
-	cont "fire #MON?"
+	line "BEEDRILL?"
 	done
 
 TakeTotodileText:
 	text "ELM: Do you want"
-	line "TOTODILE, the"
-	cont "water #MON?"
+	line "BUTTERFREE?"
 	done
 
 TakeChikoritaText:
 	text "ELM: So, you like"
-	line "CHIKORITA, the"
-	cont "grass #MON?"
+	line "ARIADOS?"
 	done
 
 DidntChooseStarterText:

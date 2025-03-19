@@ -4,19 +4,19 @@ PokemonPicPointers::
 ; entries correspond to Pokémon species
 	table_width 3 * 2
 	dba_pics BulbasaurFrontpic, BulbasaurBackpic
-	dba_pics IvysaurFrontpic, IvysaurBackpic
+	dba_pics LeafeonFrontpic, LeafeonBackpic
 	dba_pics VenusaurFrontpic, VenusaurBackpic
 	dba_pics CharmanderFrontpic, CharmanderBackpic
-	dba_pics CharmeleonFrontpic, CharmeleonBackpic
+	dba_pics SylveonFrontpic, SylveonBackpic
 	dba_pics CharizardFrontpic, CharizardBackpic
 	dba_pics SquirtleFrontpic, SquirtleBackpic
-	dba_pics WartortleFrontpic, WartortleBackpic
+	dba_pics GlaceonFrontpic, GlaceonBackpic
 	dba_pics BlastoiseFrontpic, BlastoiseBackpic
 	dba_pics CaterpieFrontpic, CaterpieBackpic
-	dba_pics MetapodFrontpic, MetapodBackpic
+	dba_pics YanmegaFrontpic, YanmegaBackpic
 	dba_pics ButterfreeFrontpic, ButterfreeBackpic
 	dba_pics WeedleFrontpic, WeedleBackpic
-	dba_pics KakunaFrontpic, KakunaBackpic
+	dba_pics MamoswineFrontpic, MamoswineBackpic
 	dba_pics BeedrillFrontpic, BeedrillBackpic
 	dba_pics PidgeyFrontpic, PidgeyBackpic
 	dba_pics PidgeottoFrontpic, PidgeottoBackpic
@@ -50,7 +50,7 @@ PokemonPicPointers::
 	dba_pics VileplumeFrontpic, VileplumeBackpic
 	dba_pics ParasFrontpic, ParasBackpic
 	dba_pics ParasectFrontpic, ParasectBackpic
-	dba_pics VenonatFrontpic, VenonatBackpic
+	dba_pics LickilickyFrontpic, LickilickyBackpic
 	dba_pics VenomothFrontpic, VenomothBackpic
 	dba_pics DiglettFrontpic, DiglettBackpic
 	dba_pics DugtrioFrontpic, DugtrioBackpic
@@ -71,7 +71,7 @@ PokemonPicPointers::
 	dba_pics MachopFrontpic, MachopBackpic
 	dba_pics MachokeFrontpic, MachokeBackpic
 	dba_pics MachampFrontpic, MachampBackpic
-	dba_pics BellsproutFrontpic, BellsproutBackpic
+	dba_pics HonchkrowFrontpic, HonchkrowBackpic
 	dba_pics WeepinbellFrontpic, WeepinbellBackpic
 	dba_pics VictreebelFrontpic, VictreebelBackpic
 	dba_pics TentacoolFrontpic, TentacoolBackpic
@@ -98,7 +98,7 @@ PokemonPicPointers::
 	dba_pics HaunterFrontpic, HaunterBackpic
 	dba_pics GengarFrontpic, GengarBackpic
 	dba_pics OnixFrontpic, OnixBackpic
-	dba_pics DrowzeeFrontpic, DrowzeeBackpic
+	dba_pics GliscorFrontpic, GliscorBackpic
 	dba_pics HypnoFrontpic, HypnoBackpic
 	dba_pics KrabbyFrontpic, KrabbyBackpic
 	dba_pics KinglerFrontpic, KinglerBackpic
@@ -118,7 +118,7 @@ PokemonPicPointers::
 	dba_pics ChanseyFrontpic, ChanseyBackpic
 	dba_pics TangelaFrontpic, TangelaBackpic
 	dba_pics KangaskhanFrontpic, KangaskhanBackpic
-	dba_pics HorseaFrontpic, HorseaBackpic
+	dba_pics RhyperiorFrontpic, RhyperiorBackpic
 	dba_pics SeadraFrontpic, SeadraBackpic
 	dba_pics GoldeenFrontpic, GoldeenBackpic
 	dba_pics SeakingFrontpic, SeakingBackpic
@@ -163,13 +163,13 @@ PokemonPicPointers::
 	dba_pics TotodileFrontpic, TotodileBackpic
 	dba_pics CroconawFrontpic, CroconawBackpic
 	dba_pics FeraligatrFrontpic, FeraligatrBackpic
-	dba_pics SentretFrontpic, SentretBackpic
+	dba_pics ElectivireFrontpic, ElectivireBackpic
 	dba_pics FurretFrontpic, FurretBackpic
 	dba_pics HoothootFrontpic, HoothootBackpic
 	dba_pics NoctowlFrontpic, NoctowlBackpic
-	dba_pics LedybaFrontpic, LedybaBackpic
+	dba_pics PorygonZFrontpic, PorygonZBackpic
 	dba_pics LedianFrontpic, LedianBackpic
-	dba_pics SpinarakFrontpic, SpinarakBackpic
+	dba_pics WeavileFrontpic, WeavileBackpic
 	dba_pics AriadosFrontpic, AriadosBackpic
 	dba_pics CrobatFrontpic, CrobatBackpic
 	dba_pics ChinchouFrontpic, ChinchouBackpic
@@ -179,9 +179,9 @@ PokemonPicPointers::
 	dba_pics IgglybuffFrontpic, IgglybuffBackpic
 	dba_pics TogepiFrontpic, TogepiBackpic
 	dba_pics TogeticFrontpic, TogeticBackpic
-	dba_pics NatuFrontpic, NatuBackpic
+	dba_pics AmbipomFrontpic, AmbipomBackpic
 	dba_pics XatuFrontpic, XatuBackpic
-	dba_pics MareepFrontpic, MareepBackpic
+	dba_pics TangrowthFrontpic, TangrowthBackpic
 	dba_pics FlaaffyFrontpic, FlaaffyBackpic
 	dba_pics AmpharosFrontpic, AmpharosBackpic
 	dba_pics BellossomFrontpic, BellossomBackpic
@@ -189,11 +189,11 @@ PokemonPicPointers::
 	dba_pics AzumarillFrontpic, AzumarillBackpic
 	dba_pics SudowoodoFrontpic, SudowoodoBackpic
 	dba_pics PolitoedFrontpic, PolitoedBackpic
-	dba_pics HoppipFrontpic, HoppipBackpic
+	dba_pics MagnezoneFrontpic, MagnezoneBackpic
 	dba_pics SkiploomFrontpic, SkiploomBackpic
 	dba_pics JumpluffFrontpic, JumpluffBackpic
 	dba_pics AipomFrontpic, AipomBackpic
-	dba_pics SunkernFrontpic, SunkernBackpic
+	dba_pics TogekissFrontpic, TogekissBackpic
 	dba_pics SunfloraFrontpic, SunfloraBackpic
 	dba_pics YanmaFrontpic, YanmaBackpic
 	dba_pics WooperFrontpic, WooperBackpic
@@ -222,7 +222,7 @@ PokemonPicPointers::
 	dba_pics UrsaringFrontpic, UrsaringBackpic
 	dba_pics SlugmaFrontpic, SlugmaBackpic
 	dba_pics MagcargoFrontpic, MagcargoBackpic
-	dba_pics SwinubFrontpic, SwinubBackpic
+	dba_pics MismagiusFrontpic, MismagiusBackpic
 	dba_pics PiloswineFrontpic, PiloswineBackpic
 	dba_pics CorsolaFrontpic, CorsolaBackpic
 	dba_pics RemoraidFrontpic, RemoraidBackpic
@@ -230,7 +230,7 @@ PokemonPicPointers::
 	dba_pics DelibirdFrontpic, DelibirdBackpic
 	dba_pics MantineFrontpic, MantineBackpic
 	dba_pics SkarmoryFrontpic, SkarmoryBackpic
-	dba_pics HoundourFrontpic, HoundourBackpic
+	dba_pics MagmortarFrontpic, MagmortarBackpic
 	dba_pics HoundoomFrontpic, HoundoomBackpic
 	dba_pics KingdraFrontpic, KingdraBackpic
 	dba_pics PhanpyFrontpic, PhanpyBackpic

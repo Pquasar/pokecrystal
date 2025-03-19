@@ -1,19 +1,19 @@
 AnimationIdlePointers:
 	table_width 2
 	dw BulbasaurAnimationIdle
-	dw IvysaurAnimationIdle
+	dw LeafeonAnimationIdle
 	dw VenusaurAnimationIdle
 	dw CharmanderAnimationIdle
-	dw CharmeleonAnimationIdle
+	dw SylveonAnimationIdle
 	dw CharizardAnimationIdle
 	dw SquirtleAnimationIdle
-	dw WartortleAnimationIdle
+	dw GlaceonAnimationIdle
 	dw BlastoiseAnimationIdle
 	dw CaterpieAnimationIdle
-	dw MetapodAnimationIdle
+	dw YanmegaAnimationIdle
 	dw ButterfreeAnimationIdle
 	dw WeedleAnimationIdle
-	dw KakunaAnimationIdle
+	dw MamoswineAnimationIdle
 	dw BeedrillAnimationIdle
 	dw PidgeyAnimationIdle
 	dw PidgeottoAnimationIdle
@@ -47,7 +47,7 @@ AnimationIdlePointers:
 	dw VileplumeAnimationIdle
 	dw ParasAnimationIdle
 	dw ParasectAnimationIdle
-	dw VenonatAnimationIdle
+	dw LickilickyAnimationIdle
 	dw VenomothAnimationIdle
 	dw DiglettAnimationIdle
 	dw DugtrioAnimationIdle
@@ -68,7 +68,7 @@ AnimationIdlePointers:
 	dw MachopAnimationIdle
 	dw MachokeAnimationIdle
 	dw MachampAnimationIdle
-	dw BellsproutAnimationIdle
+	dw HonchkrowAnimationIdle
 	dw WeepinbellAnimationIdle
 	dw VictreebelAnimationIdle
 	dw TentacoolAnimationIdle
@@ -95,7 +95,7 @@ AnimationIdlePointers:
 	dw HaunterAnimationIdle
 	dw GengarAnimationIdle
 	dw OnixAnimationIdle
-	dw DrowzeeAnimationIdle
+	dw GliscorAnimationIdle
 	dw HypnoAnimationIdle
 	dw KrabbyAnimationIdle
 	dw KinglerAnimationIdle
@@ -115,7 +115,7 @@ AnimationIdlePointers:
 	dw ChanseyAnimationIdle
 	dw TangelaAnimationIdle
 	dw KangaskhanAnimationIdle
-	dw HorseaAnimationIdle
+	dw RhyperiorAnimationIdle
 	dw SeadraAnimationIdle
 	dw GoldeenAnimationIdle
 	dw SeakingAnimationIdle
@@ -160,13 +160,13 @@ AnimationIdlePointers:
 	dw TotodileAnimationIdle
 	dw CroconawAnimationIdle
 	dw FeraligatrAnimationIdle
-	dw SentretAnimationIdle
+	dw ElectivireAnimationIdle
 	dw FurretAnimationIdle
 	dw HoothootAnimationIdle
 	dw NoctowlAnimationIdle
-	dw LedybaAnimationIdle
+	dw PorygonZAnimationIdle
 	dw LedianAnimationIdle
-	dw SpinarakAnimationIdle
+	dw WeavileAnimationIdle
 	dw AriadosAnimationIdle
 	dw CrobatAnimationIdle
 	dw ChinchouAnimationIdle
@@ -176,9 +176,9 @@ AnimationIdlePointers:
 	dw IgglybuffAnimationIdle
 	dw TogepiAnimationIdle
 	dw TogeticAnimationIdle
-	dw NatuAnimationIdle
+	dw AmbipomAnimationIdle
 	dw XatuAnimationIdle
-	dw MareepAnimationIdle
+	dw TangrowthAnimationIdle
 	dw FlaaffyAnimationIdle
 	dw AmpharosAnimationIdle
 	dw BellossomAnimationIdle
@@ -186,11 +186,11 @@ AnimationIdlePointers:
 	dw AzumarillAnimationIdle
 	dw SudowoodoAnimationIdle
 	dw PolitoedAnimationIdle
-	dw HoppipAnimationIdle
+	dw MagnezoneAnimationIdle
 	dw SkiploomAnimationIdle
 	dw JumpluffAnimationIdle
 	dw AipomAnimationIdle
-	dw SunkernAnimationIdle
+	dw TogekissAnimationIdle
 	dw SunfloraAnimationIdle
 	dw YanmaAnimationIdle
 	dw WooperAnimationIdle
@@ -219,7 +219,7 @@ AnimationIdlePointers:
 	dw UrsaringAnimationIdle
 	dw SlugmaAnimationIdle
 	dw MagcargoAnimationIdle
-	dw SwinubAnimationIdle
+	dw MismagiusAnimationIdle
 	dw PiloswineAnimationIdle
 	dw CorsolaAnimationIdle
 	dw RemoraidAnimationIdle
@@ -227,7 +227,7 @@ AnimationIdlePointers:
 	dw DelibirdAnimationIdle
 	dw MantineAnimationIdle
 	dw SkarmoryAnimationIdle
-	dw HoundourAnimationIdle
+	dw MagmortarAnimationIdle
 	dw HoundoomAnimationIdle
 	dw KingdraAnimationIdle
 	dw PhanpyAnimationIdle

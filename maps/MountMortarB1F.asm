@@ -58,7 +58,7 @@ MountMortarB1FHyperPotion:
 	itemball HYPER_POTION
 
 MountMortarB1FCarbos:
-	itemball CARBOS
+	itemball NUGGET
 
 MountMortarB1FFullRestore:
 	itemball FULL_RESTORE

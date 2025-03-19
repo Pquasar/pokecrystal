@@ -44,6 +44,8 @@ AI_Redundant:
 	dbw EFFECT_MOONLIGHT,    .Moonlight
 	dbw EFFECT_SWAGGER,      .Swagger
 	dbw EFFECT_FUTURE_SIGHT, .FutureSight
+	dbw EFFECT_HAIL,         .Hail
+	dbw EFFECT_STEALTH_ROCK, .StealthRock
 	db -1
 
 .LightScreen:
@@ -68,6 +70,9 @@ AI_Redundant:
 	ld a, [wPlayerScreens]
 	bit SCREENS_SAFEGUARD, a
 	ret
+	ret nz
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
 
 .Transform:
 	ld a, [wEnemySubStatus5]
@@ -88,6 +93,9 @@ AI_Redundant:
 	ld a, [wPlayerSubStatus4]
 	bit SUBSTATUS_LEECH_SEED, a
 	ret
+	ret nz
+	ld a, [wPlayerSubStatus4]
+	bit SUBSTATUS_SUBSTITUTE, a
 
 .Disable:
 	ld a, [wPlayerDisableCount]
@@ -103,8 +111,8 @@ AI_Redundant:
 .SleepTalk:
 	ld a, [wEnemyMonStatus]
 	and SLP_MASK
-	jr z, .Redundant
-	jr .NotRedundant
+	jp z, .Redundant
+	jp .NotRedundant
 
 .MeanLook:
 	ld a, [wEnemySubStatus5]
@@ -120,8 +128,12 @@ AI_Redundant:
 	ret
 
 .Spikes:
-	ld a, [wPlayerScreens]
-	bit SCREENS_SPIKES, a
+	ld hl, wPlayerScreens
+	ld a, [hl]
+	and 3
+	cp 3
+	jr nc, .Redundant
+	xor a
 	ret
 
 .Foresight:
@@ -176,9 +188,19 @@ AI_Redundant:
 	ret
 
 .FutureSight:
-; BUG: AI does not discourage Future Sight when it's already been used (see docs/bugs_and_glitches.md)
-	ld a, [wEnemyScreens]
-	bit SCREENS_UNUSED, a
+  ld a, [wEnemyFutureSightCount]
+	and a
+	ret
+
+.Hail:
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	jr z, .Redundant
+	jr .NotRedundant
+
+.StealthRock:
+	ld a, [wPlayerScreens]
+	bit SCREENS_STEALTH_ROCK, a
 	ret
 
 .Heal:

@@ -20,19 +20,19 @@
 ; - EZChat_SortedPokemon (see data/pokemon/ezchat_order.asm)
 	const_def 1
 	const BULBASAUR  ; 01
-	const IVYSAUR    ; 02
+	const LEAFEON    ; 02
 	const VENUSAUR   ; 03
 	const CHARMANDER ; 04
-	const CHARMELEON ; 05
+	const SYLVEON ; 05
 	const CHARIZARD  ; 06
 	const SQUIRTLE   ; 07
-	const WARTORTLE  ; 08
+	const GLACEON  ; 08
 	const BLASTOISE  ; 09
 	const CATERPIE   ; 0a
-	const METAPOD    ; 0b
+	const YANMEGA    ; 0b
 	const BUTTERFREE ; 0c
 	const WEEDLE     ; 0d
-	const KAKUNA     ; 0e
+	const MAMOSWINE     ; 0e
 	const BEEDRILL   ; 0f
 	const PIDGEY     ; 10
 	const PIDGEOTTO  ; 11
@@ -66,7 +66,7 @@
 	const VILEPLUME  ; 2d
 	const PARAS      ; 2e
 	const PARASECT   ; 2f
-	const VENONAT    ; 30
+	const LICKILICKY    ; 30
 	const VENOMOTH   ; 31
 	const DIGLETT    ; 32
 	const DUGTRIO    ; 33
@@ -87,7 +87,7 @@
 	const MACHOP     ; 42
 	const MACHOKE    ; 43
 	const MACHAMP    ; 44
-	const BELLSPROUT ; 45
+	const HONCHKROW ; 45
 	const WEEPINBELL ; 46
 	const VICTREEBEL ; 47
 	const TENTACOOL  ; 48
@@ -114,7 +114,7 @@
 	const HAUNTER    ; 5d
 	const GENGAR     ; 5e
 	const ONIX       ; 5f
-	const DROWZEE    ; 60
+	const GLISCOR    ; 60
 	const HYPNO      ; 61
 	const KRABBY     ; 62
 	const KINGLER    ; 63
@@ -134,7 +134,7 @@
 	const CHANSEY    ; 71
 	const TANGELA    ; 72
 	const KANGASKHAN ; 73
-	const HORSEA     ; 74
+	const RHYPERIOR     ; 74
 	const SEADRA     ; 75
 	const GOLDEEN    ; 76
 	const SEAKING    ; 77
@@ -180,13 +180,13 @@ DEF JOHTO_POKEMON EQU const_value
 	const TOTODILE   ; 9e
 	const CROCONAW   ; 9f
 	const FERALIGATR ; a0
-	const SENTRET    ; a1
+	const ELECTIVIRE    ; a1
 	const FURRET     ; a2
 	const HOOTHOOT   ; a3
 	const NOCTOWL    ; a4
-	const LEDYBA     ; a5
+	const PORYGON_Z     ; a5
 	const LEDIAN     ; a6
-	const SPINARAK   ; a7
+	const WEAVILE   ; a7
 	const ARIADOS    ; a8
 	const CROBAT     ; a9
 	const CHINCHOU   ; aa
@@ -196,9 +196,9 @@ DEF JOHTO_POKEMON EQU const_value
 	const IGGLYBUFF  ; ae
 	const TOGEPI     ; af
 	const TOGETIC    ; b0
-	const NATU       ; b1
+	const AMBIPOM       ; b1
 	const XATU       ; b2
-	const MAREEP     ; b3
+	const TANGROWTH     ; b3
 	const FLAAFFY    ; b4
 	const AMPHAROS   ; b5
 	const BELLOSSOM  ; b6
@@ -206,11 +206,11 @@ DEF JOHTO_POKEMON EQU const_value
 	const AZUMARILL  ; b8
 	const SUDOWOODO  ; b9
 	const POLITOED   ; ba
-	const HOPPIP     ; bb
+	const MAGNEZONE     ; bb
 	const SKIPLOOM   ; bc
 	const JUMPLUFF   ; bd
 	const AIPOM      ; be
-	const SUNKERN    ; bf
+	const TOGEKISS    ; bf
 	const SUNFLORA   ; c0
 	const YANMA      ; c1
 	const WOOPER     ; c2
@@ -239,7 +239,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const URSARING   ; d9
 	const SLUGMA     ; da
 	const MAGCARGO   ; db
-	const SWINUB     ; dc
+	const MISMAGIUS     ; dc
 	const PILOSWINE  ; dd
 	const CORSOLA    ; de
 	const REMORAID   ; df
@@ -247,7 +247,7 @@ DEF JOHTO_POKEMON EQU const_value
 	const DELIBIRD   ; e1
 	const MANTINE    ; e2
 	const SKARMORY   ; e3
-	const HOUNDOUR   ; e4
+	const MAGMORTAR   ; e4
 	const HOUNDOOM   ; e5
 	const KINGDRA    ; e6
 	const PHANPY     ; e7
@@ -272,8 +272,8 @@ DEF JOHTO_POKEMON EQU const_value
 	const HO_OH      ; fa
 	const CELEBI     ; fb
 DEF NUM_POKEMON EQU const_value - 1
-	const_skip       ; fc
-	const EGG        ; fd
+	const_skip
+	const EGG        ; fe
 
 ; Unown forms
 ; indexes for:

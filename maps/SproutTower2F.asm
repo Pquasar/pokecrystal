@@ -9,10 +9,6 @@ SproutTower2F_MapScripts:
 	def_callbacks
 
 TrainerSageNico:
-	trainer SAGE, NICO, EVENT_BEAT_SAGE_NICO, SageNicoSeenText, SageNicoBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
 	opentext
 	writetext SageNicoAfterBattleText
 	waitbutton
@@ -20,10 +16,6 @@ TrainerSageNico:
 	end
 
 TrainerSageEdmond:
-	trainer SAGE, EDMOND, EVENT_BEAT_SAGE_EDMOND, SageEdmondSeenText, SageEdmondBeatenText, 0, .Script
-
-.Script:
-	endifjustbattled
 	opentext
 	writetext SageEdmondAfterBattleText
 	waitbutton
@@ -97,6 +89,6 @@ SproutTower2F_MapEvents:
 	bg_event 12, 15, BGEVENT_READ, SproutTower2FStatue
 
 	def_object_events
-	object_event 12,  3, SPRITE_SAGE, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 4, TrainerSageNico, -1
-	object_event  9, 14, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 5, TrainerSageEdmond, -1
+	object_event 12,  3, SPRITE_SAGE, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 4, TrainerSageNico, -1
+	object_event  9, 14, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 5, TrainerSageEdmond, -1
 	object_event  3,  1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, SproutTower2FXAccuracy, EVENT_SPROUT_TOWER_2F_X_ACCURACY

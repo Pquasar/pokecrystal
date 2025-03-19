@@ -33,6 +33,65 @@ MeetMomRightScript:
 .OnRight:
 	applymovement PLAYERSHOUSE1F_MOM1, MomWalksToPlayerMovement
 MeetMomScript:
+		giveitem TM_DRAGON_CLAW  ; bf
+		giveitem TM_CALM_MIND    ; c0
+		giveitem TM_ROAR         ; c1
+		giveitem TM_TOXIC        ; c2
+		giveitem TM_HAIL         ; c4
+		giveitem TM_BULK_UP      ; c5
+		giveitem TM_HIDDEN_POWER ; c6
+		giveitem TM_SUNNY_DAY    ; c7
+		giveitem TM_ICE_BEAM     ; c8
+		giveitem TM_BLIZZARD     ; c9
+		giveitem TM_HYPER_BEAM   ; ca
+		giveitem TM_LIGHT_SCREEN ; cb
+		giveitem TM_PROTECT      ; cc
+		giveitem TM_RAIN_DANCE   ; cd
+		giveitem TM_ROOST        ; ce
+		giveitem TM_SAFEGUARD    ; cf
+		giveitem TM_DRAGON_TAIL  ; d0
+		giveitem TM_SOLARBEAM    ; d1
+		giveitem TM_THUNDERBOLT  ; d2
+		giveitem TM_THUNDER      ; d3
+		giveitem TM_EARTHQUAKE   ; d4
+		giveitem TM_RETURN       ; d5
+		giveitem TM_LEECH_LIFE   ; d6
+		giveitem TM_PSYCHIC_M    ; d7
+		giveitem TM_SHADOW_BALL  ; d8
+		giveitem TM_BRICK_BREAK  ; d9
+		giveitem TM_REFLECT      ; da
+		giveitem TM_FLAMETHROWER ; db
+		giveitem TM_SLUDGE_BOMB  ; dd
+		giveitem TM_SANDSTORM    ; de
+		giveitem TM_FIRE_BLAST   ; df
+		giveitem TM_REST         ; e0
+		giveitem TM_ATTRACT      ; e1
+		giveitem TM_THIEF        ; e2
+		giveitem TM_OVERHEAT     ; e3
+		giveitem TM_STEEL_WING   ; e4
+		giveitem TM_FOCUS_BLAST  ; e5
+		giveitem TM_ENERGY_BALL  ; e6
+		giveitem TM_SCALD        ; e7
+		giveitem TM_WILL_O_WISP  ; e8
+		giveitem TM_ACROBATICS   ; e9
+		giveitem TM_EXPLOSION    ; ea
+		giveitem TM_ROCK_POLISH  ; eb
+		giveitem TM_STONE_EDGE   ; ec
+		giveitem TM_THUNDER_WAVE ; ed
+		giveitem TM_GYRO_BALL    ; ee
+		giveitem TM_SWORDS_DANCE ; ef
+		giveitem TM_BULLDOZE     ; f0
+		giveitem TM_ROCK_SLIDE   ; f1
+		giveitem TM_X_SCISSOR    ; f2
+		giveitem TM_INFESTATION  ; f3
+		giveitem TM_POISON_JAB   ; f4
+		giveitem TM_SLEEP_TALK   ; f5
+		giveitem TM_U_TURN       ; f6
+		giveitem TM_SUBSTITUTE   ; f7
+		giveitem TM_FLASH_CANNON ; f8
+		giveitem TM_WILD_CHARGE  ; f8
+		giveitem TM_DARK_PULSE   ; f8
+		giveitem TM_DAZLINGGLEAM ; f8
 	opentext
 	writetext ElmsLookingForYouText
 	promptbutton

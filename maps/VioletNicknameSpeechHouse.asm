@@ -9,11 +9,21 @@ VioletNicknameSpeechHouse_MapScripts:
 	def_callbacks
 
 VioletNicknameSpeechHouseTeacherScript:
-	jumptextfaceplayer VioletNicknameSpeechHouseTeacherText
+	faceplayer
+	opentext
+	special MoveDeletion
+	waitbutton
+	closetext
+	end
 
 VioletNicknameSpeechHouseLassScript:
-	jumptextfaceplayer VioletNicknameSpeechHouseLassText
-
+	faceplayer
+	opentext
+	special MoveReminder
+	waitbutton
+	closetext
+	end
+	
 VioletNicknameSpeechHouseBirdScript:
 	faceplayer
 	opentext

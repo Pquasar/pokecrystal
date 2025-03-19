@@ -1,19 +1,19 @@
 AnimationPointers:
 	table_width 2
 	dw BulbasaurAnimation
-	dw IvysaurAnimation
+	dw LeafeonAnimation
 	dw VenusaurAnimation
 	dw CharmanderAnimation
-	dw CharmeleonAnimation
+	dw SylveonAnimation
 	dw CharizardAnimation
 	dw SquirtleAnimation
-	dw WartortleAnimation
+	dw GlaceonAnimation
 	dw BlastoiseAnimation
 	dw CaterpieAnimation
-	dw MetapodAnimation
+	dw YanmegaAnimation
 	dw ButterfreeAnimation
 	dw WeedleAnimation
-	dw KakunaAnimation
+	dw MamoswineAnimation
 	dw BeedrillAnimation
 	dw PidgeyAnimation
 	dw PidgeottoAnimation
@@ -47,7 +47,7 @@ AnimationPointers:
 	dw VileplumeAnimation
 	dw ParasAnimation
 	dw ParasectAnimation
-	dw VenonatAnimation
+	dw LickilickyAnimation
 	dw VenomothAnimation
 	dw DiglettAnimation
 	dw DugtrioAnimation
@@ -68,7 +68,7 @@ AnimationPointers:
 	dw MachopAnimation
 	dw MachokeAnimation
 	dw MachampAnimation
-	dw BellsproutAnimation
+	dw HonchkrowAnimation
 	dw WeepinbellAnimation
 	dw VictreebelAnimation
 	dw TentacoolAnimation
@@ -95,7 +95,7 @@ AnimationPointers:
 	dw HaunterAnimation
 	dw GengarAnimation
 	dw OnixAnimation
-	dw DrowzeeAnimation
+	dw GliscorAnimation
 	dw HypnoAnimation
 	dw KrabbyAnimation
 	dw KinglerAnimation
@@ -115,7 +115,7 @@ AnimationPointers:
 	dw ChanseyAnimation
 	dw TangelaAnimation
 	dw KangaskhanAnimation
-	dw HorseaAnimation
+	dw RhyperiorAnimation
 	dw SeadraAnimation
 	dw GoldeenAnimation
 	dw SeakingAnimation
@@ -160,13 +160,13 @@ AnimationPointers:
 	dw TotodileAnimation
 	dw CroconawAnimation
 	dw FeraligatrAnimation
-	dw SentretAnimation
+	dw ElectivireAnimation
 	dw FurretAnimation
 	dw HoothootAnimation
 	dw NoctowlAnimation
-	dw LedybaAnimation
+	dw PorygonZAnimation
 	dw LedianAnimation
-	dw SpinarakAnimation
+	dw WeavileAnimation
 	dw AriadosAnimation
 	dw CrobatAnimation
 	dw ChinchouAnimation
@@ -176,9 +176,9 @@ AnimationPointers:
 	dw IgglybuffAnimation
 	dw TogepiAnimation
 	dw TogeticAnimation
-	dw NatuAnimation
+	dw AmbipomAnimation
 	dw XatuAnimation
-	dw MareepAnimation
+	dw TangrowthAnimation
 	dw FlaaffyAnimation
 	dw AmpharosAnimation
 	dw BellossomAnimation
@@ -186,11 +186,11 @@ AnimationPointers:
 	dw AzumarillAnimation
 	dw SudowoodoAnimation
 	dw PolitoedAnimation
-	dw HoppipAnimation
+	dw MagnezoneAnimation
 	dw SkiploomAnimation
 	dw JumpluffAnimation
 	dw AipomAnimation
-	dw SunkernAnimation
+	dw TogekissAnimation
 	dw SunfloraAnimation
 	dw YanmaAnimation
 	dw WooperAnimation
@@ -219,7 +219,7 @@ AnimationPointers:
 	dw UrsaringAnimation
 	dw SlugmaAnimation
 	dw MagcargoAnimation
-	dw SwinubAnimation
+	dw MismagiusAnimation
 	dw PiloswineAnimation
 	dw CorsolaAnimation
 	dw RemoraidAnimation
@@ -227,7 +227,7 @@ AnimationPointers:
 	dw DelibirdAnimation
 	dw MantineAnimation
 	dw SkarmoryAnimation
-	dw HoundourAnimation
+	dw MagmortarAnimation
 	dw HoundoomAnimation
 	dw KingdraAnimation
 	dw PhanpyAnimation

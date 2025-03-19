@@ -92,7 +92,6 @@ GoldenrodPokecenter1FPokefanF:
 	writetext GoldenrodPokecenter1FAskGiveAwayAnEonMailText
 	yesorno
 	iffalse .NoEonMail
-	takeitem EON_MAIL
 	iffalse .NoEonMail
 	writetext GoldenrodPokecenter1FPlayerGaveAwayTheEonMailText
 	waitbutton
@@ -112,7 +111,6 @@ GoldenrodPokecenter1FPokefanF:
 	end
 
 .NoRoom:
-	giveitem EON_MAIL
 	writetext GoldenrodPokecenter1FPokefanFAnotherTimeThenText
 	waitbutton
 	closetext
@@ -585,7 +583,7 @@ GoldenrodPokecomCenterPerson4Text: ; unreferenced
 	text "Some girl I don't"
 	line "know sent me her"
 
-	para "HOPPIP."
+	para "MAGNEZONE."
 	line "You should trade"
 
 	para "for a #MON that"
@@ -594,7 +592,7 @@ GoldenrodPokecomCenterPerson4Text: ; unreferenced
 
 GoldenrodPokecomCenterPerson5Text: ; unreferenced
 	text "I received a"
-	line "female HOPPIP, but"
+	line "female MAGNEZONE, but"
 	cont "its named STANLEY!"
 
 	para "That's my dad's"

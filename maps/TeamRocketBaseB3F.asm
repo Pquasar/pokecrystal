@@ -203,7 +203,7 @@ TeamRocketBaseB3FOathScript:
 	jumpstd TeamRocketOathScript
 
 TeamRocketBaseB3FProtein:
-	itemball PROTEIN
+	itemball NUGGET
 
 TeamRocketBaseB3FXSpecial:
 	itemball X_SPECIAL

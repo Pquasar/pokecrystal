@@ -40,11 +40,11 @@ ItemEffects:
 	dw EvoStoneEffect      ; WATER_STONE
 	dw NoEffect            ; ITEM_19
 	dw VitaminEffect       ; HP_UP
-	dw VitaminEffect       ; PROTEIN
-	dw VitaminEffect       ; IRON
-	dw VitaminEffect       ; CARBOS
+	dw NoEffect       		 ; PROTEIN
+	dw NoEffect         	 ; IRON
+	dw NoEffect       		 ; CARBOS
 	dw NoEffect            ; LUCKY_PUNCH
-	dw VitaminEffect       ; CALCIUM
+	dw NoEffect       		 ; CALCIUM
 	dw RareCandyEffect     ; RARE_CANDY
 	dw XAccuracyEffect     ; X_ACCURACY
 	dw EvoStoneEffect      ; LEAF_STONE
@@ -1164,6 +1164,7 @@ VitaminEffect:
 
 	call RareCandy_StatBooster_GetParameters
 
+	ld a, [wCurItem]
 	call GetStatExpRelativePointer
 
 	ld a, MON_STAT_EXP
@@ -1171,33 +1172,69 @@ VitaminEffect:
 
 	add hl, bc
 	ld a, [hl]
-	cp 100
-	jr nc, NoEffectMessage
+	cp $FF
+	jp nc, NoEffectMessage
 
-	add 10
+	add $FF
+	ld [hl], a
+
+	ld a, PROTEIN
+	call GetStatExpRelativePointer
+
+	ld a, MON_STAT_EXP
+	call GetPartyParamLocation
+
+	add hl, bc
+	ld a, [hl]
+
+	add $FF
+	ld [hl], a
+
+	ld a, CARBOS
+	call GetStatExpRelativePointer
+
+	ld a, MON_STAT_EXP
+	call GetPartyParamLocation
+
+	add hl, bc
+	ld a, [hl]
+
+	add $FF
+	ld [hl], a
+
+	ld a, CALCIUM
+	call GetStatExpRelativePointer
+
+	ld a, MON_STAT_EXP
+	call GetPartyParamLocation
+
+	add hl, bc
+	ld a, [hl]
+	cp $FF
+
+	add $FF
+	ld [hl], a
+
+	ld a, IRON
+	call GetStatExpRelativePointer
+
+	ld a, MON_STAT_EXP
+	call GetPartyParamLocation
+
+	add hl, bc
+	ld a, [hl]
+
+	add $FF
 	ld [hl], a
 	call UpdateStatsAfterItem
 
-	call GetStatExpRelativePointer
-
-	ld hl, StatStrings
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld de, wStringBuffer2
-	ld bc, ITEM_NAME_LENGTH
-	call CopyBytes
-
 	call Play_SFX_FULL_HEAL
-
 	ld hl, ItemStatRoseText
 	call PrintText
 
 	ld c, HAPPINESS_USEDITEM
 	farcall ChangeHappiness
-
-	jp UseDisposableItem
+	ret
 
 NoEffectMessage:
 	ld hl, ItemWontHaveEffectText
@@ -1237,7 +1274,7 @@ StatStrings:
 .special db "SPECIAL@"
 
 GetStatExpRelativePointer:
-	ld a, [wCurItem]
+	;ld a, [wCurItem]
 	ld hl, StatExpItemPointerOffsets
 .next
 	cp [hl]
@@ -1640,7 +1677,7 @@ EnergypowderEnergyRootCommon:
 	push bc
 	call ItemRestoreHP
 	pop bc
-	cp 0
+	and a
 	jr nz, .skip_happiness
 
 	farcall ChangeHappiness
@@ -1937,6 +1974,25 @@ LoadHPFromBuffer1:
 	ld e, a
 	ret
 
+GetOneFourthMaxHP:
+	 push bc
+	 ld a, MON_MAXHP
+	 call GetPartyParamLocation
+	 ld a, [hli]
+	 ldh [hDividend + 0], a
+	 ld a, [hl]
+	 ldh [hDividend + 1], a
+	 ld a, 4
+	 ldh [hDivisor], a
+	 ld b, 2
+	 call Divide
+	 ldh a, [hQuotient + 2]
+	 ld d, a
+	 ldh a, [hQuotient + 3]
+	 ld e, a
+	 pop bc
+	 ret
+
 GetOneFifthMaxHP:
 	push bc
 	ld a, MON_MAXHP
@@ -1959,8 +2015,9 @@ GetOneFifthMaxHP:
 GetHealingItemAmount:
 	push hl
 	ld a, [wCurItem]
+	cp GOLD_BERRY
+	jr z, .GoldBerry
 	ld hl, HealingHPAmounts
-	ld d, a
 .next
 	ld a, [hli]
 	cp -1
@@ -1979,6 +2036,13 @@ GetHealingItemAmount:
 	ld d, [hl]
 	pop hl
 	ret
+
+.GoldBerry:
+ ; use Gen 4 effect (25% max HP)
+ 	call GetOneFourthMaxHP
+ 	pop hl
+ 	ret
+
 
 INCLUDE "data/items/heal_hp.asm"
 

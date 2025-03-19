@@ -1116,7 +1116,6 @@ ReadNoiseSample:
 	jr z, .quit
 
 	and $f
-	inc a
 	ld [wNoiseSampleDelay], a
 	ld a, [de]
 	inc de
@@ -1413,7 +1412,7 @@ MusicCommands:
 	dw MusicF6 ; nothing
 	dw MusicF7 ; nothing
 	dw MusicF8 ; nothing
-	dw MusicF9 ; unused
+	dw Music_ChangeNoiseSampleSet
 	dw Music_SetCondition
 	dw Music_JumpIf
 	dw Music_Jump
@@ -1673,13 +1672,6 @@ MusicEE:
 	ld [hl], d
 	ret
 
-MusicF9:
-; unused
-; sets some flag
-; params: 0
-	ld a, TRUE
-	ld [wUnusedMusicF9Flag], a
-	ret
 
 MusicE2:
 ; unused
@@ -1870,6 +1862,7 @@ Music_ToggleNoise:
 .on
 	; turn noise sampling on
 	set SOUND_NOISE, [hl]
+Music_ChangeNoiseSampleSet:
 	call GetMusicByte
 	ld [wMusicNoiseSampleSet], a
 	ret

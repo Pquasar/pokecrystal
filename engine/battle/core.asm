@@ -93,6 +93,7 @@ DoBattle:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
+	call StealthRockDamage
 	call SpikesDamage
 	ld a, [wLinkMode]
 	and a
@@ -107,6 +108,7 @@ DoBattle:
 	call BreakAttraction
 	call EnemySwitch
 	call SetEnemyTurn
+	call StealthRockDamage
 	call SpikesDamage
 
 .not_linked_2
@@ -471,6 +473,7 @@ DetermineMoveOrder:
 .switch
 	callfar AI_Switch
 	call SetEnemyTurn
+	call StealthRockDamage
 	call SpikesDamage
 	jp .enemy_first
 
@@ -827,14 +830,9 @@ CompareMovePriority:
 	ret
 
 GetMovePriority:
-; Return the priority (0-3) of move a.
+; Return the priority (0-4) of move a.
 
 	ld b, a
-
-	; Vital Throw goes last.
-	cp VITAL_THROW
-	ld a, 0
-	ret z
 
 	call GetMoveEffect
 	ld hl, MoveEffectPriorities
@@ -1259,7 +1257,7 @@ HandleWrap:
 	call SwitchTurnCore
 
 .skip_anim
-	call GetSixteenthMaxHP
+	call GetEighthMaxHP
 	call SubtractHPFromUser
 	ld hl, BattleText_UsersHurtByStringBuffer1
 	jr .print_text
@@ -1689,14 +1687,21 @@ HandleWeather:
 
 	ld hl, wWeatherCount
 	dec [hl]
-	jr z, .ended
+	jr nz, .continues
 
+; ended
+	ld hl, .WeatherEndedMessages
+	call .PrintWeatherMessage
+	xor a
+	ld [wBattleWeather], a
+	ret
+
+.continues
 	ld hl, .WeatherMessages
 	call .PrintWeatherMessage
-
 	ld a, [wBattleWeather]
 	cp WEATHER_SANDSTORM
-	ret nz
+	jr nz, .check_hail
 
 	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
@@ -1747,18 +1752,64 @@ HandleWeather:
 	ld de, ANIM_IN_SANDSTORM
 	call Call_PlayBattleAnim
 	call SwitchTurnCore
-	call GetEighthMaxHP
+	call GetSixteenthMaxHP
 	call SubtractHPFromUser
 
 	ld hl, SandstormHitsText
 	jp StdBattleTextbox
 
-.ended
-	ld hl, .WeatherEndedMessages
-	call .PrintWeatherMessage
+.check_hail
+	ld a, [wBattleWeather]
+	cp WEATHER_HAIL
+	ret nz
+
+	ldh a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
+	jr z, .enemy_first_hail
+
+; player first
+	call SetPlayerTurn
+	call .HailDamage
+	call SetEnemyTurn
+	jr .HailDamage
+
+.enemy_first_hail
+	call SetEnemyTurn
+	call .HailDamage
+	call SetPlayerTurn
+
+.HailDamage:
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVar
+	bit SUBSTATUS_UNDERGROUND, a
+	ret nz
+
+	ld hl, wBattleMonType1
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok1
+	ld hl, wEnemyMonType1
+.ok1
+	ld a, [hli]
+	cp ICE
+	ret z
+
+	call SwitchTurnCore
 	xor a
-	ld [wBattleWeather], a
-	ret
+	ld [wNumHits], a
+	ld de, ANIM_IN_HAIL
+	call Call_PlayBattleAnim
+	call SwitchTurnCore
+
+	ld a, [hl]
+	cp ICE
+	ret z
+
+	call GetSixteenthMaxHP
+	call SubtractHPFromUser
+
+	ld hl, PeltedByHailText
+	jp StdBattleTextbox
 
 .PrintWeatherMessage:
 	ld a, [wBattleWeather]
@@ -1777,12 +1828,14 @@ HandleWeather:
 	dw BattleText_RainContinuesToFall
 	dw BattleText_TheSunlightIsStrong
 	dw BattleText_TheSandstormRages
+	dw BattleText_HailContinuesToFall
 
 .WeatherEndedMessages:
 ; entries correspond to WEATHER_* constants
 	dw BattleText_TheRainStopped
 	dw BattleText_TheSunlightFaded
 	dw BattleText_TheSandstormSubsided
+	dw BattleText_TheHailStopped
 
 SubtractHPFromTarget:
 	call SubtractHP
@@ -1826,6 +1879,19 @@ SubtractHP:
 
 GetSixteenthMaxHP:
 	call GetQuarterMaxHP
+; quarter result
+	srl c
+	srl c
+; at least 1
+	ld a, c
+	and a
+	jr nz, .ok
+	inc c
+.ok
+	ret
+
+GetThirtySecondMaxHP:
+	call GetEighthMaxHP
 ; quarter result
 	srl c
 	srl c
@@ -1884,6 +1950,53 @@ GetHalfMaxHP:
 	jr nz, .end
 	inc c
 .end
+	ret
+
+GetThirdMaxHP:
+; output: bc
+	call GetMaxHP
+	xor a
+	inc b
+	.loop
+	dec b
+	inc a
+	dec bc
+	dec bc
+	dec bc
+	inc b
+	jr nz, .loop
+	dec a
+	ld c, a
+	ret nz
+	inc c
+	ret
+
+GetTwoThirdMaxHP:
+ 	call GetThirdMaxHP
+	sla c
+	rl b
+	ret
+
+
+GetOneSixthMaxHP:
+ 	call GetMaxHP
+
+ 	ld a, b
+ 	ld [hDividend + 0], a
+ 	ld a, c
+ 	ld [hDividend + 1], a
+ 	ld a, 6
+ 	ld [hDivisor], a
+ 	ld b, 2
+ 	call Divide
+	ld a, [hQuotient + 2]
+	ld b, a
+	ld a, [hQuotient + 3]
+	ld c, a
+	and b
+	jr nz, .ok
+	inc c
+.ok
 	ret
 
 GetMaxHP:
@@ -2337,6 +2450,7 @@ EnemyPartyMonEntrance:
 .done_switch
 	call ResetBattleParticipants
 	call SetEnemyTurn
+	call StealthRockDamage
 	call SpikesDamage
 	xor a
 	ld [wEnemyMoveStruct + MOVE_ANIM], a
@@ -2773,6 +2887,7 @@ ForcePlayerMonChoice:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
+	call StealthRockDamage
 	call SpikesDamage
 	ld a, $1
 	and a
@@ -2794,6 +2909,7 @@ PlayerPartyMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
+	call StealthRockDamage
 	jp SpikesDamage
 
 CheckMobileBattleError:
@@ -3699,11 +3815,11 @@ TryToRunAwayFromBattle:
 
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
-	jp nz, .cant_escape
+	jp nz, .can_escape
 
 	ld a, [wPlayerWrapCount]
 	and a
-	jp nz, .cant_escape
+	jp nz, .can_escape
 
 	push hl
 	push de
@@ -3771,7 +3887,7 @@ TryToRunAwayFromBattle:
 	ld c, a
 .loop
 	dec c
-	jr z, .cant_escape_2
+	jr z, .can_escape
 	ld b, 30
 	ldh a, [hQuotient + 3]
 	add b
@@ -3899,7 +4015,6 @@ InitBattleMon:
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_ATK
 	call CopyBytes
 	call ApplyStatusEffectOnPlayerStats
-	call BadgeStatBoosts
 	ret
 
 BattleCheckPlayerShininess:
@@ -4110,6 +4225,24 @@ BreakAttraction:
 	res SUBSTATUS_IN_LOVE, [hl]
 	ret
 
+
+
+GetSpikesDamage:
+	dec a
+ 	jr z, .one ; one spikes set
+ 	dec a
+ 	jr z, .two ; two spikes set
+ ; assume three spikes set
+.three
+ 	call GetQuarterMaxHP
+ 	ret
+.two
+ 	call GetOneSixthMaxHP
+ 	ret
+.one
+ 	call GetEighthMaxHP
+ 	ret
+
 SpikesDamage:
 	ld hl, wPlayerScreens
 	ld de, wBattleMonType
@@ -4122,7 +4255,9 @@ SpikesDamage:
 	ld bc, UpdateEnemyHUD
 .ok
 
-	bit SCREENS_SPIKES, [hl]
+	ld a, [hl]
+	and 3
+	; return if zero spikes set
 	ret z
 
 	; Flying-types aren't affected by Spikes.
@@ -4135,11 +4270,44 @@ SpikesDamage:
 	ret z
 
 	push bc
+	push hl
 
 	ld hl, BattleText_UserHurtBySpikes ; "hurt by SPIKES!"
 	call StdBattleTextbox
 
-	call GetEighthMaxHP
+	pop hl
+ 	ld a, [hl]
+ 	and 3
+ 	call GetSpikesDamage
+	call SubtractHPFromTarget
+
+	pop hl
+	call .hl
+
+	jp WaitBGMap
+.hl
+	jp hl
+
+StealthRockDamage:
+	ld hl, wPlayerScreens
+	ld bc, UpdatePlayerHUD
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld hl, wEnemyScreens
+	ld bc, UpdateEnemyHUD
+.ok
+
+	bit SCREENS_STEALTH_ROCK, [hl]
+	ret z
+
+	push bc
+
+	ld hl, BattleText_UserHurtByStealthRock
+	call StdBattleTextbox
+
+
+	call GetStealthRockDamage
 	call SubtractHPFromTarget
 
 	pop hl
@@ -4149,6 +4317,8 @@ SpikesDamage:
 
 .hl
 	jp hl
+
+INCLUDE "engine/battle/stealth_rock_damage.asm"
 
 PursuitSwitch:
 	ld a, BATTLE_VARS_MOVE
@@ -5238,6 +5408,7 @@ PlayerSwitch:
 EnemyMonEntrance:
 	callfar AI_Switch
 	call SetEnemyTurn
+	call StealthRockDamage
 	jp SpikesDamage
 
 BattleMonEntrance:
@@ -5271,6 +5442,7 @@ BattleMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
+	call StealthRockDamage
 	call SpikesDamage
 	ld a, $2
 	ld [wMenuCursorY], a
@@ -5295,6 +5467,7 @@ PassedBattleMonEntrance:
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
+	call StealthRockDamage
 	jp SpikesDamage
 
 BattleMenu_Run:
@@ -5689,14 +5862,18 @@ MoveInfoBox:
 	ld [wStringBuffer1], a
 	call .PrintPP
 
+	farcall UpdateMoveData
+	ld a, [wPlayerMoveStruct + MOVE_ANIM]
+	ld b, a
+	farcall GetMoveCategoryName
 	hlcoord 1, 9
-	ld de, .Type
+	ld de, wStringBuffer1
 	call PlaceString
 
-	hlcoord 7, 11
+	ld h, b
+	ld l, c
 	ld [hl], "/"
 
-	callfar UpdateMoveData
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
 	hlcoord 2, 10
@@ -5707,8 +5884,6 @@ MoveInfoBox:
 
 .Disabled:
 	db "Disabled!@"
-.Type:
-	db "TYPE/@"
 
 .PrintPP:
 	hlcoord 5, 11
@@ -6054,15 +6229,20 @@ LoadEnemyMon:
 	jp .Happiness
 
 .InitDVs:
-; Trainer DVs
-
-; All trainers have preset DVs, determined by class
-; See GetTrainerDVs for more on that
-	farcall GetTrainerDVs
-; These are the DVs we'll use if we're actually in a trainer battle
 	ld a, [wBattleMode]
 	dec a
-	jr nz, .UpdateDVs
+	jr z, .WildDVs
+
+; Trainer DVs
+	ld a, [wCurPartyMon]
+	ld hl, wOTPartyMon1DVs
+	call GetPartyLocation
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
+	jr .UpdateDVs
+
+.WildDVs:
 
 ; Wild DVs
 ; Here's where the fun starts
@@ -6097,10 +6277,9 @@ LoadEnemyMon:
 ; (HP is initialized at the end of the battle)
 	call GetRoamMonDVs
 	inc hl
-	call BattleRandom
+	ld a, $FF
 	ld [hld], a
 	ld c, a
-	call BattleRandom
 	ld [hl], a
 	ld b, a
 ; We're done with DVs
@@ -6119,11 +6298,8 @@ LoadEnemyMon:
 	jr .UpdateDVs
 
 .GenerateDVs:
-; Generate new random DVs
-	call BattleRandom
-	ld b, a
-	call BattleRandom
-	ld c, a
+	ld b, $FF
+	ld c, $FF
 
 .UpdateDVs:
 ; Input DVs in register bc
@@ -6224,6 +6400,14 @@ LoadEnemyMon:
 	ld de, wEnemyMonMaxHP
 	ld b, FALSE
 	ld hl, wEnemyMonDVs - (MON_DVS - MON_STAT_EXP + 1)
+	ld a, [wBattleMode]
+	cp TRAINER_BATTLE
+	jr nz, .no_stat_exp
+	ld a, [wCurPartyMon]
+	ld hl, wOTPartyMon1StatExp - 1
+	call GetPartyLocation
+	ld b, TRUE
+.no_stat_exp
 	predef CalcMonStats
 
 ; If we're in a trainer battle,
@@ -6759,95 +6943,6 @@ ApplyStatLevelMultiplier:
 StatLevelMultipliers_Applied:
 INCLUDE "data/battle/stat_multipliers.asm"
 
-BadgeStatBoosts:
-; Raise the stats of the battle mon in wBattleMon
-; depending on which badges have been obtained.
-
-; Every other badge boosts a stat, starting from the first.
-; GlacierBadge also boosts Special Defense, although the relevant code is buggy (see below).
-
-; 	ZephyrBadge:  Attack
-; 	PlainBadge:   Speed
-; 	MineralBadge: Defense
-; 	GlacierBadge: Special Attack and Special Defense
-
-; The boosted stats are in order, except PlainBadge and MineralBadge's boosts are swapped.
-
-	ld a, [wLinkMode]
-	and a
-	ret nz
-
-	ld a, [wInBattleTowerBattle]
-	and a
-	ret nz
-
-	ld a, [wJohtoBadges]
-
-; Swap badges 3 (PlainBadge) and 5 (MineralBadge).
-	ld d, a
-	and (1 << PLAINBADGE)
-	add a
-	add a
-	ld b, a
-	ld a, d
-	and (1 << MINERALBADGE)
-	rrca
-	rrca
-	ld c, a
-	ld a, d
-	and ((1 << ZEPHYRBADGE) | (1 << HIVEBADGE) | (1 << FOGBADGE) | (1 << STORMBADGE) | (1 << GLACIERBADGE) | (1 << RISINGBADGE))
-	or b
-	or c
-	ld b, a
-
-	ld hl, wBattleMonAttack
-	ld c, 4
-.CheckBadge:
-; BUG: Glacier Badge may not boost Special Defense depending on the value of Special Attack (see docs/bugs_and_glitches.md)
-	ld a, b
-	srl b
-	call c, BoostStat
-	inc hl
-	inc hl
-; Check every other badge.
-	srl b
-	dec c
-	jr nz, .CheckBadge
-	srl a
-	call c, BoostStat
-	ret
-
-BoostStat:
-; Raise stat at hl by 1/8.
-
-	ld a, [hli]
-	ld d, a
-	ld e, [hl]
-	srl d
-	rr e
-	srl d
-	rr e
-	srl d
-	rr e
-	ld a, [hl]
-	add e
-	ld [hld], a
-	ld a, [hl]
-	adc d
-	ld [hli], a
-
-; Cap at 999.
-	ld a, [hld]
-	sub LOW(MAX_STAT_VALUE)
-	ld a, [hl]
-	sbc HIGH(MAX_STAT_VALUE)
-	ret c
-	ld a, HIGH(MAX_STAT_VALUE)
-	ld [hli], a
-	ld a, LOW(MAX_STAT_VALUE)
-	ld [hld], a
-	ret
-
 _LoadBattleFontsHPBar:
 	callfar LoadBattleFontsHPBar
 	ret
@@ -7063,6 +7158,13 @@ GiveExperiencePoints:
 	inc de
 	dec c
 	jr nz, .stat_exp_loop
+	pop bc
+	ld hl, MON_LEVEL
+	add hl, bc
+	ld a, [hl]
+	cp MAX_LEVEL
+	jp nc, .next_mon
+	push bc
 	xor a
 	ldh [hMultiplicand + 0], a
 	ldh [hMultiplicand + 1], a
@@ -7271,7 +7373,6 @@ GiveExperiencePoints:
 	ld [wApplyStatLevelMultipliersToEnemy], a
 	call ApplyStatLevelMultiplierOnAllStats
 	callfar ApplyStatusEffectOnPlayerStats
-	callfar BadgeStatBoosts
 	callfar UpdatePlayerHUD
 	call EmptyBattleTextbox
 	call LoadTilemapToTempTilemap
@@ -7359,12 +7460,28 @@ GiveExperiencePoints:
 	ld a, [wBattleParticipantsNotFainted]
 	ld b, a
 	ld c, PARTY_LENGTH
-	ld d, 0
+	ld de, 0
 .count_loop
+	push bc
+	push de
+	ld a, e
+	ld hl, wPartyMon1Level
+	call GetPartyLocation
+	ld a, [hl]
+	cp MAX_LEVEL
+	pop de
+	pop bc
+	jr c, .gains_exp
+	srl b
+	ld a, d
+	jr .no_exp
+.gains_exp
 	xor a
 	srl b
 	adc d
 	ld d, a
+.no_exp
+	inc e
 	dec c
 	jr nz, .count_loop
 	cp 2

@@ -3,7 +3,6 @@
 
 UsefulMoves:
 	db DOUBLE_EDGE
-	db SING
 	db FLAMETHROWER
 	db HYDRO_PUMP
 	db SURF
@@ -20,5 +19,4 @@ UsefulMoves:
 	db RECOVER
 	db FIRE_BLAST
 	db SOFTBOILED
-	db SUPER_FANG
 	db -1 ; end

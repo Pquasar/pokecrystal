@@ -191,10 +191,6 @@
 	const PORTRAITMAIL ; b7
 	const LOVELY_MAIL  ; b8
 	const EON_MAIL     ; b9
-	const MORPH_MAIL   ; ba
-	const BLUESKY_MAIL ; bb
-	const MUSIC_MAIL   ; bc
-	const MIRAGE_MAIL  ; bd
 	const ITEM_BE      ; be
 DEF NUM_ITEMS EQU const_value - 1
 
@@ -217,58 +213,67 @@ ENDM
 
 ; see data/moves/tmhm_moves.asm for moves
 DEF TM01 EQU const_value
-	add_tm DYNAMICPUNCH ; bf
-	add_tm HEADBUTT     ; c0
-	add_tm CURSE        ; c1
-	add_tm ROLLOUT      ; c2
+	add_tm DRAGON_CLAW  ; bf
+	add_tm CALM_MIND    ; c0
+	add_tm ROAR         ; c1
+	add_tm TOXIC        ; c2
 	const ITEM_C3       ; c3
-	add_tm ROAR         ; c4
-	add_tm TOXIC        ; c5
-	add_tm ZAP_CANNON   ; c6
-	add_tm ROCK_SMASH   ; c7
-	add_tm PSYCH_UP     ; c8
-	add_tm HIDDEN_POWER ; c9
-	add_tm SUNNY_DAY    ; ca
-	add_tm SWEET_SCENT  ; cb
-	add_tm SNORE        ; cc
-	add_tm BLIZZARD     ; cd
-	add_tm HYPER_BEAM   ; ce
-	add_tm ICY_WIND     ; cf
-	add_tm PROTECT      ; d0
-	add_tm RAIN_DANCE   ; d1
-	add_tm GIGA_DRAIN   ; d2
-	add_tm ENDURE       ; d3
-	add_tm FRUSTRATION  ; d4
-	add_tm SOLARBEAM    ; d5
-	add_tm IRON_TAIL    ; d6
-	add_tm DRAGONBREATH ; d7
-	add_tm THUNDER      ; d8
-	add_tm EARTHQUAKE   ; d9
-	add_tm RETURN       ; da
-	add_tm DIG          ; db
+	add_tm HAIL         ; c4
+	add_tm BULK_UP      ; c5
+	add_tm HIDDEN_POWER ; c6
+	add_tm SUNNY_DAY    ; c7
+	add_tm ICE_BEAM     ; c8
+	add_tm BLIZZARD     ; c9
+	add_tm HYPER_BEAM   ; ca
+	add_tm LIGHT_SCREEN ; cb
+	add_tm PROTECT      ; cc
+	add_tm RAIN_DANCE   ; cd
+	add_tm ROOST        ; ce
+	add_tm SAFEGUARD    ; cf
+	add_tm SOLARBEAM    ; d1
+	add_tm THUNDERBOLT  ; d2
+	add_tm THUNDER      ; d3
+	add_tm EARTHQUAKE   ; d4
+	add_tm RETURN       ; d5
+	add_tm LEECH_LIFE   ; d6
+	add_tm PSYCHIC_M    ; d7
+	add_tm SHADOW_BALL  ; d8
+	add_tm BRICK_BREAK  ; d9
+	add_tm REFLECT      ; da
+	add_tm FLAMETHROWER ; db
 	const ITEM_DC       ; dc
-	add_tm PSYCHIC_M    ; dd
-	add_tm SHADOW_BALL  ; de
-	add_tm MUD_SLAP     ; df
-	add_tm DOUBLE_TEAM  ; e0
-	add_tm ICE_PUNCH    ; e1
-	add_tm SWAGGER      ; e2
-	add_tm SLEEP_TALK   ; e3
-	add_tm SLUDGE_BOMB  ; e4
-	add_tm SANDSTORM    ; e5
-	add_tm FIRE_BLAST   ; e6
-	add_tm SWIFT        ; e7
-	add_tm DEFENSE_CURL ; e8
-	add_tm THUNDERPUNCH ; e9
-	add_tm DREAM_EATER  ; ea
-	add_tm DETECT       ; eb
-	add_tm REST         ; ec
-	add_tm ATTRACT      ; ed
-	add_tm THIEF        ; ee
-	add_tm STEEL_WING   ; ef
-	add_tm FIRE_PUNCH   ; f0
-	add_tm FURY_CUTTER  ; f1
-	add_tm NIGHTMARE    ; f2
+	add_tm SLUDGE_BOMB  ; dd
+	add_tm SANDSTORM    ; de
+	add_tm FIRE_BLAST   ; df
+	add_tm REST         ; e0
+	add_tm ATTRACT      ; e1
+	add_tm THIEF        ; e2
+	add_tm OVERHEAT     ; e3
+	add_tm STEEL_WING   ; e4
+	add_tm FOCUS_BLAST  ; e5
+	add_tm ENERGY_BALL  ; e6
+	add_tm SCALD        ; e7
+	add_tm WILL_O_WISP  ; e8
+	add_tm ACROBATICS   ; e9
+	add_tm EXPLOSION    ; ea
+	add_tm ROCK_POLISH  ; eb
+	add_tm STONE_EDGE   ; ec
+	add_tm THUNDER_WAVE ; ed
+	add_tm GYRO_BALL    ; ee
+	add_tm SWORDS_DANCE ; ef
+	add_tm BULLDOZE     ; f0
+	add_tm ROCK_SLIDE   ; f1
+	add_tm X_SCISSOR    ; f2
+	add_tm DRAGON_TAIL  ; d0
+	add_tm INFESTATION  ; f3
+	add_tm POISON_JAB   ; f4
+	add_tm SLEEP_TALK   ; f5
+	add_tm U_TURN       ; f6
+	add_tm SUBSTITUTE   ; f7
+	add_tm FLASH_CANNON ; f8
+	add_tm WILD_CHARGE  ; f8
+	add_tm DARK_PULSE   ; f8
+	add_tm DAZLINGGLEAM ; f8
 DEF NUM_TMS EQU __tmhm_value__ - 1
 
 MACRO add_hm
@@ -302,9 +307,35 @@ MACRO add_mt
 ENDM
 
 DEF MT01 EQU const_value
-	add_mt FLAMETHROWER
-	add_mt THUNDERBOLT
-	add_mt ICE_BEAM
+	add_mt HEAL_BELL
+	add_mt LOW_KICK
+	add_mt IRON_TAIL
+	add_mt GIGA_DRAIN
+	add_mt SYNTHESIS
+	add_mt SIGNAL_BEAM
+	add_mt IRON_DEFENSE  ;7
+	add_mt FIRE_PUNCH
+	add_mt IRON_HEAD
+	add_mt AQUA_TAIL
+	add_mt PAIN_SPLIT
+	add_mt THUNDERPUNCH
+	add_mt ICY_WIND
+	add_mt ZEN_HEADBUTT  ;14
+	add_mt SEED_BOMB
+	add_mt DRILL_RUN
+	add_mt ICE_PUNCH
+	add_mt LIQUIDATION
+	add_mt OUTRAGE
+	add_mt THROAT_CHOP
+	add_mt EARTH_POWER  ;21
+	add_mt GUNK_SHOT
+	add_mt DUAL_CHOP
+	add_mt DRAIN_PUNCH
+	add_mt HEAT_WAVE
+	add_mt HYPER_VOICE
+	add_mt KNOCK_OFF
+	add_mt DRAGON_PULSE  ;28
+	add_mt STEALTH_ROCK
 DEF NUM_TUTORS = __tmhm_value__ - NUM_TMS - NUM_HMS - 1
 
 DEF NUM_TM_HM_TUTOR EQU NUM_TMS + NUM_HMS + NUM_TUTORS

@@ -15,7 +15,7 @@ IcePath1FPPUp:
 	itemball PP_UP
 
 IcePath1FProtein:
-	itemball PROTEIN
+	itemball NUGGET
 
 IcePath1F_MapEvents:
 	db 0, 0 ; filler

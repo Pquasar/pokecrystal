@@ -9,7 +9,7 @@ SilverCaveRoom2_MapScripts:
 	def_callbacks
 
 SilverCaveRoom2Calcium:
-	itemball CALCIUM
+	itemball NUGGET
 
 SilverCaveRoom2UltraBall:
 	itemball ULTRA_BALL

@@ -47,7 +47,7 @@ EggMovePointers::
 	dw NoEggMoves
 	dw ParasEggMoves
 	dw NoEggMoves
-	dw VenonatEggMoves
+	dw NoEggMoves
 	dw NoEggMoves
 	dw DiglettEggMoves
 	dw NoEggMoves
@@ -68,7 +68,7 @@ EggMovePointers::
 	dw MachopEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
-	dw BellsproutEggMoves
+	dw NoEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
 	dw TentacoolEggMoves
@@ -95,7 +95,7 @@ EggMovePointers::
 	dw NoEggMoves
 	dw NoEggMoves
 	dw OnixEggMoves
-	dw DrowzeeEggMoves
+	dw NoEggMoves
 	dw NoEggMoves
 	dw KrabbyEggMoves
 	dw NoEggMoves
@@ -115,7 +115,7 @@ EggMovePointers::
 	dw ChanseyEggMoves
 	dw TangelaEggMoves
 	dw KangaskhanEggMoves
-	dw HorseaEggMoves
+	dw NoEggMoves
 	dw NoEggMoves
 	dw GoldeenEggMoves
 	dw NoEggMoves
@@ -160,13 +160,13 @@ EggMovePointers::
 	dw TotodileEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
-	dw SentretEggMoves
+	dw NoEggMoves
 	dw NoEggMoves
 	dw HoothootEggMoves
 	dw NoEggMoves
-	dw LedybaEggMoves
 	dw NoEggMoves
-	dw SpinarakEggMoves
+	dw NoEggMoves
+	dw NoEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
 	dw ChinchouEggMoves
@@ -176,9 +176,9 @@ EggMovePointers::
 	dw IgglybuffEggMoves
 	dw TogepiEggMoves
 	dw NoEggMoves
-	dw NatuEggMoves
 	dw NoEggMoves
-	dw MareepEggMoves
+	dw NoEggMoves
+	dw NoEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
@@ -186,7 +186,7 @@ EggMovePointers::
 	dw NoEggMoves
 	dw SudowoodoEggMoves
 	dw NoEggMoves
-	dw HoppipEggMoves
+	dw NoEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
 	dw AipomEggMoves
@@ -219,7 +219,7 @@ EggMovePointers::
 	dw NoEggMoves
 	dw SlugmaEggMoves
 	dw NoEggMoves
-	dw SwinubEggMoves
+	dw NoEggMoves
 	dw NoEggMoves
 	dw CorsolaEggMoves
 	dw RemoraidEggMoves
@@ -227,7 +227,7 @@ EggMovePointers::
 	dw DelibirdEggMoves
 	dw MantineEggMoves
 	dw SkarmoryEggMoves
-	dw HoundourEggMoves
+	dw NoEggMoves
 	dw NoEggMoves
 	dw NoEggMoves
 	dw PhanpyEggMoves

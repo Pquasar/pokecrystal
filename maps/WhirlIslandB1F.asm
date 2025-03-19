@@ -15,10 +15,10 @@ WhirlIslandB1FFullRestore:
 	itemball FULL_RESTORE
 
 WhirlIslandB1FCarbos:
-	itemball CARBOS
+	itemball NUGGET
 
 WhirlIslandB1FCalcium:
-	itemball CALCIUM
+	itemball NUGGET
 
 WhirlIslandB1FNugget:
 	itemball NUGGET

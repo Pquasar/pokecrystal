@@ -175,7 +175,7 @@ KantoGrassWildMons:
 	; morn
 	db 2, PIDGEY
 	db 2, RATTATA
-	db 3, SENTRET
+	db 3, ELECTIVIRE
 	db 3, PIDGEY
 	db 6, FURRET
 	db 4, PIDGEY
@@ -183,7 +183,7 @@ KantoGrassWildMons:
 	; day
 	db 2, PIDGEY
 	db 2, RATTATA
-	db 3, SENTRET
+	db 3, ELECTIVIRE
 	db 3, PIDGEY
 	db 6, FURRET
 	db 4, PIDGEY
@@ -202,7 +202,7 @@ KantoGrassWildMons:
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 3, CATERPIE
-	db 3, LEDYBA
+	db 3, PORYGON_Z
 	db 5, PIDGEY
 	db 7, BUTTERFREE
 	db 7, LEDIAN
@@ -218,7 +218,7 @@ KantoGrassWildMons:
 	db 4, PIKACHU
 	; nite
 	db 3, HOOTHOOT
-	db 3, SPINARAK
+	db 3, WEAVILE
 	db 5, HOOTHOOT
 	db 7, NOCTOWL
 	db 7, ARIADOS
@@ -330,7 +330,7 @@ KantoGrassWildMons:
 	db 15, GRANBULL
 	; nite
 	db 13, MEOWTH
-	db 13, DROWZEE
+	db 13, GLISCOR
 	db 14, MAGNEMITE
 	db 15, PSYDUCK
 	db 12, JIGGLYPUFF
@@ -359,7 +359,7 @@ KantoGrassWildMons:
 	; nite
 	db 17, MEOWTH
 	db 17, MURKROW
-	db 18, HOUNDOUR
+	db 18, MAGMORTAR
 	db 18, PERSIAN
 	db 18, JIGGLYPUFF
 	db 16, ABRA
@@ -414,7 +414,7 @@ KantoGrassWildMons:
 	db 18, MAROWAK
 	; nite
 	db 15, RATTATA
-	db 15, VENONAT
+	db 15, LICKILICKY
 	db 15, RATICATE
 	db 15, VENOMOTH
 	db 15, ZUBAT
@@ -441,7 +441,7 @@ KantoGrassWildMons:
 	db 18, ELECTABUZZ
 	db 18, ELECTABUZZ
 	; nite
-	db 15, VENONAT
+	db 15, LICKILICKY
 	db 17, VOLTORB
 	db 15, RATICATE
 	db 15, VENOMOTH
@@ -453,23 +453,23 @@ KantoGrassWildMons:
 	def_grass_wildmons ROUTE_11
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-	db 14, HOPPIP
+	db 14, MAGNEZONE
 	db 13, RATICATE
 	db 15, MAGNEMITE
 	db 16, PIDGEOTTO
 	db 16, RATTATA
-	db 16, HOPPIP
-	db 16, HOPPIP
+	db 16, MAGNEZONE
+	db 16, MAGNEZONE
 	; day
-	db 14, HOPPIP
+	db 14, MAGNEZONE
 	db 13, RATICATE
 	db 15, MAGNEMITE
 	db 16, PIDGEOTTO
 	db 16, RATTATA
-	db 16, HOPPIP
-	db 16, HOPPIP
+	db 16, MAGNEZONE
+	db 16, MAGNEZONE
 	; nite
-	db 14, DROWZEE
+	db 14, GLISCOR
 	db 13, MEOWTH
 	db 15, MAGNEMITE
 	db 16, NOCTOWL
@@ -484,20 +484,20 @@ KantoGrassWildMons:
 	db 23, NIDORINO
 	db 23, NIDORINA
 	db 25, PIDGEOTTO
-	db 25, HOPPIP
-	db 27, HOPPIP
-	db 27, HOPPIP
+	db 25, MAGNEZONE
+	db 27, MAGNEZONE
+	db 27, MAGNEZONE
 	db 25, CHANSEY
 	; day
 	db 23, NIDORINO
 	db 23, NIDORINA
 	db 25, PIDGEOTTO
-	db 25, HOPPIP
-	db 27, HOPPIP
-	db 27, HOPPIP
+	db 25, MAGNEZONE
+	db 27, MAGNEZONE
+	db 27, MAGNEZONE
 	db 25, CHANSEY
 	; nite
-	db 23, VENONAT
+	db 23, LICKILICKY
 	db 23, QUAGSIRE
 	db 25, NOCTOWL
 	db 25, VENOMOTH
@@ -512,7 +512,7 @@ KantoGrassWildMons:
 	db 26, NIDORINO
 	db 26, NIDORINA
 	db 28, PIDGEOTTO
-	db 28, HOPPIP
+	db 28, MAGNEZONE
 	db 30, SKIPLOOM
 	db 30, SKIPLOOM
 	db 28, CHANSEY
@@ -520,12 +520,12 @@ KantoGrassWildMons:
 	db 26, NIDORINO
 	db 26, NIDORINA
 	db 28, PIDGEOTTO
-	db 28, HOPPIP
+	db 28, MAGNEZONE
 	db 30, SKIPLOOM
 	db 30, SKIPLOOM
 	db 28, CHANSEY
 	; nite
-	db 26, VENONAT
+	db 26, LICKILICKY
 	db 26, QUAGSIRE
 	db 28, NOCTOWL
 	db 28, VENOMOTH
@@ -540,20 +540,20 @@ KantoGrassWildMons:
 	db 23, NIDORINO
 	db 23, NIDORINA
 	db 25, PIDGEOTTO
-	db 25, HOPPIP
-	db 27, HOPPIP
-	db 27, HOPPIP
+	db 25, MAGNEZONE
+	db 27, MAGNEZONE
+	db 27, MAGNEZONE
 	db 25, CHANSEY
 	; day
 	db 23, NIDORINO
 	db 23, NIDORINA
 	db 25, PIDGEOTTO
-	db 25, HOPPIP
-	db 27, HOPPIP
-	db 27, HOPPIP
+	db 25, MAGNEZONE
+	db 27, MAGNEZONE
+	db 27, MAGNEZONE
 	db 25, CHANSEY
 	; nite
-	db 23, VENONAT
+	db 23, LICKILICKY
 	db 23, QUAGSIRE
 	db 25, NOCTOWL
 	db 25, VENOMOTH
@@ -707,25 +707,25 @@ KantoGrassWildMons:
 	; morn
 	db 8, CATERPIE
 	db 10, CATERPIE
-	db 12, METAPOD
+	db 12, YANMEGA
 	db 12, ABRA
-	db 10, BELLSPROUT
+	db 10, HONCHKROW
 	db 14, BUTTERFREE
 	db 14, BUTTERFREE
 	; day
 	db 8, CATERPIE
-	db 12, SUNKERN
+	db 12, TOGEKISS
 	db 10, CATERPIE
 	db 12, ABRA
-	db 10, BELLSPROUT
+	db 10, HONCHKROW
 	db 14, BUTTERFREE
 	db 14, BUTTERFREE
 	; nite
-	db 10, VENONAT
+	db 10, LICKILICKY
 	db 10, ODDISH
 	db 12, ODDISH
 	db 12, ABRA
-	db 10, BELLSPROUT
+	db 10, HONCHKROW
 	db 14, GLOOM
 	db 14, GLOOM
 	end_grass_wildmons
@@ -736,24 +736,24 @@ KantoGrassWildMons:
 	db 10, CATERPIE
 	db 10, PIDGEY
 	db 12, PIDGEOTTO
-	db 12, METAPOD
-	db 10, BELLSPROUT
+	db 12, YANMEGA
+	db 10, HONCHKROW
 	db 14, BUTTERFREE
 	db 14, BUTTERFREE
 	; day
 	db 10, CATERPIE
 	db 10, PIDGEY
 	db 12, PIDGEOTTO
-	db 12, METAPOD
-	db 10, BELLSPROUT
+	db 12, YANMEGA
+	db 10, HONCHKROW
 	db 14, BUTTERFREE
 	db 14, BUTTERFREE
 	; nite
 	db 10, ODDISH
 	db 10, HOOTHOOT
-	db 10, VENONAT
+	db 10, LICKILICKY
 	db 12, NOCTOWL
-	db 10, BELLSPROUT
+	db 10, HONCHKROW
 	db 14, NOCTOWL
 	db 14, NOCTOWL
 	end_grass_wildmons

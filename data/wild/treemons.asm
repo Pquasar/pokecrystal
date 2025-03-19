@@ -56,8 +56,8 @@ TreeMonSet_Town:
 TreeMonSet_Route:
 ; common
 	db 50, HOOTHOOT,   10
-	db 15, SPINARAK,   10
-	db 15, LEDYBA,     10
+	db 15, WEAVILE,   10
+	db 15, PORYGON_Z,     10
 	db 10, EXEGGCUTE,  10
 	db  5, EXEGGCUTE,  10
 	db  5, EXEGGCUTE,  10
@@ -92,7 +92,7 @@ TreeMonSet_Kanto:
 TreeMonSet_Lake:
 ; common
 	db 50, HOOTHOOT,   10
-	db 15, VENONAT,    10
+	db 15, LICKILICKY,    10
 	db 15, HOOTHOOT,   10
 	db 10, EXEGGCUTE,  10
 	db  5, EXEGGCUTE,  10
@@ -121,8 +121,8 @@ TreeMonSet_Forest:
 	db 15, CATERPIE,   10
 	db 15, WEEDLE,     10
 	db 10, HOOTHOOT,   10
-	db  5, METAPOD,    10
-	db  5, KAKUNA,     10
+	db  5, YANMEGA,    10
+	db  5, MAMOSWINE,     10
 	db -1
 
 TreeMonSet_Rock:

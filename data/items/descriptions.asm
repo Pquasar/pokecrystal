@@ -186,10 +186,6 @@ ItemDescriptions:
 	dw PortraitMailDesc
 	dw LovelyMailDesc
 	dw EonMailDesc
-	dw MorphMailDesc
-	dw BlueSkyMailDesc
-	dw MusicMailDesc
-	dw MirageMailDesc
 	dw TeruSama25Desc
 	assert_table_length NUM_ITEMS
 	dw TeruSama26Desc
@@ -197,6 +193,9 @@ ItemDescriptions:
 	dw TeruSama26Desc
 	dw TeruSama26Desc
 	dw TeruSama26Desc
+	dw TeruSama26Desc
+	dw TeruSama26Desc
+	dw TeruSama26Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
@@ -222,6 +221,7 @@ ItemDescriptions:
 	dw TeruSama27Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
+	dw TeruSama28Desc
 	dw TeruSama28Desc
 	dw TeruSama28Desc
 	dw TeruSama28Desc
@@ -358,8 +358,8 @@ TeruSama2Desc:
 	db   "?@"
 
 HPUpDesc:
-	db   "Raises the HP of"
-	next "one #MON.@"
+	db   "Raises all stats"
+	next "of one #MON.@"
 
 ProteinDesc:
 	db   "Raises ATTACK of"
@@ -909,7 +909,7 @@ SunStoneDesc:
 	next "kinds of #MON.@"
 
 PolkadotBowDesc:
-	db   "Powers up normal-"
+	db   "Powers up fairy-"
 	next "type moves. (HOLD)@"
 
 TeruSama22Desc:
@@ -925,7 +925,7 @@ BerryDesc:
 
 GoldBerryDesc:
 	db   "A self-restore"
-	next "item. (30HP, HOLD)@"
+	next "item. (HOLD)@"
 
 SquirtBottleDesc:
 	db   "A bottle used for"

@@ -2,19 +2,19 @@ PokedexDataPointerTable:
 ; entries correspond to constants/pokemon_constants.asm
 	table_width 2
 	dw BulbasaurPokedexEntry
-	dw IvysaurPokedexEntry
+	dw LeafeonPokedexEntry
 	dw VenusaurPokedexEntry
 	dw CharmanderPokedexEntry
-	dw CharmeleonPokedexEntry
+	dw SylveonPokedexEntry
 	dw CharizardPokedexEntry
 	dw SquirtlePokedexEntry
-	dw WartortlePokedexEntry
+	dw GlaceonPokedexEntry
 	dw BlastoisePokedexEntry
 	dw CaterpiePokedexEntry
-	dw MetapodPokedexEntry
+	dw YanmegaPokedexEntry
 	dw ButterfreePokedexEntry
 	dw WeedlePokedexEntry
-	dw KakunaPokedexEntry
+	dw MamoswinePokedexEntry
 	dw BeedrillPokedexEntry
 	dw PidgeyPokedexEntry
 	dw PidgeottoPokedexEntry
@@ -48,7 +48,7 @@ PokedexDataPointerTable:
 	dw VileplumePokedexEntry
 	dw ParasPokedexEntry
 	dw ParasectPokedexEntry
-	dw VenonatPokedexEntry
+	dw LickilickyPokedexEntry
 	dw VenomothPokedexEntry
 	dw DiglettPokedexEntry
 	dw DugtrioPokedexEntry
@@ -69,7 +69,7 @@ PokedexDataPointerTable:
 	dw MachopPokedexEntry
 	dw MachokePokedexEntry
 	dw MachampPokedexEntry
-	dw BellsproutPokedexEntry
+	dw HonchkrowPokedexEntry
 	dw WeepinbellPokedexEntry
 	dw VictreebelPokedexEntry
 	dw TentacoolPokedexEntry
@@ -96,7 +96,7 @@ PokedexDataPointerTable:
 	dw HaunterPokedexEntry
 	dw GengarPokedexEntry
 	dw OnixPokedexEntry
-	dw DrowzeePokedexEntry
+	dw GliscorPokedexEntry
 	dw HypnoPokedexEntry
 	dw KrabbyPokedexEntry
 	dw KinglerPokedexEntry
@@ -116,7 +116,7 @@ PokedexDataPointerTable:
 	dw ChanseyPokedexEntry
 	dw TangelaPokedexEntry
 	dw KangaskhanPokedexEntry
-	dw HorseaPokedexEntry
+	dw RhyperiorPokedexEntry
 	dw SeadraPokedexEntry
 	dw GoldeenPokedexEntry
 	dw SeakingPokedexEntry
@@ -161,13 +161,13 @@ PokedexDataPointerTable:
 	dw TotodilePokedexEntry
 	dw CroconawPokedexEntry
 	dw FeraligatrPokedexEntry
-	dw SentretPokedexEntry
+	dw ElectivirePokedexEntry
 	dw FurretPokedexEntry
 	dw HoothootPokedexEntry
 	dw NoctowlPokedexEntry
-	dw LedybaPokedexEntry
+	dw PorygonZPokedexEntry
 	dw LedianPokedexEntry
-	dw SpinarakPokedexEntry
+	dw WeavilePokedexEntry
 	dw AriadosPokedexEntry
 	dw CrobatPokedexEntry
 	dw ChinchouPokedexEntry
@@ -177,9 +177,9 @@ PokedexDataPointerTable:
 	dw IgglybuffPokedexEntry
 	dw TogepiPokedexEntry
 	dw TogeticPokedexEntry
-	dw NatuPokedexEntry
+	dw AmbipomPokedexEntry
 	dw XatuPokedexEntry
-	dw MareepPokedexEntry
+	dw TangrowthPokedexEntry
 	dw FlaaffyPokedexEntry
 	dw AmpharosPokedexEntry
 	dw BellossomPokedexEntry
@@ -187,11 +187,11 @@ PokedexDataPointerTable:
 	dw AzumarillPokedexEntry
 	dw SudowoodoPokedexEntry
 	dw PolitoedPokedexEntry
-	dw HoppipPokedexEntry
+	dw MagnezonePokedexEntry
 	dw SkiploomPokedexEntry
 	dw JumpluffPokedexEntry
 	dw AipomPokedexEntry
-	dw SunkernPokedexEntry
+	dw TogekissPokedexEntry
 	dw SunfloraPokedexEntry
 	dw YanmaPokedexEntry
 	dw WooperPokedexEntry
@@ -220,7 +220,7 @@ PokedexDataPointerTable:
 	dw UrsaringPokedexEntry
 	dw SlugmaPokedexEntry
 	dw MagcargoPokedexEntry
-	dw SwinubPokedexEntry
+	dw MismagiusPokedexEntry
 	dw PiloswinePokedexEntry
 	dw CorsolaPokedexEntry
 	dw RemoraidPokedexEntry
@@ -228,7 +228,7 @@ PokedexDataPointerTable:
 	dw DelibirdPokedexEntry
 	dw MantinePokedexEntry
 	dw SkarmoryPokedexEntry
-	dw HoundourPokedexEntry
+	dw MagmortarPokedexEntry
 	dw HoundoomPokedexEntry
 	dw KingdraPokedexEntry
 	dw PhanpyPokedexEntry

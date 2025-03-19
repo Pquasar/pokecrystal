@@ -180,6 +180,26 @@ ENDM
 	command supereffectivelooptext  ; ad
 	command startloop               ; ae
 	command curl                    ; af
+	command dragonup                ; b0
+	command doubleacrobatics				; b1
+	command brickbreak              ; b2
+	command quiverdance             ; b3
+	command suckerpunch             ; b4
+	command doburn						      ; b5
+	command stockpile						    ; b6
+	command gyroball                ; b7
+	command bulkup                  ; b8
+	command calmmind                ; b9
+	command coil                    ; ba
+	command starthail               ; bb
+	command hex                     ; bc
+	command honeclaws               ; bd
+	command growth                  ; be
+	command lowkick                 ; bf
+	command knockoff                ; c0
+	command knockoffdamage          ; c1
+	command stealthrock             ; c2
+	command clearsmog               ; c3
 DEF NUM_EFFECT_COMMANDS EQU const_value - 1
 
 	const_def -1, -1

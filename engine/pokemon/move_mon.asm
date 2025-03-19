@@ -201,11 +201,8 @@ endr
 	ld a, [wBattleMode]
 	and a
 	jr nz, .copywildmonDVs
-
-	call Random
-	ld b, a
-	call Random
-	ld c, a
+	ld b, $FF
+	ld c, $FF
 .initializeDVs
 	ld a, b
 	ld [de], a

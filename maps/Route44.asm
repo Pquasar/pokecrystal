@@ -84,7 +84,7 @@ TrainerBirdKeeperVance1:
 	checkevent EVENT_GOT_CARBOS_FROM_VANCE
 	iftrue .ReceivedCarbosBefore
 	scall Route44RematchGiftM
-	verbosegiveitem CARBOS
+	verbosegiveitem NUGGET
 	iffalse VancePackFull
 	setevent EVENT_GOT_CARBOS_FROM_VANCE
 	sjump Route44NumberAcceptedM
@@ -96,7 +96,7 @@ TrainerBirdKeeperVance1:
 	opentext
 	writetext BirdKeeperVance2BeatenText
 	waitbutton
-	verbosegiveitem CARBOS
+	verbosegiveitem NUGGET
 	iffalse VancePackFull
 	clearevent EVENT_VANCE_CARBOS
 	setevent EVENT_GOT_CARBOS_FROM_VANCE

@@ -158,22 +158,22 @@ Footprints:
 
 ; 001-008 top halves
 INCBIN "gfx/footprints/bulbasaur.1bpp",  footprint_top
-INCBIN "gfx/footprints/ivysaur.1bpp",    footprint_top
+INCBIN "gfx/footprints/leafeon.1bpp",    footprint_top
 INCBIN "gfx/footprints/venusaur.1bpp",   footprint_top
 INCBIN "gfx/footprints/charmander.1bpp", footprint_top
-INCBIN "gfx/footprints/charmeleon.1bpp", footprint_top
+INCBIN "gfx/footprints/sylveon.1bpp", footprint_top
 INCBIN "gfx/footprints/charizard.1bpp",  footprint_top
 INCBIN "gfx/footprints/squirtle.1bpp",   footprint_top
-INCBIN "gfx/footprints/wartortle.1bpp",  footprint_top
+INCBIN "gfx/footprints/glaceon.1bpp",  footprint_top
 ; 001-008 bottom halves
 INCBIN "gfx/footprints/bulbasaur.1bpp",  footprint_bottom
-INCBIN "gfx/footprints/ivysaur.1bpp",    footprint_bottom
+INCBIN "gfx/footprints/leafeon.1bpp",    footprint_bottom
 INCBIN "gfx/footprints/venusaur.1bpp",   footprint_bottom
 INCBIN "gfx/footprints/charmander.1bpp", footprint_bottom
-INCBIN "gfx/footprints/charmeleon.1bpp", footprint_bottom
+INCBIN "gfx/footprints/sylveon.1bpp", footprint_bottom
 INCBIN "gfx/footprints/charizard.1bpp",  footprint_bottom
 INCBIN "gfx/footprints/squirtle.1bpp",   footprint_bottom
-INCBIN "gfx/footprints/wartortle.1bpp",  footprint_bottom
+INCBIN "gfx/footprints/glaceon.1bpp",  footprint_bottom
 ...
 ```
 
@@ -189,13 +189,13 @@ Footprints:
 	table_width LEN_1BPP_TILE * 4
 
 INCBIN "gfx/footprints/bulbasaur.1bpp"
-INCBIN "gfx/footprints/ivysaur.1bpp"
+INCBIN "gfx/footprints/leafeon.1bpp"
 INCBIN "gfx/footprints/venusaur.1bpp"
 INCBIN "gfx/footprints/charmander.1bpp"
-INCBIN "gfx/footprints/charmeleon.1bpp"
+INCBIN "gfx/footprints/sylveon.1bpp"
 INCBIN "gfx/footprints/charizard.1bpp"
 INCBIN "gfx/footprints/squirtle.1bpp"
-INCBIN "gfx/footprints/wartortle.1bpp"
+INCBIN "gfx/footprints/glaceon.1bpp"
 ...
 ```
 
@@ -359,7 +359,7 @@ DEF NUM_TMS EQU const_value - TM01 - 2 ; discount ITEM_C3 and ITEM_DC
 >
 > Most catch rates were left as gaps in the item list, and transformed into held items via the `TimeCapsule_CatchRateItems` table in [data/items/catch_rate_items.asm](https://github.com/pret/pokecrystal/blob/master/data/items/catch_rate_items.asm). For example, the 52 Pokémon with catch rate 45 would hold the gap `ITEM_2D`, except that gets transformed into `BITTER_BERRY`.
 >
-> But a few Pokémon end up with weird items. Abra has a catch rate of 200, or $C8; and Krabby, Horsea, Goldeen, and Staryu have a catch rate of 225, or $E1. Those indexes correspond to the items `TM_PSYCH_UP` and `TM_ICE_PUNCH`, which seem like random choices—because they are.
+> But a few Pokémon end up with weird items. Abra has a catch rate of 200, or $C8; and Krabby, Rhyperior, Goldeen, and Staryu have a catch rate of 225, or $E1. Those indexes correspond to the items `TM_PSYCH_UP` and `TM_ICE_PUNCH`, which seem like random choices—because they are.
 >
 > The TMs and HMs span from indexes $BF to $F9. However, as we can see in [pokegold-spaceworld](https://github.com/pret/pokegold-spaceworld/blob/master/constants/item_constants.asm), they *originally* spanned $C4 to $FF. For some reason they were shifted down by 5 during development.
 >

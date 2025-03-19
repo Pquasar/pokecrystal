@@ -223,6 +223,7 @@ DEF ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | SLP_MASK
 	const SCREENS_SAFEGUARD
 	const SCREENS_LIGHT_SCREEN
 	const SCREENS_REFLECT
+	const SCREENS_STEALTH_ROCK
 	const SCREENS_UNUSED
 
 ; values in wBattleWeather
@@ -231,9 +232,11 @@ DEF ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | SLP_MASK
 	const WEATHER_RAIN
 	const WEATHER_SUN
 	const WEATHER_SANDSTORM
+	const WEATHER_HAIL
 	const WEATHER_RAIN_END
 	const WEATHER_SUN_END
 	const WEATHER_SANDSTORM_END
+	const WEATHER_HAIL_END
 
 ; wBattleAction
 	const_def

@@ -158,4 +158,32 @@ MoveEffectsPointers:
 	dw BeatUp
 	dw Fly
 	dw DefenseCurl
+	dw DragonUp
+	dw UTurn
+	dw Acrobatics
+	dw BrickBreak
+	dw QuiverDance
+	dw SuckerPunch
+	dw DoBurn
+	dw Stockpile
+	dw CloseCombat
+	dw GyroBall
+	dw BulkUp
+	dw CalmMind
+	dw Coil
+	dw DragonTail
+	dw FreezeHit
+	dw Hail
+	dw Overheat
+	dw Hex
+	dw HoneClaws
+	dw HammerArm
+	dw AcidSpray
+	dw Growth
+	dw Hurricane
+	dw LowKick
+	dw KnockOff
+	dw StealthRock
+	dw ClearSmog
+	dw Superpower
 	assert_table_length NUM_MOVE_EFFECTS

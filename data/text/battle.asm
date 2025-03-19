@@ -145,6 +145,11 @@ BattleText_TheSandstormRages:
 	line "rages."
 	prompt
 
+BattleText_HailContinuesToFall:
+	text "HAIL continues to"
+	line "fall."
+	prompt
+
 BattleText_TheRainStopped:
 	text "The rain stopped."
 	prompt
@@ -157,6 +162,10 @@ BattleText_TheSunlightFaded:
 BattleText_TheSandstormSubsided:
 	text "The SANDSTORM"
 	line "subsided."
+	prompt
+
+BattleText_TheHailStopped:
+	text "The HAIL stopped."
 	prompt
 
 BattleText_EnemyMonFainted:
@@ -284,6 +293,12 @@ BattleText_CantEscape:
 BattleText_UserHurtBySpikes:
 	text "<USER>'s"
 	line "hurt by SPIKES!"
+	prompt
+
+BattleText_UserHurtByStealthRock:
+	text "Pointed stones"
+	line "dug into"
+	cont "<USER>!"
 	prompt
 
 RecoveredUsingText:
@@ -453,6 +468,12 @@ UsedBindText:
 WhirlpoolTrapText:
 	text "<TARGET>"
 	line "was trapped!"
+	prompt
+
+InfestedByText:
+	text "<TARGET>"
+	line "was INFESTED by"
+	cont "<USER>!"
 	prompt
 
 FireSpinTrapText:
@@ -704,6 +725,11 @@ AlreadyPoisonedText:
 	line "already poisoned!"
 	prompt
 
+AlreadyBurnedText:
+	text "<TARGET>'s"
+	line "already burned!"
+	prompt
+
 SuckedHealthText:
 	text "Sucked health from"
 	line "<TARGET>!"
@@ -951,6 +977,14 @@ StoleText:
 	cont "from its foe!"
 	prompt
 
+KnockOffText:
+	text "<USER>"
+	line "knocked off"
+	cont "foe's @"
+	text_ram wStringBuffer1
+	text_start
+	prompt
+
 CantEscapeNowText:
 	text "<TARGET>"
 	line "can't escape now!"
@@ -989,6 +1023,12 @@ SpikesText:
 	text "SPIKES scattered"
 	line "all around"
 	cont "<TARGET>!"
+	prompt
+
+StealthRockText:
+	text "Pointed stones"
+	line "float in the air"
+	cont "around foe!"
 	prompt
 
 IdentifiedText:
@@ -1106,3 +1146,25 @@ BattleText_NoTimeLeftToday: ; unreferenced
 	text "There is no time"
 	line "left today!"
 	done
+
+ItStartedToHailText:
+	text "It started"
+	line "to HAIL!"
+	prompt
+
+PeltedByHailText:
+	text "<USER>"
+	line "is pelted by HAIL!"
+	prompt
+
+BrokeLightScreenText:
+	text "<USER>"
+	line "broke the target's"
+	cont "Light Screen!"
+	prompt
+
+BrokeReflectText:
+	text "<USER>"
+	line "broke the target's"
+	cont "Reflect!"
+	prompt

@@ -60,15 +60,15 @@ MoveTutorScript:
 	writetext GoldenrodCityMoveTutorAsk4000CoinsOkayText
 	yesorno
 	iffalse .Refused2
-	checkcoins 4000
+	checkcoins 400
 	ifequal HAVE_LESS, .NotEnoughMoney
 	writetext GoldenrodCityMoveTutorWhichMoveShouldITeachText
 	loadmenu .MoveMenuHeader
 	verticalmenu
 	closewindow
-	ifequal MOVETUTOR_FLAMETHROWER, .Flamethrower
-	ifequal MOVETUTOR_THUNDERBOLT, .Thunderbolt
-	ifequal MOVETUTOR_ICE_BEAM, .IceBeam
+	ifequal 1, .Flamethrower
+	ifequal 2, .Thunderbolt
+	ifequal 3, .IceBeam
 	sjump .Incompatible
 
 .Flamethrower:
@@ -121,7 +121,7 @@ MoveTutorScript:
 .TeachMove:
 	writetext GoldenrodCityMoveTutorIfYouUnderstandYouveMadeItText
 	promptbutton
-	takecoins 4000
+	takecoins 400
 	waitsfx
 	playsound SFX_TRANSACTION
 	special DisplayCoinCaseBalance

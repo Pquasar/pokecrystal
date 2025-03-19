@@ -88,6 +88,24 @@ CheckPlayerMoveTypeMatchups:
 	jr c, .ok2
 	call .DecreaseScore
 .ok2
+	ld a, [wBattleMonType1]
+	ld b, a
+	ld hl, wEnemyMonType2
+	call CheckTypeMatchup
+	ld a, [wTypeMatchup]
+	cp EFFECTIVE + 1 ; 1.0 + 0.1
+	jr c, .ok3
+	call .DecreaseScore
+.ok3
+	ld a, [wBattleMonType2]
+	cp b
+	jr z, .ok4
+	call CheckTypeMatchup
+	ld a, [wTypeMatchup]
+	cp EFFECTIVE + 1 ; 1.0 + 0.1
+	jr c, .ok4
+	call .DecreaseScore
+.ok4
 
 .done
 	call .CheckEnemyMoveMatchups

@@ -524,7 +524,8 @@ wPlayerScreens::
 ; 2 safeguard
 ; 3 light screen
 ; 4 reflect
-; 5-7 unused
+; 5 stealth rock
+; 6-7 unused
 	db
 
 wEnemyScreens::
@@ -2254,7 +2255,7 @@ wStringBuffer5:: ds STRING_BUFFER_LENGTH
 
 wBattleMenuCursorPosition:: db
 
-	ds 1
+wBuffer1:: db
 
 wCurBattleMon::
 ; index of the player's mon currently in battle (0-5)
@@ -2789,7 +2790,9 @@ wDudeNumBalls:: db
 wDudeBalls:: ds 2 * 4 + 1
 ENDU
 
-	ds 4
+wOtherTrainerType:: db
+wTrainerGroupBank:: db
+	ds 2
 
 wd430:: ; mobile
 wBattleAction:: db
@@ -2935,7 +2938,7 @@ endr
 
 wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE
 
-	ds 40
+	ds 38
 
 wMapObjects::
 wPlayerObject:: map_object wPlayer ; player is map object 0
@@ -3634,8 +3637,8 @@ wScratchTilemap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 wScratchAttrmap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 
 NEXTU
-wDecompressScratch:: ds $80 tiles
-wDecompressEnemyFrontpic:: ds $80 tiles
+
+wDecompressScratch:: ds $100 tiles
 
 NEXTU
 ; unidentified uses
