@@ -41,9 +41,6 @@ BattleCommand_DoBurn:
 	call .apply_burn
 	ld hl, WasBurnedText
 	call StdBattleTextbox
-	jr .finished
-
-.finished
 	farcall UseHeldStatusHealingItem
 	ret
 

@@ -1748,7 +1748,6 @@ AI_Smart_PriorityHit:
 	sub 10
 	ld [hl], a
 	ret
-	ret
 
 .discourage:
 	inc [hl]

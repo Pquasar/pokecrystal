@@ -11,8 +11,7 @@ BattleCommand_SuckerPunch:
 	pop af
 
 	and a
-	jr z, .failed
-	ret
+	ret nz
 
 .failed
 	call AnimateFailedMove

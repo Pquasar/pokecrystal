@@ -1,2 +1,0 @@
-BattleCommand_Foresight:
-	ret

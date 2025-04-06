@@ -18,10 +18,8 @@ GetStealthRockDamage:
 	inc de
 	ld a, [de]
 	cp b
-	jr z, .final
 ; skip if the same
-	call CheckTypeList
-.final
+	call nz, CheckTypeList
 	ld a, c
 	pop bc
 	dec a
@@ -31,10 +29,8 @@ GetStealthRockDamage:
 	dec a
 	jr z, .three
 	dec a
-	jr z, .four
+	jp z, GetQuarterMaxHP
 	jp GetHalfMaxHP
-.four
-	jp GetQuarterMaxHP
 .three
 	jp GetEighthMaxHP
 .two

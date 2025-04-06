@@ -1,2 +1,0 @@
-BattleCommand_Conversion:
-	ret

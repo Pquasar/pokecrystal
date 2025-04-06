@@ -3418,9 +3418,11 @@ INCLUDE "engine/battle/move_effects/pain_split.asm"
 
 INCLUDE "engine/battle/move_effects/snore.asm"
 
-INCLUDE "engine/battle/move_effects/conversion2.asm"
+BattleCommand_Conversion2:
+	ret
 
-INCLUDE "engine/battle/move_effects/lock_on.asm"
+BattleCommand_LockOn:
+	ret
 
 INCLUDE "engine/battle/move_effects/sketch.asm"
 
@@ -3453,9 +3455,11 @@ INCLUDE "engine/battle/move_effects/sleep_talk.asm"
 
 INCLUDE "engine/battle/move_effects/destiny_bond.asm"
 
-INCLUDE "engine/battle/move_effects/spite.asm"
+BattleCommand_Spite:
+	ret
 
-INCLUDE "engine/battle/move_effects/false_swipe.asm"
+BattleCommand_FalseSwipe:
+	ret
 
 INCLUDE "engine/battle/move_effects/heal_bell.asm"
 
@@ -3510,24 +3514,7 @@ DoEnemyDamage:
 	ld [wHPBuffer2 + 1], a
 	sbc b
 	ld [wEnemyMonHP], a
-if DEF(_DEBUG)
-	push af
-	ld a, BANK(sSkipBattle)
-	call OpenSRAM
-	ld a, [sSkipBattle]
-	call CloseSRAM
-	or a
-	; If [sSkipBattle] is nonzero, skip the "jr nc, .no_underflow" check,
-	; so any attack deals maximum damage to the enemy.
-	jr nz, .debug_skip
-	pop af
 	jr nc, .no_underflow
-	push af
-.debug_skip
-	pop af
-else
-	jr nc, .no_underflow
-endc
 
 	ld a, [wHPBuffer2 + 1]
 	ld [hli], a
@@ -6142,9 +6129,11 @@ INCLUDE "engine/battle/move_effects/splash.asm"
 
 INCLUDE "engine/battle/move_effects/disable.asm"
 
-INCLUDE "engine/battle/move_effects/pay_day.asm"
+BattleCommand_PayDay:
+	ret
 
-INCLUDE "engine/battle/move_effects/conversion.asm"
+BattleCommand_Conversion:
+	ret
 
 BattleCommand_ClearSmog:
 	ld a, BASE_STAT_LEVEL
@@ -6531,7 +6520,8 @@ INCLUDE "engine/battle/move_effects/spikes.asm"
 
 INCLUDE "engine/battle/move_effects/stealth_rock.asm"
 
-INCLUDE "engine/battle/move_effects/foresight.asm"
+BattleCommand_Foresight:
+	ret
 
 INCLUDE "engine/battle/move_effects/perish_song.asm"
 
@@ -6547,11 +6537,14 @@ INCLUDE "engine/battle/move_effects/fury_cutter.asm"
 
 INCLUDE "engine/battle/move_effects/attract.asm"
 
-INCLUDE "engine/battle/move_effects/return.asm"
+BattleCommand_HappinessPower:
+	ret
 
-INCLUDE "engine/battle/move_effects/present.asm"
+BattleCommand_Present:
+	ret
 
-INCLUDE "engine/battle/move_effects/frustration.asm"
+BattleCommand_FrustrationPower:
+	ret
 
 INCLUDE "engine/battle/move_effects/safeguard.asm"
 
@@ -6759,25 +6752,6 @@ GetOpponentItem:
 	ld b, [hl]
 	jp GetItemHeldEffect
 
-CheckFullHP:
-; z: yes, nz: no
-	ld hl, wEnemyMonHP
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .got_hp
-	ld hl, wBattleMonHP
-.got_hp
-	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	cp b
-	ret nz
-	ld a, [hl]
-	cp c
-	ret
-
 GetItemHeldEffect:
 ; Return the effect of item b in bc.
 	ld a, b
@@ -6824,22 +6798,6 @@ IF 0
 .finish_effect
 ENDC
 	ld b, HELD_BERRY
-	ret
-
-AnimateCurrentMoveEitherSide:
-	push hl
-	push de
-	push bc
-	ld a, [wBattleAnimParam]
-	push af
-	call BattleCommand_LowerSub
-	pop af
-	ld [wBattleAnimParam], a
-	call PlayDamageAnim
-	call BattleCommand_RaiseSub
-	pop bc
-	pop de
-	pop hl
 	ret
 
 AnimateCurrentMove:
