@@ -1,7 +1,7 @@
 MoveNames::
 	list_start
 	li "POUND"
-	li "KARATE CHOP"
+	li "GRASS KNOT"
 	li "DEFOG"
 	li "SHELL SMASH"
 	li "FOUL PLAY"

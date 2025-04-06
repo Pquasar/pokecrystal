@@ -15,7 +15,7 @@ Moves:
 ; entries correspond to move ids (see constants/move_constants.asm)
 	table_width MOVE_LENGTH, Moves
 	move POUND,        EFFECT_NORMAL_HIT,         40, NORMAL,        PHYSICAL, 100, 40,   0 ; can remove
-	move KARATE_CHOP,  EFFECT_NORMAL_HIT,         50, FIGHTING,      PHYSICAL, 100, 40,   0 ; can remove
+	move GRASS_KNOT,   EFFECT_LOW_KICK,            1, GRASS,         SPECIAL,  100, 40,   0
 	move DEFOG,        EFFECT_DEFOG,               0, NORMAL,        PHYSICAL, 100, 24,   0 
 	move SHELL_SMASH,  EFFECT_SHELL_SMASH,         0, NORMAL,        STATUS,   100, 24,   0 
 	move FOUL_PLAY,    EFFECT_NORMAL_HIT,         95, DARK,          PHYSICAL, 100, 24,   0 

@@ -3,7 +3,7 @@ BattleAnimations::
 	table_width 2
 	dw BattleAnim_Dummy
 	dw BattleAnim_Pound
-	dw BattleAnim_KarateChop
+	dw BattleAnim_GrassKnot
 	dw BattleAnim_Defog
 	dw BattleAnim_ShellSmash
 	dw BattleAnim_FoulPlay
@@ -1182,6 +1182,7 @@ BattleAnim_Surf:
 	anim_wait 56
 	anim_ret
 
+BattleAnim_GrassKnot:
 BattleAnim_VineWhip:
 	anim_1gfx BATTLE_ANIM_GFX_WHIP
 	anim_sound 0, 1, SFX_VINE_WHIP

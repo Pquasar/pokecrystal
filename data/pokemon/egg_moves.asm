@@ -680,7 +680,6 @@ SmoochumEggMoves:
 	db -1 ; end
 
 ElekidEggMoves:
-	db KARATE_CHOP
 	db BARRIER
 	db JUMP_KICK
 	db TACKLE
@@ -688,7 +687,6 @@ ElekidEggMoves:
 	db -1 ; end
 
 MagbyEggMoves:
-	db KARATE_CHOP
 	db ROCK_SLIDE
 	db BARRIER
 	db SCREECH

@@ -642,7 +642,6 @@ MachampEvosAttacks:
 	db 1, CRUNCH
 	db 1, FOCUS_ENERGY
 	db 8, FOCUS_ENERGY
-	db 15, KARATE_CHOP
 	db 19, SEISMIC_TOSS
 	db 25, TACKLE
 	db 34, CROSS_CHOP

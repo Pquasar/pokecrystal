@@ -1,5 +1,4 @@
 CriticalHitMoves:
-	db KARATE_CHOP
 	db CRABHAMMER
 	db SLASH
 	db AEROBLAST

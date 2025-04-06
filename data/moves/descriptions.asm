@@ -2,7 +2,7 @@ MoveDescriptions::
 ; entries correspond to move ids (see constants/move_constants.asm)
 	table_width 2
 	dw PoundDescription
-	dw KarateChopDescription
+	dw GrassKnotDescription
 	dw DefogDescription
 	dw ShellSmashDescription
 	dw FoulPlayDescription
@@ -271,9 +271,9 @@ PoundDescription:
 	db   "Pounds with fore-"
 	next "legs or tail.@"
 
-KarateChopDescription:
-	db   "Has a high criti-"
-	next "cal hit ratio.@"
+GrassKnotDescription:
+	db   "Does more damage"
+	next "cwith eavier tar.@"
 
 DefogDescription:
 	db   "Removes screens"

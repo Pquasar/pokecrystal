@@ -7,7 +7,7 @@
 	const_def
 	const NO_MOVE      ; 00
 	const POUND        ; 01
-	const KARATE_CHOP  ; 02
+	const GRASS_KNOT   ; 02
 	const DEFOG        ; 03
 	const SHELL_SMASH  ; 04
 	const FOUL_PLAY    ; 05
