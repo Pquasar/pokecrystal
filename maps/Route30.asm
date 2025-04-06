@@ -34,6 +34,7 @@ YoungsterJoey_ImportantBattleScript:
 	playsound SFX_TACKLE
 	applymovement ROUTE30_MONSTER1, Route30_MikeysRattataAttacksMovement
 	special RestartMapMusic
+	disappear VIOLETGYM_FALKNER 
 	end
 
 TrainerYoungsterJoey:

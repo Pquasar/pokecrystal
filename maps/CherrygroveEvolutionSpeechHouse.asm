@@ -45,7 +45,7 @@ SecondTutorScript:
   ifequal 5, .ch12
   ifequal 6, .ch13
   ifequal 7, .ch14
-  sjump .Incompatible
+  ifequal 8, .ch15
 
 .ch1:
   setval SEED_BOMB
@@ -101,6 +101,10 @@ SecondTutorScript:
 
 .ch14:
   setval DRAGON_PULSE
+  sjump .continuelearnmove
+
+.ch15:
+  setval FOUL_PLAY
 
 .continuelearnmove:
   writetext cherrygroveTownStarterTutorMoveText
@@ -123,6 +127,7 @@ SecondTutorScript:
 	promptbutton
 	waitbutton
 	closetext
+	end
 
 .MoveMenuHeader:
 	db MENU_BACKUP_TILES ; flags

@@ -8,14 +8,14 @@
 	const NO_MOVE      ; 00
 	const POUND        ; 01
 	const KARATE_CHOP  ; 02
-	const DOUBLESLAP   ; 03
-	const COMET_PUNCH  ; 04
-	const MEGA_PUNCH   ; 05
+	const DEFOG        ; 03
+	const SHELL_SMASH  ; 04
+	const FOUL_PLAY    ; 05
 	const PAY_DAY      ; 06
 	const FIRE_PUNCH   ; 07
 	const ICE_PUNCH    ; 08
 	const THUNDERPUNCH ; 09
-	const SCRATCH      ; 0a
+	const LAVA_PLUME   ; 0a
 	const SLUDGE_WAVE  ; 0b
 	const LEAF_STORM   ; 0c
 	const SUPERPOWER   ; 0d

@@ -72,11 +72,6 @@ INCLUDE "data/battle/ai/status_only_effects.asm"
 
 
 AI_Setup:
-; Use stat-modifying moves on turn 1.
-
-; 50% chance to greatly encourage stat-up moves during the first turn of enemy's Pokemon.
-; 50% chance to greatly encourage stat-down moves during the first turn of player's Pokemon.
-; Almost 90% chance to greatly discourage stat-modifying moves otherwise.
 
 	ld hl, wEnemyAIMoveScores - 1
 	ld de, wEnemyMonMoves
@@ -109,10 +104,9 @@ AI_Setup:
 	jr .checkmove
 
 .statup
-	call AICheckEnemyMaxHP
-	jr nc, .discourage
 
-	ld a, [wEnemyTurnsTaken]
+; Only use stat up moves on the first turn, or the second turn if HP is still max and enemy is faster
+	ld a, [wEnemyTurnsTaken]   
 	cp 1
 	jr z, .checkmax
 	and a
@@ -120,7 +114,6 @@ AI_Setup:
 
 	call AICheckEnemyHalfHP
 	jr nc, .discourage
-
 	jr .encourage
 
 .statdown
@@ -137,6 +130,9 @@ AI_Setup:
 	jr .checkmove
 
 .checkmax
+	call AICompareSpeed
+	jr nc, .discourage
+
 	call AICheckEnemyMaxHP
 	jr c, .encourage
 
@@ -630,17 +626,11 @@ AI_Smart_LockOn:
 AI_Smart_Selfdestruct:
 ; Selfdestruct, Explosion
 
-; Unless this is the enemy's last Pokemon...
+; Discourage if this is the enemy's last pokemon
 	push hl
-	farcall FindAliveEnemyMons
+	callfar FindAliveEnemyMons
 	pop hl
-	jr nc, .notlastmon
-
-; ...greatly discourage this move unless this is the player's last Pokemon too.
-	push hl
-	call AICheckLastPlayerMon
-	pop hl
-	jr nz, .discourage
+	jr c, .discourage
 
 .notlastmon
 ; Greatly discourage this move if enemy's HP is above 50%.
@@ -653,8 +643,7 @@ AI_Smart_Selfdestruct:
 
 ; If enemy's HP is between 25% and 50%,
 ; over 90% chance to greatly discourage this move.
-	call Random
-	cp 8 percent
+	call AI_50_50
 	ret c
 
 .discourage
@@ -1017,13 +1006,20 @@ AI_Smart_ForceSwitch:
 	pop hl
 	ret c
 	inc [hl]
+	bit SCREENS_SPIKES, a
+	ret z
+	bit SCREENS_STEALTH_ROCK, a
+	ret z
+	call AI_50_50
+	ret c
+	dec [hl]
 	ret
 
 AI_Smart_Heal:
 AI_Smart_MorningSun:
 AI_Smart_Synthesis:
 AI_Smart_Moonlight:
-; 90% chance to greatly encourage this move if enemy's HP is below 25%.
+; Greatly encourage this move if enemy's HP is below 25%.
 ; Discourage this move if enemy's HP is higher than 50%.
 ; Do nothing otherwise.
 
@@ -1036,10 +1032,9 @@ AI_Smart_Moonlight:
 	ret
 
 .encourage
-	call Random
-	cp 10 percent
-	ret c
 	dec [hl]
+	call AI_50_50
+	ret c
 	dec [hl]
 	ret
 
@@ -1528,7 +1523,11 @@ AI_Smart_GyroBall:
 
 AI_Smart_PainSplit:
 
-; Discourage this move if [enemy's current HP * 2 > player's current HP].
+; Discourage this move if its the first turn
+	ld a, [wEnemyTurnsTaken]
+	and a
+	jp nz, .discourage
+; Discourage this move if [enemy's current HP > player's current HP].
 	push hl
 	ld hl, wEnemyMonHP
 	ld b, [hl]
@@ -1541,6 +1540,7 @@ AI_Smart_PainSplit:
 	sbc b
 	pop hl
 	ret nc
+.discourage
 	inc [hl]
 	inc [hl]
 	ret
@@ -1715,7 +1715,7 @@ AI_Smart_HealBell:
 
 AI_Smart_PriorityHit:
 	call AICompareSpeed
-	ret c
+	jp c, .discourage
 
 ; Dismiss this move if the player is flying or underground.
 	ld a, [wPlayerSubStatus3]
@@ -1726,7 +1726,7 @@ AI_Smart_PriorityHit:
 	call AICheckEnemyQuarterHP
 	jp nc, .alwaysuse
 
-; Almost always use this move if it will KO the player.
+; Always use this move if it will KO the player.
 	ld a, 1
 	ldh [hBattleTurn], a
 	push hl
@@ -1767,47 +1767,12 @@ AI_Smart_KnockOff:
 	and a
 	ret z
 	dec [hl]
+	call AI_50_50
+	ret c
 	dec [hl]
 	ret
 
 AI_Smart_Conversion2:
-; BUG: "Smart" AI discourages Conversion2 after the first turn (see docs/bugs_and_glitches.md)
-	ld a, [wLastPlayerMove]
-	and a
-	jr nz, .discourage
-
-	push hl
-	dec a
-	ld hl, Moves + MOVE_TYPE
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-
-	ld a, BANK(Moves)
-	call GetFarByte
-	ld [wPlayerMoveStruct + MOVE_TYPE], a
-
-	xor a
-	ldh [hBattleTurn], a
-
-	callfar BattleCheckTypeMatchup
-
-	ld a, [wTypeMatchup]
-	cp EFFECTIVE
-	pop hl
-	jr c, .discourage
-	ret z
-
-	call AI_50_50
-	ret c
-
-	dec [hl]
-	ret
-
-.discourage
-	call Random
-	cp 10 percent
-	ret c
-	inc [hl]
 	ret
 
 AI_Smart_Disable:
@@ -1928,24 +1893,29 @@ endr
 	ret
 
 AI_Smart_Curse:
-
+; Discourage if the attack stat is already + 2
 	ld a, [wEnemyAtkLevel]
 	cp BASE_STAT_LEVEL + 2
 	jr nc, .discourage
 
+; Encourage if HP > 3/4
+    call AICheckEnemyThreeQuartersHP
+    jr nc, .encourage
+
+; Discourage of HP ≤ 1/2
 	call AICheckEnemyHalfHP
 	jr nc, .discourage
 
-	ld a, [wEnemyAtkLevel]
-	cp BASE_STAT_LEVEL
-	ret nz
+; If HP is between 3/4 and 1/2, discourage if already at + 1
+    ld a, [wEnemyAtkLevel]
+    cp BASE_STAT_LEVEL + 1
+    jr nc, .discourage
 
-	dec [hl]
+.encourage
 	dec [hl]
 	ret
 
 .discourage
-	inc [hl]
 	inc [hl]
 	inc [hl]
 	ret
@@ -2360,10 +2330,10 @@ AI_Smart_RapidSpin:
 	ld a, [wEnemyScreens]
 	bit SCREENS_SPIKES, a
 	ret z
+	bit SCREENS_STEALTH_ROCK, a
+	ret z
 
 .encourage
-	call AI_80_20
-	ret c
 
 	dec [hl]
 	dec [hl]
@@ -2528,21 +2498,32 @@ AI_Smart_BellyDrum:
 	ret
 
 AI_Smart_DragonDance:
-; check the speed level is less than 2
+; Discourage if the speed stat is already + 2 or more
 	ld a, [wEnemySpdLevel]
 	cp BASE_STAT_LEVEL + 2
 	jr nc, .discourage
-; check the health is more than half
+
+; Encourage if HP > 3/4
+    call AICheckEnemyThreeQuartersHP
+    jr nc, .encourage
+
+; Discourage of HP ≤ 1/2
 	call AICheckEnemyHalfHP
-	jr c, .encourage
+	jr nc, .discourage
+
+; If HP is between 3/4 and 1/2, discourage if already at + 1
+    ld a, [wEnemySpdLevel]
+    cp BASE_STAT_LEVEL + 1
+    jr nc, .discourage
+
+.encourage
+	dec [hl]
+	ret
 
 .discourage
 	inc [hl]
 	inc [hl]
-	ret
-
-.encourage
-	dec [hl]
+	inc [hl]
 	ret
 
 AI_Smart_MirrorCoat:
@@ -2623,8 +2604,8 @@ AI_Smart_FutureSight:
 	ret
 
 AI_Smart_Solarbeam:
-; 80% chance to encourage this move when it's sunny.
-; 90% chance to discourage this move when it's raining.
+; Encourage this move when it's sunny.
+; Discourage this move when it's raining.
 
 	ld a, [wBattleWeather]
 	cp WEATHER_SUN
@@ -2632,35 +2613,31 @@ AI_Smart_Solarbeam:
 
 	cp WEATHER_RAIN
 	ret nz
-
-	call Random
-	cp 10 percent
-	ret c
-
 	inc [hl]
 	inc [hl]
 	ret
 
 .encourage
-	call AI_80_20
-	ret c
-
 	dec [hl]
 	dec [hl]
 	ret
 
 AI_Smart_Thunder:
-; 90% chance to discourage this move when it's sunny.
 
 	ld a, [wBattleWeather]
+	cp WEATHER_RAIN
+	jr z, .encourage
+
+
 	cp WEATHER_SUN
 	ret nz
 
-	call Random
-	cp 10 percent
-	ret c
-
 	inc [hl]
+	ret
+
+.encourage
+	dec [hl]
+	dec [hl]
 	ret
 
 AICompareSpeed:
@@ -2780,6 +2757,37 @@ AICheckEnemyQuarterHP:
 	pop de
 	pop hl
 	ret
+
+AICheckEnemyThreeQuartersHP:
+    push hl
+    push de
+    push bc
+    ld hl, wEnemyMonHP      
+    ld b, [hl]                
+    inc hl
+    ld c, [hl]                
+    sla c
+    rl b
+    sla c
+    rl b
+    inc hl
+    inc hl
+    ld a, [hld]               
+    ld d, a
+    ld a, [hl]               
+    ld e, a
+    add hl, de
+    add hl, de
+
+; 	Compare current HP * 4 to Max HP * 3
+    ld a, h
+    cp b
+    ld a, l
+    sbc c
+    pop bc
+    pop de
+    pop hl
+    ret
 
 AICheckPlayerQuarterHP:
 	push hl
@@ -3286,4 +3294,112 @@ AI_80_20:
 AI_50_50:
 	call Random
 	cp 50 percent + 1
+	ret
+
+IsPlayerPhysicalOrSpecial:
+; Compare high bytes
+	push bc
+	ld a, [wBattleMonAttack]
+	ld b, a
+	ld a, [wBattleMonSpclAtk]
+	cp b
+	pop bc
+	jr c, .yes 
+; Attack high byte is greater
+	jr nz, .no 
+; Special attack high byte is greater
+
+; Both high bytes are the same so check low byte
+	push bc
+	ld a, [wBattleMonAttack + 1]
+	ld b, a
+	ld a, [wBattleMonSpclAtk + 1]
+	cp b
+	pop bc
+	jr c, .yes 
+; Attack is greater than special attack
+
+.no
+    xor a
+    ret
+.yes
+    scf
+    ret
+
+gotoswitch:
+    ld a, $1
+    ld [wEnemyIsSwitching], a
+	ret
+
+CanPlayerKO:
+    ld de, wBattleMonMoves 
+; Load player moves
+	ld b, NUM_MOVES + 1
+.loopPlayerKOMoves
+	dec b 
+	jr z, .done 
+	ld a, [de] 
+	and a
+	jr z, .done 
+; Return if no move
+	inc de 
+; Increment to next move
+	call AIGetPlayerMove
+	ld a, [wPlayerMoveStruct + MOVE_POWER]
+	and a
+	jr z, .loopPlayerKOMoves 
+; Skip moves with 0 power
+    ld a, 0
+	ldh [hBattleTurn], a
+	push hl
+	push de
+	push bc
+	callfar PlayerAttackDamage
+	callfar BattleCommand_DamageCalc
+	callfar BattleCommand_Stab
+	ld a, [wCurDamage + 1]
+	ld c, a 
+	ld a, [wCurDamage]
+	ld b, a 
+	ld a, [wEnemyMonHP + 1]
+	cp c 
+	ld a, [wEnemyMonHP]
+    sbc b 
+	pop bc
+	pop de
+	pop hl
+    jp nc, .loopPlayerKOMoves
+; skip moves that can't be used on consecutive turns, except hyper beam
+	ld a, [wPlayerMoveStruct + MOVE_EFFECT]
+	cp EFFECT_SELFDESTRUCT
+	jr z, .loopPlayerKOMoves
+	cp EFFECT_SKY_ATTACK
+	jr z, .loopPlayerKOMoves
+	cp EFFECT_SOLARBEAM
+	jr z, .loopPlayerKOMoves
+    scf
+    ret
+.done
+    xor a 
+    ret
+
+
+AIGetPlayerMove:
+; Load attributes of move a into ram
+
+	push hl
+	push de
+	push bc
+	dec a
+	ld hl, Moves
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+
+	ld de, wPlayerMoveStruct
+	ld a, BANK(Moves)
+	call FarCopyBytes
+
+	pop bc
+	pop de
+	pop hl
 	ret

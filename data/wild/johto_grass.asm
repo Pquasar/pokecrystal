@@ -341,29 +341,29 @@ JohtoGrassWildMons:
 	def_grass_wildmons NATIONAL_PARK
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-	db 100, NIDORAN_M
-	db 100, NIDORAN_F
-	db 100, PORYGON_Z
-	db 100, PIDGEY
-	db 100, CATERPIE
-	db 100, WEEDLE
-	db 100, WEEDLE
+	db 100, FEAROW
+	db 100, ARBOK
+	db 100, SHUCKLE
+	db 100, FLAREON
+	db 100, XATU
+	db 100, STANTLER
+	db 100, AZUMARILL
 	; day
-	db 100, NIDORAN_F
-	db 100, NIDORAN_M
-	db 100, TOGEKISS
-	db 100, PIDGEY
-	db 100, CATERPIE
-	db 100, WEEDLE
-	db 100, WEEDLE
+	db 100, FEAROW
+	db 100, ARBOK
+	db 100, SHUCKLE
+	db 100, FLAREON
+	db 100, XATU
+	db 100, STANTLER
+	db 100, AZUMARILL
 	; nite
-	db 100, PSYDUCK
-	db 100, HOOTHOOT
-	db 100, WEAVILE
-	db 100, HOOTHOOT
-	db 100, LICKILICKY
-	db 100, LICKILICKY
-	db 100, LICKILICKY
+	db 100, FEAROW
+	db 100, ARBOK
+	db 100, SHUCKLE
+	db 100, FLAREON
+	db 100, XATU
+	db 100, STANTLER
+	db 100, AZUMARILL
 	end_grass_wildmons
 
 	def_grass_wildmons RUINS_OF_ALPH_OUTSIDE
@@ -1461,29 +1461,29 @@ JohtoGrassWildMons:
 	def_grass_wildmons ROUTE_37
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-	db 100, PORYGON_Z
-	db 100, GROWLITHE
-	db 100, PIDGEY
-	db 16, GROWLITHE
-	db 100, PIDGEOTTO
-	db 100, LEDIAN
-	db 100, LEDIAN
+	db 100, MAGMORTAR
+	db 100, KINGLER
+	db 100, HITMONLEE
+	db 100, PIDGEOT
+	db 100, PERSIAN
+	db 100, FURRET
+	db 100, SUDOWOODO
 	; day
-	db 100, PIDGEY
-	db 100, GROWLITHE
-	db 100, PIDGEY
-	db 16, GROWLITHE
-	db 100, PIDGEOTTO
-	db 100, PIDGEY
-	db 100, PIDGEY
+	db 100, MAGMORTAR
+	db 100, KINGLER
+	db 100, HITMONLEE
+	db 100, PIDGEOT
+	db 100, PERSIAN
+	db 100, FURRET
+	db 100, SUDOWOODO
 	; nite
-	db 100, WEAVILE
-	db 100, STANTLER
-	db 100, HOOTHOOT
-	db 16, STANTLER
-	db 100, NOCTOWL
-	db 100, ARIADOS
-	db 100, ARIADOS
+	db 100, MAGMORTAR
+	db 100, KINGLER
+	db 100, HITMONLEE
+	db 100, PIDGEOT
+	db 100, PERSIAN
+	db 100, FURRET
+	db 100, SUDOWOODO
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_38

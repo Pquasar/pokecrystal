@@ -3,14 +3,14 @@ MoveDescriptions::
 	table_width 2
 	dw PoundDescription
 	dw KarateChopDescription
-	dw DoubleslapDescription
-	dw CometPunchDescription
-	dw MegaPunchDescription
+	dw DefogDescription
+	dw ShellSmashDescription
+	dw FoulPlayDescription
 	dw PayDayDescription
 	dw FirePunchDescription
 	dw IcePunchDescription
 	dw ThunderpunchDescription
-	dw ScratchDescription
+	dw LavaPlumeDescription
 	dw SludgeWaveDescription
 	dw LeafStormDescription
 	dw SuperpowerDescription
@@ -275,17 +275,17 @@ KarateChopDescription:
 	db   "Has a high criti-"
 	next "cal hit ratio.@"
 
-DoubleslapDescription:
-	db   "Repeatedly slaps"
-	next "2-5 times.@"
+DefogDescription:
+	db   "Removes screens"
+	next "on both sides.@"
 
-CometPunchDescription:
-	db   "Repeatedly punches"
-	next "2-5 times.@"
+ShellSmashDescription:
+	db   "Ups ATK, SPE, SPA,"
+	next "Lowers DEF, SPDEF.@"
 
-MegaPunchDescription:
-	db   "A powerful punch"
-	next "thrown very hard.@"
+FoulPlayDescription:
+	db   "Uses the foe's ATK"
+	next "stat to damage.@"
 
 PayDayDescription:
 	db   "Throws coins. Gets"
@@ -303,9 +303,9 @@ ThunderpunchDescription:
 	db   "An electric punch."
 	next "It may paralyze.@"
 
-ScratchDescription:
-	db   "Scratches with"
-	next "sharp claws.@"
+LavaPlumeDescription:
+	db   "An attack that may"
+	next "inflict a burn.@"
 
 SludgeWaveDescription:
 	db   "A move that may"

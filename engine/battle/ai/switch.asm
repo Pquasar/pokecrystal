@@ -109,6 +109,7 @@ CheckPlayerMoveTypeMatchups:
 
 .done
 	call .CheckEnemyMoveMatchups
+;	call .CheckEnemyMoveMatchupspart2
 	pop bc
 	pop de
 	pop hl
@@ -191,7 +192,80 @@ CheckPlayerMoveTypeMatchups:
 	ld [wEnemyAISwitchScore], a
 	ret
 
+
+;==========================================
+;==========================================
+
+.CheckEnemyMoveMatchupspart2:
+	ld de, wEnemyMonMoves
+	ld b, NUM_MOVES + 1
+	ld c, 0
+
+	ld a, [wTypeMatchup]
+	push af
+.loop2part2
+	dec b
+	jr z, .exit2part2
+
+	ld a, [de]
+	and a
+	jr z, .exit2part2
+
+	inc de
+	dec a
+	ld hl, Moves + MOVE_POWER
+	call GetMoveAttr
+	and a
+	jr z, .loop2part2
+
+	inc hl
+	call GetMoveByte
+	ld hl, wBattleMonType2
+	call CheckTypeMatchup
+
+	ld a, [wTypeMatchup]
+	; immune
+	and a
+	jr z, .loop2part2
+
+	; not very effective
+	inc c
+	cp EFFECTIVE
+	jr c, .loop2part2
+
+	; neutral
+	inc c
+	inc c
+	inc c
+	inc c
+	inc c
+	cp EFFECTIVE
+	jr z, .loop2part2
+
+	; super effective
+	ld c, 100
+	jr .loop2part2
+
+.exit2part2
+	pop af
+	ld [wTypeMatchup], a
+
+	ld a, c
+	and a
+	jr z, .doubledown ; double down
+	cp 5
+	jr c, .DecreaseScore ; down
+	cp 100
+	ret c
+	jr .IncreaseScore ; up
+
+
+;==========================================
+;==========================================
+
+
 CheckAbleToSwitch:
+
 	xor a
 	ld [wEnemySwitchMonParam], a
 	call FindAliveEnemyMons
@@ -238,6 +312,22 @@ CheckAbleToSwitch:
 	ret
 
 .no_perish
+; Force switch after using Overheat, Leaf Storm
+	ld a, [wEnemySAtkLevel]
+	cp BASE_STAT_LEVEL - 2
+	jr z, .loweredstats
+
+	ld a, [wEnemyAtkLevel]
+	cp BASE_STAT_LEVEL - 2
+	jr z, .loweredstats
+	jr .normalstats
+
+.loweredstats
+	ld a, [wEnemyAISwitchScore]
+	add $30 ; maximum chance
+	ld [wEnemySwitchMonParam], a
+
+.normalstats
 	call CheckPlayerMoveTypeMatchups
 	ld a, [wEnemyAISwitchScore]
 	cp 11

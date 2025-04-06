@@ -186,4 +186,6 @@ MoveEffectsPointers:
 	dw StealthRock
 	dw ClearSmog
 	dw Superpower
+	dw ShellSmash
+	dw Defog
 	assert_table_length NUM_MOVE_EFFECTS

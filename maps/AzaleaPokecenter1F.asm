@@ -17,6 +17,14 @@ AzaleaPokecenter1FNurseScript:
 	jumpstd PokecenterNurseScript
 
 AzaleaPokecenter1FGentlemanScript:
+	setflag ENGINE_ZEPHYRBADGE
+	setflag ENGINE_HIVEBADGE
+	setflag ENGINE_PLAINBADGE
+	setflag ENGINE_FOGBADGE
+	setflag ENGINE_MINERALBADGE
+	setflag ENGINE_STORMBADGE
+	setflag ENGINE_GLACIERBADGE
+	setflag ENGINE_RISINGBADGE
 	jumptextfaceplayer AzaleaPokecenter1FGentlemanText
 
 AzaleaPokecenter1FFishingGuruScript:

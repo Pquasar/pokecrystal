@@ -1245,6 +1245,9 @@ INCLUDE "engine/battle/move_effects/low_kick.asm"
 
 INCLUDE "engine/battle/move_effects/knock_off.asm"
 
+INCLUDE "engine/battle/move_effects/defog.asm"
+
+
 BattleCommand_Stab:
 ; STAB = Same Type Attack Bonus
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -2617,6 +2620,15 @@ PlayerAttackDamage:
 
 .physicalcrit
 	ld hl, wBattleMonAttack
+
+; Handle foul play
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp FOUL_PLAY
+	jr nz, .notfoulplay
+	ld hl, wEnemyMonAttack
+
+.notfoulplay
 	call CheckDamageStatsCritical
 	jr c, .thickclub
 
@@ -2625,6 +2637,16 @@ PlayerAttackDamage:
 	ld b, a
 	ld c, [hl]
 	ld hl, wPlayerAttack
+
+; Handle foul play
+	push af
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp FOUL_PLAY
+	pop af
+	jr nz, .thickclub
+	ld hl, wEnemyAttack
+
 	jr .thickclub
 
 .special
@@ -2829,9 +2851,9 @@ SpeciesItemBoost:
 	ret nz
 
 ; Double the stat
-; BUG: Thick Club and Light Ball can make (Special) Attack wrap around above 1024 (see docs/bugs_and_glitches.md)
 	sla l
 	rl h
+
 	ld a, HIGH(MAX_STAT_VALUE)
 	cp h
 	jr c, .cap
@@ -2872,6 +2894,15 @@ EnemyAttackDamage:
 
 .physicalcrit
 	ld hl, wEnemyMonAttack
+
+; Handle foul play
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp FOUL_PLAY
+	jr nz, .notfoulplay
+	ld hl, wBattleMonAttack
+
+.notfoulplay
 	call CheckDamageStatsCritical
 	jr c, .thickclub
 
@@ -2880,6 +2911,16 @@ EnemyAttackDamage:
 	ld b, a
 	ld c, [hl]
 	ld hl, wEnemyAttack
+
+	; Handle foul play
+	push af
+	ld a, BATTLE_VARS_MOVE_ANIM
+	call GetBattleVar
+	cp FOUL_PLAY
+	pop af
+	jr nz, .thickclub
+	ld hl, wPlayerAttack
+
 	jr .thickclub
 
 .special
@@ -4702,6 +4743,23 @@ BattleCommand_HoneClaws:
 	call BattleCommand_AttackUp
 	jp BattleCommand_StatUpMessage
 
+BattleCommand_ShellSmash:
+
+; Special Attack 2
+	call ResetMiss
+	call BattleCommand_SpecialAttackUp2
+	call BattleCommand_StatUpMessage
+
+; Speed 2
+	call ResetMiss
+	call BattleCommand_SpeedUp2
+	call BattleCommand_StatUpMessage
+
+; Attack 2
+	call ResetMiss
+	call BattleCommand_AttackUp2
+	jp BattleCommand_StatUpMessage
+
 BattleCommand_CalmMind:
 
 ; Special Defense
@@ -5387,12 +5445,10 @@ BattleCommand_EndLoop:
 	jr .double_hit
 
 .only_one_beatup
-; BUG: Beat Up works incorrectly with only one Pokémon in the party (see docs/bugs_and_glitches.md)
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVarAddr
 	res SUBSTATUS_IN_LOOP, [hl]
-	call BattleCommand_BeatUpFailText
-	jp EndMoveEffect
+	ret
 
 .not_triple_kick
 	call BattleRandom

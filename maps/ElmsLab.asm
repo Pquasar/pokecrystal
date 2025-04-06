@@ -348,6 +348,13 @@ ElmAfterTheftScript:
 	waitbutton
 	closetext
 	setscene SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
+	setflag ENGINE_ZEPHYRBADGE
+	setflag ENGINE_HIVEBADGE
+	setflag ENGINE_PLAINBADGE
+	setflag ENGINE_FOGBADGE
+	setflag ENGINE_MINERALBADGE
+	setflag ENGINE_STORMBADGE
+	setflag ENGINE_GLACIERBADGE
 	setflag ENGINE_RISINGBADGE
 	end
 
@@ -477,7 +484,6 @@ AideScript_GivePotion:
 	;writetext AideText_GiveYouPotion
 	promptbutton
 	verbosegiveitem POTION
-	giveitem MASTER_BALL, 98
 	;writetext AideText_AlwaysBusy
 	waitbutton
 	closetext
@@ -502,9 +508,9 @@ AideScript_GiveYouBalls:
 	opentext
 	writetext AideText_GiveYouBalls
 	promptbutton
-	getitemname STRING_BUFFER_4, POKE_BALL
+	getitemname STRING_BUFFER_4, MASTER_BALL
 	scall AideScript_ReceiveTheBalls
-	giveitem POKE_BALL, 5
+	giveitem MASTER_BALL, 98
 	writetext AideText_ExplainBalls
 	promptbutton
 	itemnotify
@@ -544,6 +550,14 @@ AideScript_ExplainBalls:
 
 AideScript_AfterTheft:
 	writetext AideText_AfterTheft
+	setflag ENGINE_ZEPHYRBADGE
+	setflag ENGINE_HIVEBADGE
+	setflag ENGINE_PLAINBADGE
+	setflag ENGINE_FOGBADGE
+	setflag ENGINE_MINERALBADGE
+	setflag ENGINE_STORMBADGE
+	setflag ENGINE_GLACIERBADGE
+	setflag ENGINE_RISINGBADGE
 	waitbutton
 	closetext
 	end

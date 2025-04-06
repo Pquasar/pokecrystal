@@ -2335,7 +2335,6 @@ Overheat:
 	stab
 	damagevariation
 	checkhit
-	effectchance
 	moveanim
 	failuretext
 	applydamage
@@ -2343,13 +2342,12 @@ Overheat:
 	supereffectivetext
 	switchturn
 	specialattackdown2
+	statdownmessage
 	switchturn
+	statdownfailtext
 	checkfaint
 	buildopponentrage
-	switchturn
-	statdownmessage
-	statdownfailtext
-	switchturn
+	kingsrock
 	endmove
 
 Hex:
@@ -2563,4 +2561,33 @@ Superpower:
 	checkfaint
 	buildopponentrage
 	kingsrock
+	endmove
+
+ShellSmash:
+	checkobedience
+	usedmovetext
+	doturn
+	statupanim
+	shellsmash
+	lowersub
+	raisesub
+	statupfailtext
+	switchturn
+	defensedown
+	statdownmessage
+	specialdefensedown
+	statdownmessage
+	switchturn
+	statdownfailtext
+	endmove
+
+Defog:
+	checkobedience
+	usedmovetext
+	doturn
+	evasiondown
+	statdownanim
+	statdownmessage
+	statdownfailtext
+	defog
 	endmove

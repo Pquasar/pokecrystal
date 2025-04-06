@@ -12,7 +12,7 @@ KantoMonSpecials:
 	db  65 ; GLACEON
 	db  85 ; BLASTOISE
 	db  20 ; CATERPIE
-	db  25 ; YANMEGA
+	db  86 ; YANMEGA
 	db  80 ; BUTTERFREE
 	db  20 ; WEEDLE
 	db  25 ; MAMOSWINE

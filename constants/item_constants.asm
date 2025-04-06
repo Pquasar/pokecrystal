@@ -336,6 +336,7 @@ DEF MT01 EQU const_value
 	add_mt KNOCK_OFF
 	add_mt DRAGON_PULSE  ;28
 	add_mt STEALTH_ROCK
+	add_mt FOUL_PLAY
 DEF NUM_TUTORS = __tmhm_value__ - NUM_TMS - NUM_HMS - 1
 
 DEF NUM_TM_HM_TUTOR EQU NUM_TMS + NUM_HMS + NUM_TUTORS

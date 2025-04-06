@@ -38,11 +38,11 @@ MrPokemonsHouseMrPokemonEventScript:
 	writetext MrPokemonIntroText3
 	promptbutton
 	turnobject MRPOKEMONSHOUSE_GENTLEMAN, RIGHT
-	writetext MrPokemonIntroText4
+	;writetext MrPokemonIntroText4
 	promptbutton
 	turnobject MRPOKEMONSHOUSE_GENTLEMAN, DOWN
 	turnobject MRPOKEMONSHOUSE_OAK, LEFT
-	writetext MrPokemonIntroText5
+	;writetext MrPokemonIntroText5
 	waitbutton
 	closetext
 	sjump MrPokemonsHouse_OakScript
@@ -86,14 +86,14 @@ MrPokemonsHouse_OakScript:
 	applymovement MRPOKEMONSHOUSE_OAK, MrPokemonsHouse_OakWalksToPlayer
 	turnobject PLAYER, RIGHT
 	opentext
-	writetext MrPokemonsHouse_OakText1
+	;writetext MrPokemonsHouse_OakText1
 	promptbutton
 	waitsfx
 	writetext MrPokemonsHouse_GetDexText
 	playsound SFX_ITEM
 	waitsfx
 	setflag ENGINE_POKEDEX
-	writetext MrPokemonsHouse_OakText2
+	;writetext MrPokemonsHouse_OakText2
 	waitbutton
 	closetext
 	turnobject PLAYER, DOWN

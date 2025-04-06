@@ -38,11 +38,17 @@ Marts:
 	assert_table_length NUM_MARTS
 
 MartCherrygrove:
-	db 4 ; # items
-	db POTION
-	db ANTIDOTE
-	db PARLYZ_HEAL
-	db AWAKENING
+	db 10 ; # items
+	db LEFTOVERS
+	db GOLD_BERRY
+	db MIRACLEBERRY
+	db HARD_STONE
+	db BLACKGLASSES
+	db DRAGON_FANG
+	db POLKADOT_BOW
+	db METAL_COAT
+	db MIRACLE_SEED
+	db PINK_BOW
 	db -1 ; end
 
 MartCherrygroveDex:
@@ -69,16 +75,17 @@ MartViolet:
 	db -1 ; end
 
 MartAzalea:
-	db 9 ; # items
-	db CHARCOAL
-	db POKE_BALL
-	db POTION
-	db SUPER_POTION
-	db ESCAPE_ROPE
-	db REPEL
-	db ANTIDOTE
-	db PARLYZ_HEAL
-	db FLOWER_MAIL
+	db 10 ; # items
+	db LEFTOVERS
+	db GOLD_BERRY
+	db MIRACLEBERRY
+	db MASTER_BALL
+	db SHARP_BEAK
+	db MAGNET
+	db POLKADOT_BOW
+	db METAL_COAT
+	db SOFT_SAND
+	db SPELL_TAG
 	db -1 ; end
 
 MartCianwood:
@@ -91,45 +98,42 @@ MartCianwood:
 	db -1 ; end
 
 MartGoldenrod2F1:
-	db 7 ; # items
-	db POTION
-	db SUPER_POTION
-	db ANTIDOTE
-	db PARLYZ_HEAL
-	db AWAKENING
-	db BURN_HEAL
-	db ICE_HEAL
+	db 10 ; # items
+	db LEFTOVERS
+	db GOLD_BERRY
+	db MIRACLEBERRY
+	db MAX_REVIVE
+	db BLACKBELT_I
+	db CHARCOAL
+	db MYSTIC_WATER
+	db PINK_BOW
+	db CHARCOAL
+	db TWISTEDSPOON
 	db -1 ; end
 
 MartGoldenrod2F2:
-	db 8 ; # items
-	db POKE_BALL
-	db GREAT_BALL
-	db ESCAPE_ROPE
-	db REPEL
-	db REVIVE
-	db FULL_HEAL
-	db POKE_DOLL
-	db FLOWER_MAIL
+	db 10 ; # items
+	db LEFTOVERS
+	db GOLD_BERRY
+	db MIRACLEBERRY
+	db MAX_REPEL
+	db SHARP_BEAK
+	db POISON_BARB
+	db MYSTIC_WATER
+	db BLACKBELT_I
+	db CHARCOAL
+	db MAGNET
 	db -1 ; end
 
 MartGoldenrod3F:
-	db 7 ; # items
-	db X_SPEED
-	db X_SPECIAL
-	db X_DEFEND
-	db X_ATTACK
-	db DIRE_HIT
-	db GUARD_SPEC
-	db X_ACCURACY
+	db 3 ; # items
+	db FULL_RESTORE
+	db MAX_REVIVE
+	db MAX_REPEL
 	db -1 ; end
 
 MartGoldenrod4F:
-	db 5 ; # items
-	db PROTEIN
-	db IRON
-	db CARBOS
-	db CALCIUM
+	db 1 ; # items
 	db HP_UP
 	db -1 ; end
 
@@ -180,16 +184,16 @@ MartOlivine:
 
 MartEcruteak:
 	db 10 ; # items
-	db POKE_BALL
-	db GREAT_BALL
-	db POTION
-	db SUPER_POTION
-	db ANTIDOTE
-	db PARLYZ_HEAL
-	db AWAKENING
-	db BURN_HEAL
-	db ICE_HEAL
-	db REVIVE
+	db LEFTOVERS
+	db GOLD_BERRY
+	db MIRACLEBERRY
+	db MAX_REVIVE
+	db MIRACLE_SEED
+	db CHARCOAL
+	db NEVERMELTICE
+	db POLKADOT_BOW
+	db CHARCOAL
+	db BLACKGLASSES
 	db -1 ; end
 
 MartMahogany1:

@@ -200,4 +200,6 @@ BattleCommandPointers:
 	dw BattleCommand_KnockOffDamage
 	dw BattleCommand_StealthRock
 	dw BattleCommand_ClearSmog
+	dw BattleCommand_ShellSmash
+	dw BattleCommand_Defog
 	assert_table_length NUM_EFFECT_COMMANDS

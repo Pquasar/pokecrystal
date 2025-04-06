@@ -1,5 +1,5 @@
 GetPartyParamLocation::
-; Get the location of parameter a from wCurPartyMon in hl
+; Gets the location of parameter a from wCurPartyMon in hl
 	push bc
 	ld hl, wPartyMons
 	ld c, a
