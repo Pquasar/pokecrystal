@@ -184,8 +184,6 @@ ItemDescriptions:
 	dw SurfMailDesc
 	dw LiteBlueMailDesc
 	dw PortraitMailDesc
-	dw LovelyMailDesc
-	dw EonMailDesc
 	dw TeruSama25Desc
 	assert_table_length NUM_ITEMS
 	dw TeruSama26Desc
@@ -221,6 +219,8 @@ ItemDescriptions:
 	dw TeruSama27Desc
 	dw TeruSama27Desc
 	dw TeruSama27Desc
+	dw TeruSama28Desc
+	dw TeruSama28Desc
 	dw TeruSama28Desc
 	dw TeruSama28Desc
 	dw TeruSama28Desc
@@ -960,30 +960,6 @@ LiteBlueMailDesc:
 PortraitMailDesc:
 	db   "MAIL featuring the"
 	next "holder's likeness.@"
-
-LovelyMailDesc:
-	db   "Heart-print MAIL."
-	next "(HOLD)@"
-
-EonMailDesc:
-	db   "EEVEE-print MAIL."
-	next "(HOLD)@"
-
-MorphMailDesc:
-	db   "DITTO-print MAIL."
-	next "(HOLD)@"
-
-BlueSkyMailDesc:
-	db   "Sky-print MAIL."
-	next "(HOLD)@"
-
-MusicMailDesc:
-	db   "NATU-print MAIL."
-	next "(HOLD)@"
-
-MirageMailDesc:
-	db   "MEW-print MAIL."
-	next "(HOLD)@"
 
 TeruSama25Desc:
 	db   "?@"

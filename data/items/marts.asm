@@ -328,7 +328,6 @@ MartCeladon3F:
 MartCeladon4F:
 	db 3 ; # items
 	db POKE_DOLL
-	db LOVELY_MAIL
 	db SURF_MAIL
 	db -1 ; end
 

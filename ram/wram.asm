@@ -2850,7 +2850,7 @@ wMapReentryScriptQueueFlag:: db
 wMapReentryScriptBank:: db
 wMapReentryScriptAddress:: dw
 
-	ds 4
+	ds 1
 
 wTimeCyclesSinceLastCall:: db
 wReceiveCallDelay_MinsRemaining:: db

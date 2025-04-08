@@ -272,8 +272,8 @@ PoundDescription:
 	next "legs or tail.@"
 
 GrassKnotDescription:
-	db   "Does more damage"
-	next "cwith eavier tar.@"
+	db   "Inflicts more dam-"
+	next "age on heavy foes.@"
 
 DefogDescription:
 	db   "Removes screens"
@@ -532,8 +532,8 @@ DarkPulseDescription:
 	next "cause flinching.@"
 
 LowKickDescription:
-	db   "An attack that may"
-	next "cause flinching.@"
+	db   "Inflicts more dam-"
+	next "age on heavy foes.@"
 
 CounterDescription:
 	db   "Returns a physical"

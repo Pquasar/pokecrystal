@@ -189,8 +189,6 @@
 	const SURF_MAIL    ; b5
 	const LITEBLUEMAIL ; b6
 	const PORTRAITMAIL ; b7
-	const LOVELY_MAIL  ; b8
-	const EON_MAIL     ; b9
 	const ITEM_BE      ; be
 DEF NUM_ITEMS EQU const_value - 1
 
@@ -256,6 +254,7 @@ DEF TM01 EQU const_value
 	add_tm WILL_O_WISP  ; e8
 	add_tm ACROBATICS   ; e9
 	add_tm EXPLOSION    ; ea
+	add_tm SHADOW_CLAW
 	add_tm ROCK_POLISH  ; eb
 	add_tm STONE_EDGE   ; ec
 	add_tm THUNDER_WAVE ; ed
@@ -267,6 +266,7 @@ DEF TM01 EQU const_value
 	add_tm DRAGON_TAIL  ; d0
 	add_tm INFESTATION  ; f3
 	add_tm POISON_JAB   ; f4
+	add_tm GRASS_KNOT
 	add_tm SLEEP_TALK   ; f5
 	add_tm U_TURN       ; f6
 	add_tm SUBSTITUTE   ; f7

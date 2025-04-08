@@ -1116,7 +1116,6 @@ CheckMimicUsed:
 	and a
 	ret
 
-
 SandstormSpDefBoost:
 ; First, check if Sandstorm is active.
 	ld a, [wBattleWeather]
@@ -2266,7 +2265,8 @@ GetFailureResultText:
 
 	ld a, [wTypeModifier]
 	and EFFECTIVENESS_MASK
-	ret z
+	;ret z
+	jp z, .player_miss
 
 	ldh a, [hBattleTurn]
 	and a

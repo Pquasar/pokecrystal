@@ -92,8 +92,10 @@ MeetMomScript:
 		giveitem TM_WILD_CHARGE  ; f8
 		giveitem TM_DARK_PULSE   ; f8
 		giveitem TM_DAZLINGGLEAM ; f8
-		giveitem TM_DAZLINGGLEAM ; f8
+		giveitem TM_GRASS_KNOT ; f8
+		giveitem TM_SHADOW_CLAW ; f8
 		giveitem HM_CUT ; f8
+		giveitem HM_SURF ; f8
 		giveitem HM_FLY ; f8
 	opentext
 	writetext ElmsLookingForYouText

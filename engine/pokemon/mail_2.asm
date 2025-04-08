@@ -5,7 +5,6 @@
 	const SURF_MAIL_INDEX    ; 1
 	const LITEBLUEMAIL_INDEX ; 2
 	const PORTRAITMAIL_INDEX ; 3
-	const LOVELY_MAIL_INDEX  ; 4
 DEF NUM_MAIL EQU const_value
 
 ReadPartyMonMail:
@@ -133,7 +132,6 @@ MailGFXPointers:
 	dbw SURF_MAIL,    LoadSurfMailGFX
 	dbw LITEBLUEMAIL, LoadLiteBlueMailGFX
 	dbw PORTRAITMAIL, LoadPortraitMailGFX
-	dbw LOVELY_MAIL,  LoadLovelyMailGFX
 	assert_table_length NUM_MAIL
 	db -1 ; end
 
