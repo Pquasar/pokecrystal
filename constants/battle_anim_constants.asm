@@ -220,11 +220,11 @@ DEF BATTLEANIM_BASE_TILE EQU 7 * 7  ; Maximum size of a pokemon picture
 	const BATTLE_ANIM_OBJ_PLAYERHEAD_1ROW     ; b9
 	const BATTLE_ANIM_OBJ_ENEMYFEET_2ROW      ; ba
 	const BATTLE_ANIM_OBJ_PLAYERHEAD_2ROW     ; bb
-	const ANIM_OBJ_ENERGY_BALL                ; bc
-	const ANIM_OBJ_SMALL_ICE                  ; bd
-	const ANIM_OBJ_BIG_ICE                    ; be
-	const ANIM_OBJ_EARTH_POWER                ; bf
-	const ANIM_OBJ_POWER_GEM                  ; c0
+	const BATTLE_ANIM_OBJ_ENERGY_BALL         ; bc
+	const BATTLE_ANIM_OBJ_SMALL_ICE           ; bd
+	const BATTLE_ANIM_OBJ_BIG_ICE             ; be
+	const BATTLE_ANIM_OBJ_EARTH_POWER         ; bf
+	const BATTLE_ANIM_OBJ_POWER_GEM           ; c0
 	const BATTLE_ANIM_OBJ_HAIL                ; c1
 DEF NUM_BATTLE_ANIM_OBJS EQU const_value
 

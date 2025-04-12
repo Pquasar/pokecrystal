@@ -62,7 +62,7 @@ Moves:
 	move ROAR,         EFFECT_FORCE_SWITCH,        0, NORMAL,        STATUS,   100, 32,   0 
 	move COSMIC_POWER, EFFECT_STOCKPILE,           0, PSYCHIC_TYPE,  STATUS,   100, 32,   0 ; ANIM OK
 	move DUAL_CHOP,    EFFECT_DOUBLE_HIT,         40, DRAGON,        PHYSICAL,  90, 24,   0 ; ANIM NEED TO DO
-	move ICICLE_CRASH, EFFECT_FLINCH_HIT,         85, ICE,           PHYSICAL,  90, 16,  30 ; ANIM NEED TO DO
+	move ICICLE_CRASH, EFFECT_FLINCH_HIT,         85, ICE,           PHYSICAL,  90, 16,  30 ; ANIM DONE
 	move DISABLE,      EFFECT_DISABLE,             0, NORMAL,        STATUS,   100, 32,   0
 	move POWER_WHIP,   EFFECT_NORMAL_HIT,        120, GRASS,         PHYSICAL,  85, 16,   0 ; ANIM NEED TO DO
 	move DRAIN_PUNCH,  EFFECT_LEECH_HIT,          75, FIGHTING,      PHYSICAL, 100, 16,  10 ; ANIM DONE
@@ -135,7 +135,7 @@ Moves:
 	move MIRROR_MOVE,  EFFECT_MIRROR_MOVE,         0, FLYING,        STATUS,   100, 32,   0 ; can remove
 	move SELFDESTRUCT, EFFECT_SELFDESTRUCT,      200, NORMAL,        PHYSICAL, 100,  8,   0
 	move GUNK_SHOT,    EFFECT_POISON_HIT,        120, POISON,        PHYSICAL,  80,  8,  30 ; ANIM DONE
-	move POWER_GEM,    EFFECT_NORMAL_HIT,         80, ROCK,          SPECIAL,  100, 32,   0 
+	move POWER_GEM,    EFFECT_NORMAL_HIT,         80, ROCK,          SPECIAL,  100, 32,   0 ; ANIM DONE
 	move SEED_BOMB,    EFFECT_NORMAL_HIT,         80, GRASS,         PHYSICAL, 100, 24,   0 ; ANIM DONE
 	move SLUDGE,       EFFECT_POISON_HIT,         65, POISON,        SPECIAL,  100, 32,  30 ; can remove
 	move AQUA_TAIL,    EFFECT_NORMAL_HIT,         90, WATER,         PHYSICAL,  90, 16,   0 ; ANIM DONE
@@ -206,7 +206,7 @@ Moves:
 	move INFESTATION,  EFFECT_TRAP_TARGET,        20, BUG,           SPECIAL,  100, 32,   0
 	move SPIKES,       EFFECT_SPIKES,              0, GROUND,        STATUS,   100, 32,   0
 	move ZAP_CANNON,   EFFECT_PARALYZE_HIT,      120, ELECTRIC,      SPECIAL,   50,  8, 100
-	move ENERGY_BALL,  EFFECT_SP_DEF_DOWN_HIT,    90, GRASS,         SPECIAL,  100, 16,  10 ; ANIM NEED TO DO
+	move ENERGY_BALL,  EFFECT_SP_DEF_DOWN_HIT,    90, GRASS,         SPECIAL,  100, 16,  10 ; ANIM DONE
 	move DESTINY_BOND, EFFECT_DESTINY_BOND,        0, GHOST,         STATUS,   100,  8,   0
 	move PERISH_SONG,  EFFECT_PERISH_SONG,         0, NORMAL,        STATUS,   100,  8,   0
 	move ICY_WIND,     EFFECT_SPEED_DOWN_HIT,     55, ICE,           SPECIAL,   95, 24, 100
