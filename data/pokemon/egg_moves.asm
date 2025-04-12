@@ -208,7 +208,6 @@ GeodudeEggMoves:
 PonytaEggMoves:
 	db TACKLE
 	db THRASH
-	db DOUBLE_KICK
 	db HYPNOSIS
 	db CHARM
 	db QUICK_ATTACK

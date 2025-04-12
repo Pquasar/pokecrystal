@@ -2591,3 +2591,24 @@ Defog:
 	statdownfailtext
 	defog
 	endmove
+
+WeatherBall:
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	weatherball
+	damagecalc
+	stab
+	damagevariation
+	doubledamage
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	kingsrock
+	endmove

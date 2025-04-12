@@ -24,7 +24,7 @@ MoveDescriptions::
 	dw VoltSwitchDescription
 	dw StealthRockDescription
 	dw KnockOffDescription
-	dw DoubleKickDescription
+	dw WeatherBallDescription
 	dw FakeOutDescription
 	dw JumpKickDescription
 	dw NastyPlotDescription
@@ -359,9 +359,9 @@ KnockOffDescription:
 	db   "Slaps down the"
 	next "foe's held item.@"
 
-DoubleKickDescription:
-	db   "A double kicking"
-	next "attack.@"
+WeatherBallDescription:
+	db   "Power and type"
+	next "varies on weather.@"
 
 FakeOutDescription:
 	db   "Always flinches,"
@@ -385,7 +385,7 @@ HeadbuttDescription:
 
 ThroatChopDescription:
 	db   "The user attacks"
-	next "the target's throat.@"
+	next "the target's tht.@"
 
 PlayRoughDescription:
 	db   "An attack that may"

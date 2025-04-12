@@ -30,8 +30,7 @@ EcruteakGymMortyScript:
 	waitbutton
 	closetext
 	winlosstext MortyWinLossText, 0
-	;loadtrainer MORTY, MORTY1
-	loadtrainer RED, RED1
+	loadtrainer MORTY, MORTY1
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_MORTY

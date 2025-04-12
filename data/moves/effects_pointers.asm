@@ -188,4 +188,5 @@ MoveEffectsPointers:
 	dw Superpower
 	dw ShellSmash
 	dw Defog
+	dw WeatherBall
 	assert_table_length NUM_MOVE_EFFECTS

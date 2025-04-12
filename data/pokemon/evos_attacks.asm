@@ -309,7 +309,6 @@ NidoqueenEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 1, RETURN
-	db 1, DOUBLE_KICK
 	db 1, SWORDS_DANCE
 	db 23, BODY_SLAM
 	db 0 ; no more level-up moves
@@ -330,7 +329,6 @@ NidokingEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 1, SWORDS_DANCE
-	db 1, DOUBLE_KICK
 	db 1, POISON_JAB
 	db 23, THRASH
 	db 0 ; no more level-up moves
@@ -1324,7 +1322,6 @@ JolteonEvosAttacks:
 	db 8, GLARE
 	db 16, THUNDERBOLT
 	db 23, QUICK_ATTACK
-	db 30, DOUBLE_KICK
 	db 36, PIN_MISSILE
 	db 42, THUNDER_WAVE
 	db 47, AGILITY

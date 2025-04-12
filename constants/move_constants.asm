@@ -29,7 +29,7 @@
 	const VOLT_SWITCH  ; 15
 	const STEALTH_ROCK ; 16
 	const KNOCK_OFF    ; 17
-	const DOUBLE_KICK  ; 18
+	const WEATHER_BALL ; 18
 	const FAKE_OUT     ; 19
 	const JUMP_KICK    ; 1a
 	const NASTY_PLOT   ; 1b

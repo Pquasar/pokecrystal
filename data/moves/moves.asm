@@ -37,7 +37,7 @@ Moves:
 	move VOLT_SWITCH,  EFFECT_U_TURN,             70, ELECTRIC,      SPECIAL,  100, 32,   0 ; ANIM OK MAYBE
 	move STEALTH_ROCK, EFFECT_STEALTH_ROCK,        0, ROCK,          PHYSICAL, 100, 16,   0 ; ANIM OK
 	move KNOCK_OFF,    EFFECT_KNOCK_OFF,          65, DARK,          PHYSICAL, 100, 32, 100 ; ANIM DONE
-	move DOUBLE_KICK,  EFFECT_DOUBLE_HIT,         30, FIGHTING,      PHYSICAL, 100, 40,   0 ; can remove
+	move WEATHER_BALL, EFFECT_WEATHER_BALL,       50, NORMAL,        SPECIAL,  100, 16,   0 
 	move FAKE_OUT,     EFFECT_FAKE_OUT,           40, NORMAL,        PHYSICAL, 100, 16,   0 ; ANIM NEED TO DO
 	move JUMP_KICK,    EFFECT_JUMP_KICK,         100, FIGHTING,      PHYSICAL,  95, 40,   0
 	move NASTY_PLOT,   EFFECT_SP_ATK_UP_2,         0, DARK,          STATUS,   100, 24,   0 ; ANIM DONE

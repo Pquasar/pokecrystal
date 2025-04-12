@@ -201,7 +201,9 @@ ENDM
 	command stealthrock             ; c2
 	command clearsmog               ; c3
 	command shellsmash              ; c4
-	command defog                   ; c4
+	command defog                   ; c5
+	command weatherball             ; c6
+	command doubledamage            ; c7
 DEF NUM_EFFECT_COMMANDS EQU const_value - 1
 
 	const_def -1, -1

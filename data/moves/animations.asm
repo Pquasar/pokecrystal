@@ -25,7 +25,7 @@ BattleAnimations::
 	dw BattleAnim_VoltSwitch
 	dw BattleAnim_StealthRock
 	dw BattleAnim_KnockOff
-	dw BattleAnim_DoubleKick
+	dw BattleAnim_WeatherBall
 	dw BattleAnim_FakeOut
 	dw BattleAnim_JumpKick
 	dw BattleAnim_NastyPlot
@@ -756,16 +756,6 @@ BattleAnim_DrainPunch:
 	anim_wait 32
 	anim_incbgeffect BATTLE_BG_EFFECT_FADE_MONS_TO_BLACK_REPEATING
 	anim_call BattleAnim_ShowMon_0
-	anim_ret
-
-BattleAnim_DoubleKick:
-	anim_1gfx BATTLE_ANIM_GFX_HIT
-	anim_if_param_equal $1, .alternate
-	anim_sound 0, 1, SFX_DOUBLE_KICK
-	anim_obj BATTLE_ANIM_OBJ_KICK, 144, 48, $0
-	anim_wait 6
-	anim_obj BATTLE_ANIM_OBJ_HIT_YFIX, 144, 48, $0
-	anim_wait 8
 	anim_ret
 
 .alternate:
@@ -4400,6 +4390,22 @@ BattleAnim_Ancientpower:
 	anim_wait 6
 	anim_ret
 
+BattleAnim_WeatherBall:
+	anim_3gfx BATTLE_ANIM_GFX_HAZE, BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_SMOKE
+	anim_sound 6, 2, SFX_SLUDGE_BOMB
+	anim_obj BATTLE_ANIM_OBJ_OCTAZOOKA, 64, 92, $4
+	anim_wait 16
+	anim_obj BATTLE_ANIM_OBJ_BALL_POOF, 132, 56, $10
+	anim_wait 8
+	anim_if_param_equal $0, .done
+.loop
+	anim_obj BATTLE_ANIM_OBJ_SMOKE, 132, 60, $20
+	anim_wait 8
+	anim_loop 5, .loop
+	anim_wait 128
+.done
+	anim_ret
+
 BattleAnim_EnergyBall:
 	anim_3gfx BATTLE_ANIM_GFX_CHARGE, BATTLE_ANIM_GFX_EGG, BATTLE_ANIM_GFX_SMOKE
 	anim_sound 0, 0, SFX_CHARGE
@@ -4779,6 +4785,7 @@ BattleAnimSub_FlashRepeat:
 	anim_obj BATTLE_ANIM_OBJ_FLASH, 136, 56, $30
 	anim_wait 4
 	anim_obj BATTLE_ANIM_OBJ_FLASH, 136, 56, $38
+	anim_ret
 
 BattleAnimSub_FocusEnergy:
 	anim_obj BATTLE_ANIM_OBJ_FOCUS, 44, 108, $6

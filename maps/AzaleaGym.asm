@@ -21,7 +21,7 @@ AzaleaGymBugsyScript:
 	waitbutton
 	closetext
 	winlosstext BugsyText_ResearchIncomplete, 0
-	loadtrainer RED, RED1
+	loadtrainer BUGSY, BUGSY1
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_BUGSY

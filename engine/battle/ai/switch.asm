@@ -281,6 +281,7 @@ CheckAbleToSwitch:
 
 	; Perish count is 1
 
+.forceswitch
 	call FindAliveEnemyMons
 	call FindEnemyMonsWithAtLeastQuarterMaxHP
 	call FindEnemyMonsThatResistPlayer
@@ -312,22 +313,15 @@ CheckAbleToSwitch:
 	ret
 
 .no_perish
-; Force switch after using Overheat, Leaf Storm
+; Force switch after using Overheat, Leaf Storm, Superpower
 	ld a, [wEnemySAtkLevel]
 	cp BASE_STAT_LEVEL - 2
-	jr z, .loweredstats
+	jr z, .forceswitch
 
 	ld a, [wEnemyAtkLevel]
 	cp BASE_STAT_LEVEL - 2
-	jr z, .loweredstats
-	jr .normalstats
+	jr z, .forceswitch
 
-.loweredstats
-	ld a, [wEnemyAISwitchScore]
-	add $30 ; maximum chance
-	ld [wEnemySwitchMonParam], a
-
-.normalstats
 	call CheckPlayerMoveTypeMatchups
 	ld a, [wEnemyAISwitchScore]
 	cp 11

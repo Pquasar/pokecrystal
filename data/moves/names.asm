@@ -23,7 +23,7 @@ MoveNames::
 	li "VOLT SWITCH"
 	li "STEALTH ROCK"
 	li "KNOCK OFF"
-	li "DOUBLE KICK"
+	li "WEATHER BALL"
 	li "FAKE OUT"
 	li "JUMP KICK"
 	li "NASTY PLOT"

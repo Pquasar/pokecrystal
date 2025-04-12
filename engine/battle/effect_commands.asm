@@ -1246,6 +1246,7 @@ INCLUDE "engine/battle/move_effects/knock_off.asm"
 
 INCLUDE "engine/battle/move_effects/defog.asm"
 
+INCLUDE "engine/battle/move_effects/weather_ball.asm"
 
 BattleCommand_Stab:
 ; STAB = Same Type Attack Bonus
@@ -6108,17 +6109,17 @@ BattleCommand_DoubleUndergroundDamage:
 
 	; fallthrough
 
+BattleCommand_DoubleDamage:
 DoubleDamage:
 	ld hl, wCurDamage + 1
 	sla [hl]
 	dec hl
 	rl [hl]
-	jr nc, .quit
+	ret nc
 
 	ld a, $ff
 	ld [hli], a
 	ld [hl], a
-.quit
 	ret
 
 INCLUDE "engine/battle/move_effects/mimic.asm"
