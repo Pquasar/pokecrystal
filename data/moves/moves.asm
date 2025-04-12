@@ -35,7 +35,7 @@ Moves:
 	move FLY,          EFFECT_FLY,                90, FLYING,        PHYSICAL,  95, 24,   0
 	move BIND,         EFFECT_TRAP_TARGET,        15, NORMAL,        PHYSICAL,  85, 32,   0
 	move VOLT_SWITCH,  EFFECT_U_TURN,             70, ELECTRIC,      SPECIAL,  100, 32,   0 ; ANIM OK MAYBE
-	move STEALTH_ROCK, EFFECT_STEALTH_ROCK,        0, ROCK,          PHYSICAL, 100, 16,   0 ; ANIM OK MAYBE
+	move STEALTH_ROCK, EFFECT_STEALTH_ROCK,        0, ROCK,          PHYSICAL, 100, 16,   0 ; ANIM OK
 	move KNOCK_OFF,    EFFECT_KNOCK_OFF,          65, DARK,          PHYSICAL, 100, 32, 100 ; ANIM DONE
 	move DOUBLE_KICK,  EFFECT_DOUBLE_HIT,         30, FIGHTING,      PHYSICAL, 100, 40,   0 ; can remove
 	move FAKE_OUT,     EFFECT_FAKE_OUT,           40, NORMAL,        PHYSICAL, 100, 16,   0 ; ANIM NEED TO DO

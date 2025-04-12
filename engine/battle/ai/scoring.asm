@@ -464,6 +464,7 @@ AI_Smart_EffectHandlers:
 	dbw EFFECT_HAIL,             AI_Smart_Hail
 	dbw EFFECT_SUCKER_PUNCH,     AI_Smart_SuckerPunch
 	dbw EFFECT_FAKE_OUT,         AI_Smart_FakeOut
+	dbw EFFECT_HEX,              AI_Smart_Hex
 	db -1 ; end
 
 AI_Smart_Sleep:
@@ -1579,8 +1580,6 @@ AI_Smart_DefrostOpponent:
 	ret
 
 AI_Smart_Hex:
-; Encourage this move if the player has a status condition.
-
 	ld a, [wBattleMonStatus]
 	and a
 	ret z
@@ -3325,7 +3324,7 @@ IsPlayerPhysicalOrSpecial:
     scf
     ret
 
-gotoswitch:
+GoToSwitch:
     ld a, $1
     ld [wEnemyIsSwitching], a
 	ret

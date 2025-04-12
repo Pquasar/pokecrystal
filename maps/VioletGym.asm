@@ -18,8 +18,7 @@ VioletGymFalknerScript:
 	waitbutton
 	closetext
 	winlosstext FalknerWinLossText, 0
-	;loadtrainer FALKNER, FALKNER1
-	loadtrainer RED, RED1
+	loadtrainer FALKNER, FALKNER1
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_FALKNER
