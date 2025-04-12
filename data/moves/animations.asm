@@ -1959,7 +1959,7 @@ BattleAnim_PowerGem:
 	anim_sound 6, 2, SFX_SHINE
 	anim_obj BATTLE_ANIM_OBJ_POWER_GEM, 64, 92, $4
 	anim_wait 4
-	anim_loop 20, .loop
+	anim_loop 15, .loop
 	anim_wait 32
 	anim_ret
 
@@ -4345,21 +4345,21 @@ BattleAnim_StoneEdge:
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $14, $2, $0
 	anim_wait 32
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $1, $0
-	anim_sound 0, 0, SFX_STRENGTH
+	anim_sound 0, 0, SFX_SPARK
 	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 136, 77, $20
-	anim_wait 16
-	anim_sound 0, 0, SFX_STRENGTH
+	anim_wait 8
+	anim_sound 0, 0, SFX_SPARK
 	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 121, 77, $20
-	anim_wait 16
-	anim_sound 0, 0, SFX_STRENGTH
+	anim_wait 8
+	anim_sound 0, 0, SFX_SPARK
 	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 151, 77, $20
-	anim_wait 16
-	anim_sound 0, 0, SFX_STRENGTH
+	anim_wait 8
+	anim_sound 0, 0, SFX_SPARK
 	anim_obj BATTLE_ANIM_OBJ_ANCIENTPOWER, 136, 77, $20
-	anim_wait 16
-	anim_sound 0, 1, SFX_STRENGTH
+	anim_wait 8
+	anim_sound 0, 1, SFX_SPARK
 	anim_obj BATTLE_ANIM_OBJ_HIT_BIG_YFIX, 136, 56, $0
-	anim_wait 6
+	anim_wait 12
 	anim_ret
 
 BattleAnim_Ancientpower:
