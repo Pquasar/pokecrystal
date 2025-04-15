@@ -1467,6 +1467,8 @@ AI_Smart_Encore:
 
 	pop hl
 	ld a, [wTypeMatchup]
+	and a
+	jp z, AIDiscourageMove
 	cp EFFECTIVE
 	jr nc, .weakmove
 
@@ -1484,9 +1486,6 @@ AI_Smart_Encore:
 	jr nc, .discourage
 
 .encourage
-	call Random
-	cp 28 percent - 1
-	ret c
 	dec [hl]
 	dec [hl]
 	ret

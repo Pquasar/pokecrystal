@@ -301,16 +301,12 @@ ChooseWildEncounter:
 	call Random
 	cp 35 percent
 	jr c, .ok
-	inc b
 	cp 65 percent
 	jr c, .ok
-	inc b
 	cp 85 percent
 	jr c, .ok
-	inc b
 	cp 95 percent
 	jr c, .ok
-	inc b
 ; Store the level
 .ok
 ; BUG: ChooseWildEncounter doesn't really validate the wild Pokemon species (see docs/bugs_and_glitches.md)

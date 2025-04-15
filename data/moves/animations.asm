@@ -2531,10 +2531,9 @@ BattleAnim_BugBuzz:
 	anim_obj BATTLE_ANIM_OBJ_WAVE, 64, 88, $2
 	anim_wait 4
 	anim_loop 10, .loop
-	anim_wait 64
+	anim_wait 32
 	anim_call BattleAnim_ShowMon_0
 	anim_ret
-
 
 BattleAnim_Psywave:
 	anim_ret

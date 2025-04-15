@@ -6106,8 +6106,8 @@ BattleCommand_DoubleUndergroundDamage:
 
 BattleCommand_DoubleDamage:
 	ld a, [wBattleWeather]
-    cp WEATHER_NONE
-    ret z
+	cp WEATHER_NONE
+	ret z
 
 DoubleDamage:
 	ld hl, wCurDamage + 1
