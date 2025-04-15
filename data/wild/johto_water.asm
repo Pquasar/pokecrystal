@@ -165,16 +165,16 @@ JohtoWaterWildMons:
 
 	def_water_wildmons ROUTE_40
 	db 6 percent ; encounter rate
-	db 20, TENTACOOL
-	db 15, TENTACOOL
-	db 20, TENTACRUEL
+	db 100, FERALIGATR
+	db 100, QWILFISH
+	db 100, LANTURN
 	end_water_wildmons
 
 	def_water_wildmons ROUTE_41
 	db 6 percent ; encounter rate
-	db 20, TENTACOOL
-	db 20, TENTACRUEL
-	db 20, MANTINE
+	db 100, GYARADOS
+	db 100, SLOWKING
+	db 100, BLASTOISE
 	end_water_wildmons
 
 	def_water_wildmons ROUTE_42
@@ -249,9 +249,9 @@ JohtoWaterWildMons:
 
 	def_water_wildmons LAKE_OF_RAGE
 	db 6 percent ; encounter rate
-	db 15, MAGIKARP
-	db 10, MAGIKARP
-	db 15, GYARADOS
+	db 100, GYARADOS
+	db 100, LANTURN
+	db 100, GOLDUCK
 	end_water_wildmons
 
 	def_water_wildmons BLACKTHORN_CITY

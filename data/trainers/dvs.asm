@@ -61,13 +61,13 @@ TrainerClassDVs:
 	dn 15, 15, 15, 15 ; SAGE
 	dn 15, 15, 15, 15 ; MEDIUM
 	dn 15, 15, 15, 15 ; BOARDER
-	dn  9,  8,  8,  8 ; POKEFANM
-	dn  6,  8,  8, 10 ; KIMONO_GIRL
-	dn  6,  8, 10,  8 ; TWINS
-	dn  6, 13,  8,  8 ; POKEFANF
+	dn 15, 15, 15, 15 ; POKEFANM
+	dn 15, 15, 15, 15 ; KIMONO_GIRL
+	dn 15, 15, 15, 15 ; TWINS
+	dn 15, 15, 15, 15 ; POKEFANF
 	dn 15, 15, 15, 15 ; RED
 	dn 15, 15, 15, 15 ; BLUE
-	dn  9,  8,  8,  8 ; OFFICER
-	dn  7, 14, 10,  8 ; GRUNTF
-	dn  9,  8,  8,  8 ; MYSTICALMAN
+	dn 15, 15, 15, 15 ; OFFICER
+	dn 15, 15, 15, 15 ; GRUNTF
+	dn 15, 15, 15, 15 ; MYSTICALMAN
 	assert_table_length NUM_TRAINER_CLASSES

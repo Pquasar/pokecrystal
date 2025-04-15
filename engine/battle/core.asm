@@ -1533,7 +1533,7 @@ HandleDefrost:
 	ret nz
 
 	call BattleRandom
-	cp 10 percent
+	cp 20 percent
 	ret nc
 	xor a
 	ld [wBattleMonStatus], a
@@ -6717,8 +6717,6 @@ ApplyPrzEffectOnSpeed:
 	ld a, [hl]
 	srl a
 	rr b
-	srl a
-	rr b
 	ld [hli], a
 	or b
 	jr nz, .player_ok
@@ -6736,8 +6734,6 @@ ApplyPrzEffectOnSpeed:
 	ld a, [hld]
 	ld b, a
 	ld a, [hl]
-	srl a
-	rr b
 	srl a
 	rr b
 	ld [hli], a

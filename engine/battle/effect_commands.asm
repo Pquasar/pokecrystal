@@ -6102,10 +6102,13 @@ BattleCommand_DoubleUndergroundDamage:
 	call GetBattleVar
 	bit SUBSTATUS_UNDERGROUND, a
 	ret z
-
-	; fallthrough
+	jr DoubleDamage
 
 BattleCommand_DoubleDamage:
+	ld a, [wBattleWeather]
+    cp WEATHER_NONE
+    ret z
+
 DoubleDamage:
 	ld hl, wCurDamage + 1
 	sla [hl]
