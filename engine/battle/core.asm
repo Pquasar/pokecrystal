@@ -2336,9 +2336,6 @@ WinTrainerBattle:
 
 	call IsMobileBattle
 	jr z, .mobile
-	ld a, [wLinkMode]
-	and a
-	ret nz
 
 	ld a, [wInBattleTowerBattle]
 	bit IN_BATTLE_TOWER_BATTLE_F, a
@@ -3613,10 +3610,6 @@ TryToRunAwayFromBattle:
 	cp BATTLETYPE_SUICUNE
 	jp z, .cant_escape
 
-	ld a, [wLinkMode]
-	and a
-	jp nz, .can_escape
-
 	ld a, [wBattleMode]
 	dec a
 	jp nz, .cant_run_from_trainer
@@ -3733,27 +3726,6 @@ TryToRunAwayFromBattle:
 	ld a, [wLinkMode]
 	and a
 	ld a, DRAW
-	jr z, .fled
-	call LoadTilemapToTempTilemap
-	xor a ; BATTLEPLAYERACTION_USEMOVE
-	ld [wBattlePlayerAction], a
-	ld a, BATTLEACTION_FORFEIT
-	ld [wCurMoveNum], a
-	xor a
-	ld [wCurPlayerMove], a
-	call LinkBattleSendReceiveAction
-	call SafeLoadTempTilemapToTilemap
-	call CheckMobileBattleError
-	jr c, .mobile
-
-	; Got away safely
-	ld a, [wBattleAction]
-	cp BATTLEACTION_FORFEIT
-	ld a, DRAW
-	jr z, .fled
-	assert DRAW - 1 == LOSE
-	dec a
-.fled
 	ld b, a
 	ld a, [wBattleResult]
 	and BATTLERESULT_BITMASK
@@ -5850,11 +5822,6 @@ LoadEnemyMon:
 	ld hl, wEnemyMonSpecies
 	ld bc, wEnemyMonEnd - wEnemyMon
 	call ByteFill
-
-; We don't need to be here if we're in a link battle
-	ld a, [wLinkMode]
-	and a
-	jp nz, InitEnemyMon
 
 ; and also not in a Battle Tower battle
 	ld a, [wInBattleTowerBattle]
