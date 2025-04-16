@@ -204,4 +204,5 @@ BattleCommandPointers:
 	dw BattleCommand_Defog
 	dw BattleCommand_WeatherBall
 	dw BattleCommand_DoubleDamage
+	dw BattleCommand_ToxicSpikes
 	assert_table_length NUM_EFFECT_COMMANDS

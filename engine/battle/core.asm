@@ -4190,21 +4190,6 @@ BreakAttraction:
 	res SUBSTATUS_IN_LOVE, [hl]
 	ret
 
-
-
-GetSpikesDamage:
-	dec a
- 	jr z, .one ; one spikes set
- 	dec a
- 	jr z, .two ; two spikes set
-
- ; assume three spikes set
- 	jp GetQuarterMaxHP
-.two
- 	jp GetOneSixthMaxHP
-.one
- 	jp GetEighthMaxHP
-
 SpikesDamage:
 	ld hl, wPlayerScreens
 	ld de, wBattleMonType
@@ -4240,7 +4225,11 @@ SpikesDamage:
 	pop hl
  	ld a, [hl]
  	and 3
- 	call GetSpikesDamage
+	dec a
+ 	jp z, GetEighthMaxHP
+ 	dec a
+ 	jp z, GetOneSixthMaxHP
+ 	jp GetQuarterMaxHP
 	call SubtractHPFromTarget
 
 	pop hl
@@ -9088,7 +9077,6 @@ BattleStartMessage:
 
 	call IsMobileBattle2
 	ret nz
-
 	ld c, $2 ; start
 	farcall Mobile_PrintOpponentBattleMessage
 	ret

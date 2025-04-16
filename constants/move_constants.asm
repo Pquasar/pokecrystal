@@ -65,7 +65,7 @@
 	const SURF         ; 39
 	const ICE_BEAM     ; 3a
 	const BLIZZARD     ; 3b
-	const PSYBEAM      ; 3c
+	const TOXIC_SPIKES ; 3c
 	const BUBBLEBEAM   ; 3d
 	const AURORA_BEAM  ; 3e
 	const HYPER_BEAM   ; 3f

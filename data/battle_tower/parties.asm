@@ -344,7 +344,7 @@ BattleTowerMons:
 
 	db GIRAFARIG
 	db KINGS_ROCK
-	db PSYBEAM, SUCKER_PUNCH, SHADOW_BALL, AGILITY
+	db PSYCHIC_M, SUCKER_PUNCH, SHADOW_BALL, AGILITY
 	dw 0 ; OT ID
 	bigdt 1000 ; Exp
 	; Stat exp
@@ -1965,7 +1965,7 @@ BattleTowerMons:
 
 	db PORYGON2
 	db NO_ITEM
-	db TACKLE, TACKLE, PSYBEAM, THIEF
+	db TACKLE, TACKLE, PSYCHIC_M, THIEF
 	dw 0 ; OT ID
 	bigdt 64000 ; Exp
 	; Stat exp

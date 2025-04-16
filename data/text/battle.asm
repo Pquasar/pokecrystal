@@ -1025,6 +1025,12 @@ SpikesText:
 	cont "<TARGET>!"
 	prompt
 
+ToxicSpikesText:
+	text "TOXIC SPIKES"
+	line "were scattered"
+	cont "<TARGET>!"
+	prompt
+
 StealthRockText:
 	text "Pointed stones"
 	line "float in the air"

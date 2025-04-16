@@ -204,6 +204,7 @@ ENDM
 	command defog                   ; c5
 	command weatherball             ; c6
 	command doubledamage            ; c7
+	command toxicspikes             ; c8
 DEF NUM_EFFECT_COMMANDS EQU const_value - 1
 
 	const_def -1, -1

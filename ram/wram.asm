@@ -150,7 +150,8 @@ wScriptVar:: db
 wPlayerNextMovement:: db
 wPlayerMovement:: db
 
-	ds 2
+wPlayerMoreScreens:: db
+wEnemyMoreScreens:: db
 
 wMovementObject::
 	db

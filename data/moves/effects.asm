@@ -2392,7 +2392,6 @@ HammerArm:
 	stab
 	damagevariation
 	checkhit
-	effectchance
 	moveanim
 	failuretext
 	applydamage
@@ -2400,13 +2399,12 @@ HammerArm:
 	supereffectivetext
 	switchturn
 	speeddown
+	statdownmessage
 	switchturn
+	statdownfailtext
 	checkfaint
 	buildopponentrage
-	switchturn
-	statdownmessage
-	statdownfailtext
-	switchturn
+	kingsrock
 	endmove
 
 AcidSpray:
@@ -2611,4 +2609,11 @@ WeatherBall:
 	checkfaint
 	buildopponentrage
 	kingsrock
+	endmove
+
+ToxicSpikes:
+	checkobedience
+	usedmovetext
+	doturn
+	toxicspikes
 	endmove

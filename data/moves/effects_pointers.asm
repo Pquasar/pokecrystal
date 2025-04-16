@@ -189,4 +189,5 @@ MoveEffectsPointers:
 	dw ShellSmash
 	dw Defog
 	dw WeatherBall
+	dw ToxicSpikes
 	assert_table_length NUM_MOVE_EFFECTS

@@ -61,7 +61,7 @@ BattleAnimations::
 	dw BattleAnim_Surf
 	dw BattleAnim_IceBeam
 	dw BattleAnim_Blizzard
-	dw BattleAnim_Psybeam
+	dw BattleAnim_ToxicSpikes
 	dw BattleAnim_Bubblebeam
 	dw BattleAnim_AuroraBeam
 	dw BattleAnim_HyperBeam
@@ -2527,11 +2527,11 @@ BattleAnim_BugBuzz:
 	anim_1gfx BATTLE_ANIM_GFX_PSYCHIC
 	anim_bgeffect BATTLE_BG_EFFECT_SHAKE_SCREEN_X, $60, $1, $0
 .loop
-	anim_sound 6, 2, SFX_PERISH_SONG
+	anim_sound 5, 2, SFX_PERISH_SONG
 	anim_obj BATTLE_ANIM_OBJ_WAVE, 64, 88, $2
 	anim_wait 4
 	anim_loop 10, .loop
-	anim_wait 32
+	anim_wait 64
 	anim_call BattleAnim_ShowMon_0
 	anim_ret
 
@@ -3424,16 +3424,17 @@ BattleAnim_Bulldoze:
 BattleAnim_StealthRock:
 	anim_1gfx BATTLE_ANIM_GFX_ROCKS
 	anim_sound 6, 2, SFX_MENU
-	anim_obj BATTLE_ANIM_OBJ_STEALTH_ROCK, 48, 72, $20
+	anim_obj BATTLE_ANIM_OBJ_STEALTH_ROCK, 48, 92, $20
 	anim_wait 8
 	anim_sound 6, 2, SFX_MENU
-	anim_obj BATTLE_ANIM_OBJ_STEALTH_ROCK, 48, 62, $30
+	anim_obj BATTLE_ANIM_OBJ_STEALTH_ROCK, 48, 87, $30
 	anim_wait 8
 	anim_sound 6, 2, SFX_MENU
-	anim_obj BATTLE_ANIM_OBJ_STEALTH_ROCK, 48, 82, $28
+	anim_obj BATTLE_ANIM_OBJ_STEALTH_ROCK, 48, 97, $28
 	anim_wait 64
 	anim_ret
 
+BattleAnim_ToxicSpikes:
 BattleAnim_Spikes:
 	anim_1gfx BATTLE_ANIM_GFX_MISC
 	anim_sound 6, 2, SFX_MENU
@@ -4690,7 +4691,7 @@ BattleAnimSub_Sludge:
 	anim_sound 0, 1, SFX_TOXIC
 	anim_obj BATTLE_ANIM_OBJ_SLUDGE, 148, 72, $0
 	anim_wait 8
-	anim_loop 5, .loop
+	anim_loop 3, .loop
 	anim_ret
 
 BattleAnimSub_Leaf:

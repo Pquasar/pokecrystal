@@ -269,6 +269,16 @@ DEF ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | SLP_MASK
 	const LOSE
 	const DRAW
 
+; wPlayerMoreScreens or wEnemyMoreScreens bit flags
+	const_def
+	const SCREENS_TOXIC_SPIKES
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+	const_skip
+
 DEF BATTLERESULT_CAUGHT_CELEBI EQU 6
 DEF BATTLERESULT_BOX_FULL EQU 7
 DEF BATTLERESULT_BITMASK EQU (1 << BATTLERESULT_CAUGHT_CELEBI) | (1 << BATTLERESULT_BOX_FULL)

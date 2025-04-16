@@ -60,7 +60,7 @@ MoveDescriptions::
 	dw SurfDescription
 	dw IceBeamDescription
 	dw BlizzardDescription
-	dw PsybeamDescription
+	dw ToxicSpikesDescription
 	dw BubblebeamDescription
 	dw AuroraBeamDescription
 	dw HyperBeamDescription
@@ -509,9 +509,9 @@ BlizzardDescription:
 	db   "An attack that may"
 	next "freeze the foe.@"
 
-PsybeamDescription:
-	db   "An attack that may"
-	next "confuse the foe.@"
+ToxicSpikesDescription:
+	db   "Lays poison spi"
+	next "kes.@"
 
 BubblebeamDescription:
 	db   "An attack that may"

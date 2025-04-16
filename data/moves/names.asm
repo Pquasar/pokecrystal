@@ -59,7 +59,7 @@ MoveNames::
 	li "SURF"
 	li "ICE BEAM"
 	li "BLIZZARD"
-	li "PSYBEAM"
+	li "TOXIC SPIKES"
 	li "BUBBLEBEAM"
 	li "AURORA BEAM"
 	li "HYPER BEAM"

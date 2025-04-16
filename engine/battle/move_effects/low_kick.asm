@@ -60,8 +60,10 @@ BattleCommand_LowKick:
 	jp BattleCommand_DamageStats
 
 ; The output with these specific values is correct,
-;  but it might be inaccurate for other values, especially bigger ones.
-DEF kg EQUS "* 100000 / 4535"
+; but it might be inaccurate for other values, especially bigger ones.
+
+DEF kg EQUS "* 441 / 20"
+;DEF kg EQUS "* 100000 / 4535"
 .table
 	dwb 200 kg, 120
 	dwb 100 kg, 100

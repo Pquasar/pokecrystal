@@ -122,7 +122,6 @@ ParasEggMoves:
 	db TACKLE
 	db SCREECH
 	db COUNTER
-	db PSYBEAM
 	db FLAIL
 	db LIGHT_SCREEN
 	db PURSUIT
@@ -146,7 +145,6 @@ MeowthEggMoves:
 PsyduckEggMoves:
 	db ICE_BEAM
 	db HYPNOSIS
-	db PSYBEAM
 	db TACKLE
 	db LIGHT_SCREEN
 	db FUTURE_SIGHT
@@ -305,7 +303,6 @@ LickitungEggMoves:
 KoffingEggMoves:
 	db SCREECH
 	db PSYWAVE
-	db PSYBEAM
 	db DESTINY_BOND
 	db PAIN_SPLIT
 	db -1 ; end
@@ -343,7 +340,6 @@ KangaskhanEggMoves:
 	db -1 ; end
 
 GoldeenEggMoves:
-	db PSYBEAM
 	db HAZE
 	db HYDRO_PUMP
 	db -1 ; end

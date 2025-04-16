@@ -73,7 +73,7 @@ Moves:
 	move SURF,         EFFECT_NORMAL_HIT,         90, WATER,         SPECIAL,  100, 24,   0
 	move ICE_BEAM,     EFFECT_FREEZE_HIT,         90, ICE,           SPECIAL,  100, 16,  10
 	move BLIZZARD,     EFFECT_BLIZZARD,          110, ICE,           SPECIAL,   70,  8,  10
-	move PSYBEAM,      EFFECT_CONFUSE_HIT,        65, PSYCHIC_TYPE,  SPECIAL,  100, 32,  10 ; can remove
+	move TOXIC_SPIKES, EFFECT_TOXIC_SPIKES,        0, POISON,        STATUS,   100, 32,   0
 	move BUBBLEBEAM,   EFFECT_SPEED_DOWN_HIT,     65, WATER,         SPECIAL,  100, 32,  10 ; can remove
 	move AURORA_BEAM,  EFFECT_ATTACK_DOWN_HIT,    65, ICE,           SPECIAL,  100, 32,  10 ; can remove
 	move HYPER_BEAM,   EFFECT_HYPER_BEAM,        150, NORMAL,        SPECIAL,   90,  8,   0

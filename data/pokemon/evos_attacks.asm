@@ -615,7 +615,6 @@ AlakazamEvosAttacks:
 	db 1, PSYWAVE
 	db 16, PSYWAVE
 	db 18, DISABLE
-	db 21, PSYBEAM
 	db 26, RECOVER
 	db 31, FUTURE_SIGHT
 	db 38, PSYCHIC_M
@@ -1190,7 +1189,6 @@ MrMimeEvosAttacks:
 	db 26, LIGHT_SCREEN
 	db 26, REFLECT
 	db 31, ENCORE
-	db 36, PSYBEAM
 	db 41, BATON_PASS
 	db 46, SAFEGUARD
 	db 0 ; no more level-up moves
@@ -1957,7 +1955,6 @@ EspeonEvosAttacks:
 	db 16, PSYWAVE
 	db 23, QUICK_ATTACK
 	db 30, SWIFT
-	db 36, PSYBEAM
 	db 42, PSYWAVE
 	db 47, PSYCHIC_M
 	db 52, MORNING_SUN
@@ -2002,7 +1999,6 @@ MisdreavusEvosAttacks:
 	db 6, CURSE
 	db 12, CONFUSE_RAY
 	db 19, MEAN_LOOK
-	db 27, PSYBEAM
 	db 36, PAIN_SPLIT
 	db 46, PERISH_SONG
 	db 0 ; no more level-up moves
