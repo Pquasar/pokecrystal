@@ -36,7 +36,7 @@ BlackthornGymClairScript:
 	writetext ClairIntroText
 	waitbutton
 	closetext
-	winlosstext ClairWinText, 0
+	winlosstext ClairWinText, ClairLossText
 	loadtrainer CLAIR, CLAIR1
 	startbattle
 	reloadmapafterbattle
@@ -179,6 +179,12 @@ ClairWinText:
 	line "it. There must be"
 	cont "some mistake…"
 	done
+
+ClairLossText:
+	text "Come on!"
+
+	para "You've got to get"
+	line "tougher than this!"
 
 ClairText_GoToDragonsDen:
 	text "I won't admit"

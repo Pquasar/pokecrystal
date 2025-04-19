@@ -15,7 +15,7 @@ OlivineGymJasmineScript:
 	writetext Jasmine_SteelTypeIntro
 	waitbutton
 	closetext
-	winlosstext Jasmine_BetterTrainer, 0
+	winlosstext Jasmine_BetterTrainer, LossTextJasmine
 	loadtrainer JASMINE, JASMINE1
 	startbattle
 	reloadmapafterbattle
@@ -129,6 +129,11 @@ Jasmine_BetterTrainer:
 
 	para "confer upon you"
 	line "this BADGE."
+	done
+
+LossTextJasmine:
+	text "I'm glad…"
+	line "I won…"
 	done
 
 Text_ReceivedMineralBadge:

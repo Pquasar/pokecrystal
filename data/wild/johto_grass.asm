@@ -1601,29 +1601,29 @@ JohtoGrassWildMons:
 	def_grass_wildmons ROUTE_44
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-	db 23, TANGELA
-	db 22, LICKITUNG
-	db 22, HONCHKROW
-	db 24, WEEPINBELL
-	db 24, LICKITUNG
-	db 26, LICKITUNG
-	db 26, LICKITUNG
+	db 100, ARCANINE
+	db 100, VILEPLUME
+	db 100, AERODACTYL
+	db 100, AMPHAROS
+	db 100, MISMAGIUS
+	db 100, AMBIPOM
+	db 100, KABUTOPS
 	; day
-	db 23, TANGELA
-	db 22, LICKITUNG
-	db 22, HONCHKROW
-	db 24, WEEPINBELL
-	db 24, LICKITUNG
-	db 26, LICKITUNG
-	db 26, LICKITUNG
+	db 100, ARCANINE
+	db 100, VILEPLUME
+	db 100, AERODACTYL
+	db 100, AMPHAROS
+	db 100, MISMAGIUS
+	db 100, AMBIPOM
+	db 100, KABUTOPS
 	; nite
-	db 23, TANGELA
-	db 22, POLIWAG
-	db 22, HONCHKROW
-	db 24, WEEPINBELL
-	db 24, POLIWHIRL
-	db 26, POLIWHIRL
-	db 26, POLIWHIRL
+	db 100, ARCANINE
+	db 100, VILEPLUME
+	db 100, AERODACTYL
+	db 100, AMPHAROS
+	db 100, MISMAGIUS
+	db 100, AMBIPOM
+	db 100, KABUTOPS
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_45

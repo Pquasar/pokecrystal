@@ -20,7 +20,7 @@ AzaleaGymBugsyScript:
 	writetext BugsyText_INeverLose
 	waitbutton
 	closetext
-	winlosstext BugsyText_ResearchIncomplete, 0
+	winlosstext BugsyText_ResearchIncomplete, BugsyText_ResearchComplete
 	loadtrainer BUGSY, BUGSY1
 	startbattle
 	reloadmapafterbattle
@@ -160,6 +160,12 @@ BugsyText_ResearchIncomplete:
 
 	para "OK, you win. Take"
 	line "this BADGE."
+	done
+
+BugsyText_ResearchComplete:
+	text "I guess I'm done"
+	line "reporting my re-"
+	cont "search findings!"
 	done
 
 Text_ReceivedHiveBadge:

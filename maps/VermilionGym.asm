@@ -18,7 +18,7 @@ VermilionGymSurgeScript:
 	writetext LtSurgeIntroText
 	waitbutton
 	closetext
-	winlosstext LtSurgeWinLossText, 0
+	winlosstext LtSurgeWinLossText, LossTextSurge
 	loadtrainer LT_SURGE, LT_SURGE1
 	startbattle
 	reloadmapafterbattle
@@ -131,6 +131,11 @@ LtSurgeWinLossText:
 
 	para "OK, kid. You get"
 	line "THUNDERBADGE!"
+	done
+
+LossTextSurge:
+	text "Oh yeah!"
+	line "I'm strong!"
 	done
 
 ReceivedThunderBadgeText:

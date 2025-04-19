@@ -55,7 +55,7 @@ LancesRoomLanceScript:
 	writetext LanceBattleIntroText
 	waitbutton
 	closetext
-	winlosstext LanceBattleWinText, 0
+	winlosstext LanceBattleWinText, LossTextLance
 	setlasttalked LANCESROOM_LANCE
 	loadtrainer CHAMPION, LANCE
 	startbattle
@@ -333,6 +333,14 @@ LancesRoomMaryNoInterviewText:
 	text "MARY: Oh, wait!"
 	line "We haven't done"
 	cont "the interview!"
+	done
+
+LossTextLance:
+	text "I never give up,"
+	line "no matter what."
+
+	para "You must be the"
+	line "same?"
 	done
 
 LancesRoom_MapEvents:

@@ -165,6 +165,7 @@ MamoswineEvosAttacks:
 BeedrillEvosAttacks: 
 	db 0 ; no more evolutions
 	db 99, IRON_DEFENSE
+	db 99, TOXIC_SPIKES
 	db 100, PURSUIT
 	db 100, PIN_MISSILE
 	db 100, POISON_JAB
@@ -466,6 +467,7 @@ VenomothEvosAttacks:
 	db 99, AGILITY
 	db 99, BATON_PASS
 	db 99, MORNING_SUN
+	db 99, TOXIC_SPIKES
 	db 99, POISONPOWDER
 	db 99, STUN_SPORE
 	db 99, PSYCHIC_M
@@ -1078,6 +1080,7 @@ WeezingEvosAttacks:
 	db 99, DESTINY_BOND
 	db 99, SCREECH
 	db 99, STOCKPILE
+	db 99, TOXIC_SPIKES
 	db 99, POISON_GAS
 	db 99, HAZE
 	db 99, GYRO_BALL
@@ -1674,6 +1677,7 @@ AriadosEvosAttacks:
 	db 99, DISABLE
 	db 99, NIGHT_SLASH
 	db 99, PURSUIT
+	db 99, TOXIC_SPIKES
 	db 99, INFESTATION
 	db 99, NIGHT_SHADE
 	db 99, SHADOW_SNEAK

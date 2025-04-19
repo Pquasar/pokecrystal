@@ -187,7 +187,7 @@ Moves:
 	move NIGHTMARE,    EFFECT_NIGHTMARE,           0, GHOST,         STATUS,   100, 24,   0
 	move CLOSE_COMBAT, EFFECT_CLOSE_COMBAT,      120, FIGHTING,      PHYSICAL, 100,  8,   0 ; ANIM DONE
 	move SNORE,        EFFECT_SNORE,              50, NORMAL,        SPECIAL,  100, 24,  30 ; can remove
-	move CURSE,        EFFECT_CURSE,               0, GHOST,         STATUS,   100, 16,   0
+	move CURSE,        EFFECT_TOXIC_SPIKES,               0, GHOST,         STATUS,   100, 16,   0
 	move FLAIL,        EFFECT_REVERSAL,            1, NORMAL,        PHYSICAL, 100, 24,   0
 	move SCALD,        EFFECT_BURN_HIT,           80, WATER,         SPECIAL,  100, 24,  30 ; ANIM DONE
 	move AEROBLAST,    EFFECT_NORMAL_HIT,        100, FLYING,        SPECIAL,   95,  8,   0

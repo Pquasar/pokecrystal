@@ -15,7 +15,7 @@ ViridianGymBlueScript:
 	writetext LeaderBlueBeforeText
 	waitbutton
 	closetext
-	winlosstext LeaderBlueWinText, 0
+	winlosstext LeaderBlueWinText, LeaderBlueLossText
 	loadtrainer BLUE, BLUE1
 	startbattle
 	reloadmapafterbattle
@@ -105,6 +105,14 @@ LeaderBlueWinText:
 	para "Tch, all right…"
 	line "Here, take this--"
 	cont "it's EARTHBADGE."
+	done
+
+LeaderBlueLossText:
+	text "This is what I,"
+	line "Kanto's top-level"
+
+	para "trainer, can rea-"
+	line "lly do!"
 	done
 
 Text_ReceivedEarthBadge:

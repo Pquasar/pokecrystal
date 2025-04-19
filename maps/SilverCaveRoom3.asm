@@ -13,7 +13,7 @@ Red:
 	writetext RedSeenText
 	waitbutton
 	closetext
-	winlosstext RedWinLossText, RedWinLossText
+	winlosstext RedWinLossText, RedLossText
 	loadtrainer RED, RED1
 	startbattle
 	dontrestartmapmusic
@@ -41,6 +41,10 @@ RedSeenText:
 
 RedWinLossText:
 	text "…"
+	done
+
+RedLossText:
+	text "…?"
 	done
 
 RedLeavesText:

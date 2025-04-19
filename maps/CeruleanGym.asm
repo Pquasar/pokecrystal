@@ -64,7 +64,7 @@ CeruleanGymMistyScript:
 	writetext MistyIntroText
 	waitbutton
 	closetext
-	winlosstext MistyWinLossText, 0
+	winlosstext MistyWinLossText, MistyLossText
 	loadtrainer MISTY, MISTY1
 	startbattle
 	reloadmapafterbattle
@@ -255,14 +255,22 @@ MistyIntroText:
 	done
 
 MistyWinLossText:
-	text "MISTY: You really"
-	line "are good…"
+	text "You really are"
+	line "good…"
 
 	para "I'll admit that"
 	line "you are skilled…"
 
 	para "Here you go. It's"
 	line "CASCADEBADGE."
+	done
+
+MistyLossText:
+	text "See! This is the"
+	line "WATER-type tough-"
+
+	para "ness I was talking"
+	line "about!"
 	done
 
 ReceivedCascadeBadgeText:

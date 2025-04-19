@@ -17,7 +17,7 @@ VioletGymFalknerScript:
 	writetext FalknerIntroText
 	waitbutton
 	closetext
-	winlosstext FalknerWinLossText, 0
+	winlosstext FalknerWinLossText, FalknerLossText
 	loadtrainer FALKNER, FALKNER1
 	startbattle
 	reloadmapafterbattle
@@ -138,6 +138,12 @@ FalknerWinLossText:
 	para "It's the official"
 	line "#MON LEAGUE"
 	cont "ZEPHYRBADGE."
+	done
+
+FalknerLossText:
+	text "A defeat is a"
+	line "defeat. You are"
+	cont "strong indeed."
 	done
 
 ReceivedZephyrBadgeText:

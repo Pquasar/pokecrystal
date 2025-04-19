@@ -19,7 +19,7 @@ SeafoamGymBlaineScript:
 	writetext BlaineIntroText
 	waitbutton
 	closetext
-	winlosstext BlaineWinLossText, 0
+	winlosstext BlaineWinLossText, BlaineLossText
 	loadtrainer BLAINE, BLAINE1
 	startbattle
 	iftrue .ReturnAfterBattle
@@ -94,6 +94,11 @@ BlaineWinLossText:
 
 	para "You've earned"
 	line "VOLCANOBADGE!"
+	done
+
+BlaineLossText:
+	text "Whoa hey! I'm a"
+	line "raging inferno!"
 	done
 
 ReceivedVolcanoBadgeText:

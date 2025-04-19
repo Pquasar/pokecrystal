@@ -27,7 +27,7 @@ GoldenrodGymWhitneyScript:
 	writetext WhitneyBeforeText
 	waitbutton
 	closetext
-	winlosstext WhitneyShouldntBeSoSeriousText, 0
+	winlosstext WhitneyShouldntBeSoSeriousText, WhitneyPoorYou
 	loadtrainer WHITNEY, WHITNEY1
 	startbattle
 	reloadmapafterbattle
@@ -190,6 +190,11 @@ WhitneyShouldntBeSoSeriousText:
 	para "You shouldn't be"
 	line "so serious! You…"
 	cont "you child, you!"
+	done
+
+WhitneyPoorYou:
+	text "See? Didn't I"
+	line "tell ya?"
 	done
 
 WhitneyYouMeanieText:

@@ -19,7 +19,7 @@ SaffronGymSabrinaScript:
 	writetext SabrinaIntroText
 	waitbutton
 	closetext
-	winlosstext SabrinaWinLossText, 0
+	winlosstext SabrinaWinLossText, SabrinaLossText
 	loadtrainer SABRINA, SABRINA1
 	startbattle
 	reloadmapafterbattle
@@ -154,6 +154,10 @@ SabrinaWinLossText:
 	para "OK, you win. You"
 	line "earned yourself"
 	cont "MARSHBADGE."
+	done
+
+SabrinaLossText:
+	text "Just as I foresaw…"
 	done
 
 ReceivedMarshBadgeText:

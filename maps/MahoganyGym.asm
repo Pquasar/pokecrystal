@@ -20,7 +20,7 @@ MahoganyGymPryceScript:
 	writetext PryceText_Intro
 	waitbutton
 	closetext
-	winlosstext PryceText_Impressed, 0
+	winlosstext PryceText_Impressed, LossTextPryce
 	loadtrainer PRYCE, PRYCE1
 	startbattle
 	reloadmapafterbattle
@@ -368,6 +368,11 @@ MahoganyGymGuideWinText:
 
 	para "bridged the gen-"
 	line "eration gap!"
+	done
+
+LossTextPryce:
+	text "This is winter's"
+	line "harshness."
 	done
 
 MahoganyGym_MapEvents:

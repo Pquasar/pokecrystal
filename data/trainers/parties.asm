@@ -3419,7 +3419,6 @@ MediumGroup:
 
 	; MEDIUM (6)
 	db "REBECCA@", TRAINERTYPE_NORMAL
-	db 35, GLISCOR
 	db 35, HYPNO
 	db -1 ; end
 

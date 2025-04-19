@@ -1,5 +1,4 @@
 GetStealthRockDamage:
-
 	ld de, wBattleMonType
 	ld bc, UpdatePlayerHUD
 	ldh a, [hBattleTurn]
@@ -10,33 +9,27 @@ GetStealthRockDamage:
 .ok
 	push bc
 	ld c, 3
-; pointer c, c = 1 = 1/32, c = 5 = 1/2
+; Pointer c, c = 1 = 1/32, c = 5 = 1/2
 	ld a, [de]
 	call CheckTypeList
-; compare type 1 to 2
+; Compare type 1 to 2
 	ld b, a
 	inc de
 	ld a, [de]
 	cp b
-; skip if the same
+; Skip if the same
 	call nz, CheckTypeList
 	ld a, c
 	pop bc
 	dec a
-	jr z, .one
+	jp z, GetThirtySecondMaxHP
 	dec a
-	jr z, .two
+	jp z, GetSixteenthMaxHP
 	dec a
-	jr z, .three
+	jp z, GetEighthMaxHP
 	dec a
 	jp z, GetQuarterMaxHP
 	jp GetHalfMaxHP
-.three
-	jp GetEighthMaxHP
-.two
-	jp GetSixteenthMaxHP
-.one
-	jp GetThirtySecondMaxHP
 
 CheckTypeList:
 	cp FLYING

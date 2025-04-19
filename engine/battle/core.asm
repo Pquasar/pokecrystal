@@ -85,6 +85,7 @@ DoBattle:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call StealthRockDamage
+	call DoToxicSpikes
 	call SpikesDamage
 	jp BattleTurn
 
@@ -2313,6 +2314,7 @@ EnemyPartyMonEntrance:
 	call ResetBattleParticipants
 	call SetEnemyTurn
 	call StealthRockDamage
+	call DoToxicSpikes
 	call SpikesDamage
 	xor a
 	ld [wEnemyMoveStruct + MOVE_ANIM], a
@@ -2739,6 +2741,7 @@ ForcePlayerMonChoice:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call StealthRockDamage
+	call DoToxicSpikes
 	call SpikesDamage
 	ld a, $1
 	and a
@@ -2761,6 +2764,7 @@ PlayerPartyMonEntrance:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call StealthRockDamage
+	call DoToxicSpikes
 	jp SpikesDamage
 
 CheckMobileBattleError:
@@ -2883,9 +2887,15 @@ LostBattle:
 	bit IN_BATTLE_TOWER_BATTLE_F, a
 	jr nz, .battle_tower
 
-	ld a, [wBattleType]
-	cp BATTLETYPE_CANLOSE
-	jr nz, .not_canlose
+	ld a, [wBattleMode]
+	dec a ; wild?
+	jr z, .no_loss_text
+
+	ld hl, wLossTextPointer
+	ld a, [hli]
+	ld h, [hl]
+	or h
+	jr z, .no_loss_text
 
 ; Remove the enemy from the screen.
 	hlcoord 0, 0
@@ -2919,7 +2929,7 @@ LostBattle:
 	call ClearBGPalettes
 	ret
 
-.not_canlose
+.no_loss_text
 	ld b, SCGB_BATTLE_GRAYSCALE
 	call GetSGBLayout
 	call SetDefaultBGPAndOBP
@@ -4016,13 +4026,12 @@ SpikesDamage:
 	ld de, wEnemyMonType
 	ld bc, UpdateEnemyHUD
 .ok
-
+; Return if zero spikes set
 	ld a, [hl]
 	and 3
-	; return if zero spikes set
 	ret z
 
-	; Flying-types aren't affected by Spikes.
+; Flying-types aren't affected by Spikes.
 	ld a, [de]
 	cp FLYING
 	ret z
@@ -4030,11 +4039,9 @@ SpikesDamage:
 	ld a, [de]
 	cp FLYING
 	ret z
-
 	push bc
 	push hl
-
-	ld hl, BattleText_UserHurtBySpikes ; "hurt by SPIKES!"
+	ld hl, BattleText_UserHurtBySpikes 
 	call StdBattleTextbox
 
 	pop hl
@@ -4049,7 +4056,6 @@ SpikesDamage:
 
 	pop hl
 	call .hl
-
 	jp WaitBGMap
 .hl
 	jp hl
@@ -4066,25 +4072,105 @@ StealthRockDamage:
 
 	bit SCREENS_STEALTH_ROCK, [hl]
 	ret z
-
 	push bc
-
 	ld hl, BattleText_UserHurtByStealthRock
 	call StdBattleTextbox
-
-
 	call GetStealthRockDamage
 	call SubtractHPFromTarget
 
 	pop hl
 	call .hl
-
 	jp WaitBGMap
-
 .hl
 	jp hl
 
 INCLUDE "engine/battle/stealth_rock_damage.asm"
+
+DoToxicSpikes:
+	ld hl, wPlayerMoreScreens
+	ld de, wBattleMonType
+	ld bc, UpdatePlayerHUD
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld hl, wEnemyMoreScreens
+	ld de, wEnemyMonType
+	ld bc, UpdateEnemyHUD
+.ok
+
+	ld a, [hl]
+	and 3
+; Return if zero spikes set
+	ret z
+
+; Return if already has a status condition
+	ld a, BATTLE_VARS_STATUS_OPP
+	call GetBattleVarAddr
+	and a
+	ret nz
+
+; Flying and steel are immune, poison types clear spikes
+	ld a, [de]
+	cp FLYING
+	ret z
+	cp STEEL
+	ret z
+	cp POISON
+	jr z, .cleartoxicspikes
+	inc de
+	ld a, [de]
+	cp FLYING
+	ret z
+	cp STEEL
+	ret z
+	cp POISON
+	jr z, .cleartoxicspikes
+	push bc
+	push hl
+	jr .go
+
+.cleartoxicspikes
+	ld a, [hl]
+ 	and $fc ; Clear bits
+ 	ld [hl], a
+ 	ret
+
+.go
+	pop hl
+ 	ld a, [hl]
+ 	ld hl, WasPoisonedText
+ 	and 3
+	dec a
+ 	jr z, .notoxic
+ 	ld hl, BadlyPoisonedText
+ 	push hl
+ 	ld a, BATTLE_VARS_SUBSTATUS5
+ 	call GetBattleVarAddr
+ 	set SUBSTATUS_TOXIC, [hl]
+ 	pop hl
+
+.notoxic
+ 	push bc
+ 	push hl
+ 	ld a, BATTLE_VARS_STATUS
+ 	call GetBattleVarAddr
+ 	ld a, 1 << PSN
+ 	ld [hl], a
+ 	ld de, ANIM_PSN
+ 	call Call_PlayBattleAnim
+ 	call RefreshBattleHuds
+
+ 	pop hl
+ 	call SwitchTurnCore
+ 	call StdBattleTextbox
+ 	call SwitchTurnCore
+
+
+	call .hl
+	jp WaitBGMap
+.hl
+	jp hl
+
 
 PursuitSwitch:
 	ld a, BATTLE_VARS_MOVE
@@ -5129,6 +5215,7 @@ EnemyMonEntrance:
 	callfar AI_Switch
 	call SetEnemyTurn
 	call StealthRockDamage
+	call DoToxicSpikes
 	jp SpikesDamage
 
 BattleMonEntrance:
@@ -5163,6 +5250,7 @@ BattleMonEntrance:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call StealthRockDamage
+	call DoToxicSpikes
 	call SpikesDamage
 	ld a, $2
 	ld [wMenuCursorY], a
@@ -5188,6 +5276,7 @@ PassedBattleMonEntrance:
 	call LoadTilemapToTempTilemap
 	call SetPlayerTurn
 	call StealthRockDamage
+	call DoToxicSpikes
 	jp SpikesDamage
 
 BattleMenu_Run:

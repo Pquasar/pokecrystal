@@ -26,7 +26,7 @@ TrainerGruntM29:
 	end
 
 TrainerGruntM1:
-	trainer GRUNTM, GRUNTM_1, EVENT_BEAT_ROCKET_GRUNTM_1, GruntM1SeenText, GruntM1BeatenText, 0, .Script
+	trainer GRUNTM, GRUNTM_1, EVENT_BEAT_ROCKET_GRUNTM_1, GruntM1SeenText, GruntM1BeatenText, GruntM1LostText, .Script
 
 .Script:
 	opentext
@@ -194,6 +194,11 @@ GruntM29SeenText:
 GruntM29BeatenText:
 	text "Arrgh! This is NOT"
 	line "my day!"
+	done
+
+GruntM1LostText:
+	text "Serves you right,"
+	line "you brat!"
 	done
 
 GruntM29AfterBattleText:

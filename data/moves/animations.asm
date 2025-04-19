@@ -3435,6 +3435,19 @@ BattleAnim_StealthRock:
 	anim_ret
 
 BattleAnim_ToxicSpikes:
+	anim_2gfx BATTLE_ANIM_GFX_MISC, BATTLE_ANIM_GFX_POISON
+	anim_sound 6, 2, SFX_MENU
+	anim_obj BATTLE_ANIM_OBJ_SPIKES, 48, 88, $20
+	anim_wait 8
+	anim_sound 6, 2, SFX_MENU
+	anim_obj BATTLE_ANIM_OBJ_SPIKES, 48, 88, $30
+	anim_wait 8
+	anim_sound 6, 2, SFX_MENU
+	anim_obj BATTLE_ANIM_OBJ_SPIKES, 48, 88, $28
+	anim_wait 32
+	anim_call BattleAnimSub_Sludge
+	anim_ret
+	
 BattleAnim_Spikes:
 	anim_1gfx BATTLE_ANIM_GFX_MISC
 	anim_sound 6, 2, SFX_MENU
