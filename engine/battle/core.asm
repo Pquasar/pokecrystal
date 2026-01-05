@@ -5698,6 +5698,40 @@ MoveInfoBox:
 
 	callfar UpdateMoveData
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
+
+	cp HIDDEN_POWER
+	jr nz, .not_hidden_power
+	push hl 
+	ld hl, wBattleMonDVs
+; Def & 3
+	ld a, [hl]
+	and %0011
+	ld b, a
+; + (Atk & 3) << 2
+	ld a, [hl]
+	and %0011 << 4
+	swap a
+	add a
+	add a
+	or b
+; Skip Normal
+	inc a
+; Skip Bird
+	cp BIRD
+	jr c, .print_type
+	inc a
+; Skip unused types
+	cp UNUSED_TYPES
+	jr c, .print_type
+	add UNUSED_TYPES_END - UNUSED_TYPES
+.print_type
+	pop hl
+	ld b, a
+	hlcoord 2, 10
+	predef PrintType
+	ret
+
+.not_hidden_power
 	ld b, a
 	hlcoord 2, 10
 	predef PrintMoveType
