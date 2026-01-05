@@ -34,7 +34,7 @@ MeetMomRightScript:
 	applymovement PLAYERSHOUSE1F_MOM1, MomWalksToPlayerMovement
 MeetMomScript:
 	opentext
-	writetext ElmsLookingForYouText
+;	writetext ElmsLookingForYouText
 	promptbutton
 	getstring STRING_BUFFER_4, PokegearName
 	scall PlayersHouse1FReceiveItemStd
@@ -44,7 +44,7 @@ MeetMomScript:
 	setscene SCENE_PLAYERSHOUSE1F_NOOP
 	setevent EVENT_PLAYERS_HOUSE_MOM_1
 	clearevent EVENT_PLAYERS_HOUSE_MOM_2
-	writetext MomGivesPokegearText
+;	writetext MomGivesPokegearText
 	promptbutton
 	special SetDayOfWeek
 .SetDayOfWeek:
@@ -67,17 +67,17 @@ MeetMomScript:
 	sjump .KnowPhone
 
 .KnowPhone:
-	writetext KnowTheInstructionsText
+;	writetext KnowTheInstructionsText
 	promptbutton
 	sjump .FinishPhone
 
 .ExplainPhone:
-	writetext DontKnowTheInstructionsText
+;	writetext DontKnowTheInstructionsText
 	promptbutton
 	sjump .FinishPhone
 
 .FinishPhone:
-	writetext InstructionsNextText
+;	writetext InstructionsNextText
 	waitbutton
 	closetext
 	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1

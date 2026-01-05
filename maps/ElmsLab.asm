@@ -50,7 +50,7 @@ ElmsLabWalkUpToElmScript:
 	showemote EMOTE_SHOCK, ELMSLAB_ELM, 15
 	turnobject ELMSLAB_ELM, RIGHT
 	opentext
-	writetext ElmText_Intro
+;	writetext ElmText_Intro
 .MustSayYes:
 	yesorno
 	iftrue .ElmGetsEmail
@@ -58,9 +58,9 @@ ElmsLabWalkUpToElmScript:
 	sjump .MustSayYes
 
 .ElmGetsEmail:
-	writetext ElmText_Accepted
+;	writetext ElmText_Accepted
 	promptbutton
-	writetext ElmText_ResearchAmbitions
+;	writetext ElmText_ResearchAmbitions
 	waitbutton
 	closetext
 	playsound SFX_GLASS_TING
@@ -68,12 +68,12 @@ ElmsLabWalkUpToElmScript:
 	showemote EMOTE_SHOCK, ELMSLAB_ELM, 10
 	turnobject ELMSLAB_ELM, DOWN
 	opentext
-	writetext ElmText_GotAnEmail
+;	writetext ElmText_GotAnEmail
 	waitbutton
 	closetext
 	opentext
 	turnobject ELMSLAB_ELM, RIGHT
-	writetext ElmText_MissionFromMrPokemon
+;	writetext ElmText_MissionFromMrPokemon
 	waitbutton
 	closetext
 	applymovement ELMSLAB_ELM, ElmsLab_ElmToDefaultPositionMovement1
@@ -179,7 +179,7 @@ CyndaquilPokeBallScript:
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-	givepoke CYNDAQUIL, 5, BERRY
+	givepoke CYNDAQUIL, 100, BERRY
 	closetext
 	readvar VAR_FACING
 	ifequal RIGHT, ElmDirectionsScript
