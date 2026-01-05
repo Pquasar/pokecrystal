@@ -5658,7 +5658,7 @@ MoveInfoBox:
 	hlcoord 1, 10
 	ld de, .Disabled
 	call PlaceString
-	jr .done
+	jp .done
 
 .not_disabled
 	ld hl, wMenuCursorY
