@@ -4,19 +4,19 @@ LoadOpponentTrainerAndPokemon:
 	ld a, BANK(wBT_OTTrainer)
 	ldh [rWBK], a
 
-	; Fill wBT_OTTrainer with zeros
+; Fill wBT_OTTrainer with zeros
 	xor a
 	ld hl, wBT_OTTrainer
 	ld bc, BATTLE_TOWER_STRUCT_LENGTH
-	call ByteFill
+	call ByteFill ; fill bc bytes with the value of a, starting at hl
 
-	; Write $ff into the Item-Slots
+; Write $ff into the Item-Slots
 	ld a, $ff
 	ld [wBT_OTMon1Item], a
 	ld [wBT_OTMon2Item], a
 	ld [wBT_OTMon3Item], a
 
-	; Set wBT_OTTrainer as start address to write the following data to
+; Set wBT_OTTrainer as start address to write the following data to
 	ld de, wBT_OTTrainer
 
 	ldh a, [hRandomAdd]
@@ -26,15 +26,8 @@ LoadOpponentTrainerAndPokemon:
 	ldh a, [hRandomAdd]
 	add b
 	ld b, a ; b contains the nr of the trainer
-if DEF(_CRYSTAL11)
 	maskbits BATTLETOWER_NUM_UNIQUE_TRAINERS
 	cp BATTLETOWER_NUM_UNIQUE_TRAINERS
-else
-; BUG: Crystal 1.0 used the wrong constant here, so only the first
-; 21 trainers in BattleTowerTrainers can be sampled.
-	maskbits BATTLETOWER_NUM_UNIQUE_MON
-	cp BATTLETOWER_NUM_UNIQUE_MON
-endc
 	jr nc, .resample
 	ld b, a
 
@@ -99,13 +92,13 @@ LoadRandomBattleTowerMon:
 	call OpenSRAM
 
 .FindARandomBattleTowerMon:
-	; From Which LevelGroup are the mon loaded
-	; a = 1..10
+; From Which LevelGroup are the mon loaded
+; a = 1..10
 	ld a, [wBTChoiceOfLvlGroup]
 	dec a
 	ld hl, BattleTowerMons
 	ld bc, BATTLETOWER_NUM_UNIQUE_MON * NICKNAMED_MON_STRUCT_LENGTH
-	call AddNTimes
+	call AddNTimes ; Add bc * a to hl, skips over all mon below selected level group
 
 	ldh a, [hRandomAdd]
 	ld b, a
@@ -117,11 +110,11 @@ LoadRandomBattleTowerMon:
 	maskbits BATTLETOWER_NUM_UNIQUE_MON
 	cp BATTLETOWER_NUM_UNIQUE_MON
 	jr nc, .resample
-	; in register 'a' is the chosen mon of the LevelGroup
+; in register 'a' is the chosen mon of the LevelGroup
 
-	; Check if mon was already loaded before
-	; Check current and the 2 previous teams
-	; includes check if item is double at the current team
+; Check if mon was already loaded before
+; Check current and the 2 previous teams
+; includes check if item is double at the current team
 	ld bc, NICKNAMED_MON_STRUCT_LENGTH
 	call AddNTimes
 	ld a, [hli]
