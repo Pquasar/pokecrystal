@@ -338,6 +338,18 @@ SECTION UNION "Miscellaneous", WRAM0
 
 ; battle tower temp struct
 wBT_OTTemp:: battle_tower_struct wBT_OTTemp
+; Macro becomes:
+
+; wBT_OTTempName::         ds NAME_LENGTH - 1
+; wBT_OTTempTrainerClass:: db
+; wBT_OTTempMon1::         party_struct wBT_OTMonN
+; wBT_OTTempMon1Name::     ds MON_NAME_LENGTH
+; wBT_OTTempMon2::         party_struct wBT_OTMonN
+; wBT_OTTempMon2Name::     ds MON_NAME_LENGTH
+; wBT_OTTempMon3::         party_struct wBT_OTMonN
+; wBT_OTTempMon3Name::     ds MON_NAME_LENGTH
+; wBT_OTTempTrainerData::  ds BATTLETOWER_TRAINERDATALENGTH
+; wBT_OTTempTrainerEnd::
 
 
 SECTION UNION "Miscellaneous", WRAM0
@@ -3441,6 +3453,18 @@ w3_d090:: ds $70
 
 w3_d100::
 wBT_OTTrainer:: battle_tower_struct wBT_OT
+; Macro becomes:
+
+; wBT_OTName::         ds NAME_LENGTH - 1
+; wBT_OTTrainerClass:: db
+; wBT_OTMon1::         party_struct wBT_OTMon1
+; wBT_OTMon1Name::     ds MON_NAME_LENGTH
+; wBT_OTMon2::         party_struct wBT_OTMon2
+; wBT_OTMon2Name::     ds MON_NAME_LENGTH
+; wBT_OTMon3::         party_struct wBT_OTMon3
+; wBT_OTMon3Name::     ds MON_NAME_LENGTH
+; wBT_OTTrainerData::  ds BATTLETOWER_TRAINERDATALENGTH
+; wBT_OTTrainerEnd::
 	ds $20
 wBT_TrainerTextIndex:: db
 	ds 1

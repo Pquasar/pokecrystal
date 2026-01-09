@@ -11,6 +11,7 @@ Function1700ba:
 	ret
 
 Function1700c4:
+; Function called by an unreferenced function
 	ldh a, [rWBK]
 	push af
 	ld a, BANK(w3_d202TrainerData) ; aka BANK(w3_dffc) and BANK(w3_d202Name)
@@ -212,10 +213,12 @@ _BattleTowerBattle:
 	dw SkipBattleTowerTrainer
 
 RunBattleTowerTrainer:
+; Saves the state of wInBattleTowerBattle, wOptions before battle
+; and then retrieves them
 	ld a, [wOptions]
 	push af
 	ld hl, wOptions
-	set BATTLE_SHIFT, [hl] ; SET MODE
+	set BATTLE_SHIFT, [hl] ; Force set mode
 
 	ld a, [wInBattleTowerBattle]
 	push af
@@ -231,7 +234,7 @@ RunBattleTowerTrainer:
 
 	predef StartBattle
 
-	farcall LoadPokemonData
+	farcall LoadPokemonData ; Load pokemon data from sram
 	farcall HealParty
 	ld a, [wBattleResult]
 	ld [wScriptVar], a
@@ -266,17 +269,18 @@ ReadBTTrainerParty:
 ; with their species names.
 	ld de, wBT_OTTempMon1Name
 	ld c, MON_NAME_LENGTH
-	farcall CheckStringForErrors
+	farcall CheckStringForErrors ; If "failed" this function, set the carry flag
 	jr nc, .skip_mon_1
 
 	ld a, [wBT_OTTempMon1]
 	ld [wNamedObjectIndex], a
-	call GetPokemonName
+	call GetPokemonName ; Get Pokemon name for wNamedObjectIndex.
 	ld l, e
 	ld h, d
 	ld de, wBT_OTTempMon1Name
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	call CopyBytes ; copy bc bytes from hl to de
+
 
 .skip_mon_1
 	ld de, wBT_OTTempMon2Name
@@ -335,13 +339,13 @@ ReadBTTrainerParty:
 	ld hl, wBT_OTTempTrainerClass
 	ld a, [hli]
 	ld [wOtherTrainerClass], a
-	ld a, LOW(wOTPartyMonNicknames)
+	ld a, LOW(wOTPartyMonNicknames) ; Get the low byte 
 	ld [wBGMapBuffer], a
-	ld a, HIGH(wOTPartyMonNicknames)
+	ld a, HIGH(wOTPartyMonNicknames) ; Get the high byte 
 	ld [wBGMapBuffer + 1], a
 
 	; Copy mon into Memory from the address in hl
-	ld de, wOTPartyMon1Species
+	ld de, wOTPartyMon1Species ; wOTPartyMon struct can hold 6 pokemon
 	ld bc, wOTPartyCount
 	ld a, BATTLETOWER_PARTY_LENGTH
 	ld [bc], a
@@ -353,7 +357,8 @@ ReadBTTrainerParty:
 	inc bc
 	push bc
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	call CopyBytes ; copy PARTYMON_STRUCT_LENGTH bytes from wBT_OTTempMon(n) to wOTPartyMon(n)Species
+; Copying bytes points to to wOTPartyMon(n+1)Species
 	push de
 	ld a, [wBGMapBuffer]
 	ld e, a
@@ -556,7 +561,7 @@ CopyBTTrainer_FromBT_OT_TowBT_OTTemp:
 	ld hl, wBT_OTTrainer
 	ld de, wBT_OTTemp
 	ld bc, BATTLE_TOWER_STRUCT_LENGTH
-	call CopyBytes
+	call CopyBytes ; copy bc bytes from hl to de
 
 	pop af
 	ldh [rWBK], a

@@ -159,7 +159,9 @@ LoadRandomBattleTowerMon:
 	jr z, .FindARandomBattleTowerMon
 
 	ld bc, NICKNAMED_MON_STRUCT_LENGTH
-	call CopyBytes
+	call CopyBytes ; copy bc bytes from hl to de (points to wBT_OTTrainer)
+; de now points to wBT_OTMon(n+1)
+; Since NICKNAMED_MON_STRUCT_LENGTH fits wBT_OTMon(n) and wBT_OTMon(n)Name
 
 	ld a, [wNamedObjectIndex]
 	push af
@@ -182,6 +184,8 @@ LoadRandomBattleTowerMon:
 	pop af
 	ld [wNamedObjectIndex], a
 	pop bc
+; Register c stores BATTLETOWER_PARTY_LENGTH
+; Check if 0 to know 3 pokemon were sampled
 	dec c
 	jp nz, .loop
 
