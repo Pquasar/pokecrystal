@@ -212,10 +212,10 @@ CheckBTMonMovesForErrors:
 .loop
 	push hl
 	ld a, [hl]
-	cp NUM_ATTACKS + 1
+	cp NUM_ATTACKS + 1 ; NUM_ATTACKS is the total number of moves in the game
 	jr c, .okay
 	ld a, POUND
-	ld [hl], a
+	ld [hl], a ; If a move is not in the range of possible moves, replace it with pound
 
 .okay
 	inc hl

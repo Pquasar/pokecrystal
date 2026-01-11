@@ -340,15 +340,18 @@ SECTION UNION "Miscellaneous", WRAM0
 wBT_OTTemp:: battle_tower_struct wBT_OTTemp
 ; Macro becomes:
 
-; wBT_OTTempName::         ds NAME_LENGTH - 1
-; wBT_OTTempTrainerClass:: db
-; wBT_OTTempMon1::         party_struct wBT_OTMonN
-; wBT_OTTempMon1Name::     ds MON_NAME_LENGTH
-; wBT_OTTempMon2::         party_struct wBT_OTMonN
-; wBT_OTTempMon2Name::     ds MON_NAME_LENGTH
-; wBT_OTTempMon3::         party_struct wBT_OTMonN
-; wBT_OTTempMon3Name::     ds MON_NAME_LENGTH
-; wBT_OTTempTrainerData::  ds BATTLETOWER_TRAINERDATALENGTH
+; wBT_OTTempName::          ds NAME_LENGTH - 1
+; wBT_OTTempTrainerClass::  db
+; (struct) wBT_OTTempMon1::   party_struct wBT_OTMonN
+; 	wBT_OTTempMon1Species:: db
+;	wBT_OTTempMon1Item::    db
+;	...
+; wBT_OTTempMon1Name::      ds MON_NAME_LENGTH
+; wBT_OTTempMon2::          party_struct wBT_OTMonN
+; wBT_OTTempMon2Name::      ds MON_NAME_LENGTH
+; wBT_OTTempMon3::          party_struct wBT_OTMonN
+; wBT_OTTempMon3Name::      ds MON_NAME_LENGTH
+; wBT_OTTempTrainerData::   ds BATTLETOWER_TRAINERDATALENGTH
 ; wBT_OTTempTrainerEnd::
 
 
@@ -363,7 +366,28 @@ wEnemyMonNickname::  ds MON_NAME_LENGTH
 wBattleMonNickname:: ds MON_NAME_LENGTH
 
 wBattleMon:: battle_struct wBattleMon
+; Macro becomes:
 
+; wBattleMonSpecies::   db
+; wBattleMonItem::      db
+; wBattleMonMoves::     ds NUM_MOVES
+; wBattleMonDVs::       dw
+; wBattleMonPP::        ds NUM_MOVES
+; wBattleMonHappiness:: db
+; wBattleMonLevel::     db
+; wBattleMonStatus::    ds 2
+; wBattleMonHP::        dw
+; wBattleMonMaxHP::     dw
+; wBattleMonStats:: ; big endian
+; wBattleMonAttack::    dw
+; wBattleMonDefense::   dw
+; wBattleMonSpeed::     dw
+; wBattleMonSpclAtk::   dw
+; wBattleMonSpclDef::   dw
+; wBattleMonType::
+; wBattleMonType1::     db
+; wBattleMonType2::     db
+; wBattleMonStructEnd::
 	ds 2
 
 wWildMon:: db
@@ -3455,15 +3479,18 @@ w3_d100::
 wBT_OTTrainer:: battle_tower_struct wBT_OT
 ; Macro becomes:
 
-; wBT_OTName::         ds NAME_LENGTH - 1
-; wBT_OTTrainerClass:: db
-; wBT_OTMon1::         party_struct wBT_OTMon1
-; wBT_OTMon1Name::     ds MON_NAME_LENGTH
-; wBT_OTMon2::         party_struct wBT_OTMon2
-; wBT_OTMon2Name::     ds MON_NAME_LENGTH
-; wBT_OTMon3::         party_struct wBT_OTMon3
-; wBT_OTMon3Name::     ds MON_NAME_LENGTH
-; wBT_OTTrainerData::  ds BATTLETOWER_TRAINERDATALENGTH
+; wBT_OTName::          ds NAME_LENGTH - 1
+; wBT_OTTrainerClass::  db
+; (struct) wBT_OTMon1:: party_struct wBT_OTMonN
+; 	wBT_OTMon1Species:: db
+;	wBT_OTMon1Item::    db
+;	...
+; wBT_OTMon1Name::      ds MON_NAME_LENGTH
+; wBT_OTMon2::          party_struct wBT_OTMon2
+; wBT_OTMon2Name::      ds MON_NAME_LENGTH
+; wBT_OTMon3::          party_struct wBT_OTMon3
+; wBT_OTMon3Name::      ds MON_NAME_LENGTH
+; wBT_OTTrainerData::   ds BATTLETOWER_TRAINERDATALENGTH
 ; wBT_OTTrainerEnd::
 	ds $20
 wBT_TrainerTextIndex:: db

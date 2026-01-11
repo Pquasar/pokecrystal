@@ -121,6 +121,7 @@ LoadRandomBattleTowerMon:
 	ld b, a
 	ld a, [hld]
 	ld c, a
+; b stores the species, c stores the item. Check for any copies of either
 	ld a, [wBT_OTMon1]
 	cp b
 	jr z, .FindARandomBattleTowerMon
@@ -166,19 +167,19 @@ LoadRandomBattleTowerMon:
 	ld a, [wNamedObjectIndex]
 	push af
 	push de
-	ld hl, -NICKNAMED_MON_STRUCT_LENGTH
+	ld hl, -NICKNAMED_MON_STRUCT_LENGTH ; hl points to de - NICKNAMED_MON_STRUCT_LENGTH
 	add hl, de
 	ld a, [hl]
 	ld [wNamedObjectIndex], a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	add hl, bc
 	push hl
-	call GetPokemonName
+	call GetPokemonName ; Get Pokemon name for wNamedObjectIndex
 	ld h, d
 	ld l, e
 	pop de
 	ld bc, MON_NAME_LENGTH
-	call CopyBytes
+	call CopyBytes ; copy MON_NAME_LENGTH bytes from hl to de
 
 	pop de
 	pop af

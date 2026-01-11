@@ -8,15 +8,15 @@ BattleTowerMons:
 	db MIRACLEBERRY
 	db THUNDERBOLT, HYPER_BEAM, SHADOW_BALL, ROAR
 	dw 0 ; OT ID
-	bigdt 1000 ; Exp
+	bigdt 1000 ; Exp, 3 bytes
 	; Stat exp
 	bigdw 50000
 	bigdw 40000
 	bigdw 40000
 	bigdw 35000
 	bigdw 40000
-	dn 13, 13, 11, 13 ; DVs
-	db 15, 5, 15, 20 ; PP
+	dn 13, 13, 11, 13 ; DVs, 2 bytes
+	db 15, 5, 15, 20 ; PP, 4 bytes
 	db 100 ; Happiness
 	db 0, 0, 0 ; Pokerus, Caught data
 	db 10 ; Level
@@ -28,7 +28,7 @@ BattleTowerMons:
 	bigdw 37 ; Spd
 	bigdw 34 ; SAtk
 	bigdw 31 ; SDef
-	dname "SANDA-SU", MON_NAME_LENGTH
+	dname "SANDA-SU", MON_NAME_LENGTH ; 11 bytes
 
 	db ESPEON
 	db LEFTOVERS

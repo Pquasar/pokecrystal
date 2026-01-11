@@ -274,7 +274,7 @@ ReadBTTrainerParty:
 
 	ld a, [wBT_OTTempMon1]
 	ld [wNamedObjectIndex], a
-	call GetPokemonName ; Get Pokemon name for wNamedObjectIndex.
+	call GetPokemonName ; Get Pokemon name for wNamedObjectIndex
 	ld l, e
 	ld h, d
 	ld de, wBT_OTTempMon1Name
