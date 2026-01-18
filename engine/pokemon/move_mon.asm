@@ -364,6 +364,8 @@ endr
 	ret
 
 FillPP:
+; fills location de with the 4 calculated PP amounts, from 4 moves pointed by hl
+; de then points to byte after PP, hl to byte after moves
 	push bc
 	ld b, NUM_MOVES
 .loop

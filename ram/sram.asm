@@ -165,7 +165,7 @@ sBTMonOfTrainers::
 for n, 1, BATTLETOWER_PARTY_LENGTH + 1
 sBTMonPrevTrainer{d:n}:: db
 endr
-; team of preprevious trainer
+; team of previous previous trainer
 ; sBTMonPrevPrevTrainer1 - sBTMonPrevPrevTrainer3
 for n, 1, BATTLETOWER_PARTY_LENGTH + 1
 sBTMonPrevPrevTrainer{d:n}:: db

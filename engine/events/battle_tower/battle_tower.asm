@@ -488,6 +488,7 @@ BT_ChrisName:
 	db "CHRIS@"
 
 Function17042c:
+; Function called by an "unreferenced" function
 	ld hl, w3_d202TrainerData
 	ld a, BATTLETOWER_STREAK_LENGTH
 .loop
