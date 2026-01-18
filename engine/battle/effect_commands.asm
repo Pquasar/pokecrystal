@@ -629,6 +629,29 @@ HitConfusion:
 	jp BattleCommand_RaiseSub
 
 BattleCommand_CheckObedience:
+
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .skip_print
+	ld hl, wBT_OTMon1Species
+
+.loop_print
+	push hl
+	ld a, [hl] ; Load the actual byte value into a
+
+; DEBUG print function that will print any number of bytes pointed by hl
+	ld [wTextDecimalByte], a
+	call BattleCommand_MoveDelay
+	ld hl, BattleText_PrintNumber
+	call StdBattleTextbox
+	pop hl
+	dec b 
+	ld a, b
+	cp 0
+	inc hl
+	jr nz, .loop_print
+.skip_print
+
 	; Enemy can't disobey
 	ldh a, [hBattleTurn]
 	and a

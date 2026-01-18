@@ -29,7 +29,7 @@ LoadOpponentTrainerAndPokemon:
 	maskbits BATTLETOWER_NUM_UNIQUE_TRAINERS
 	cp BATTLETOWER_NUM_UNIQUE_TRAINERS
 	jr nc, .resample
-	ld b, a
+	ld b, a ; Unnecessary?
 
 	ld a, BANK(sBTTrainers)
 	call OpenSRAM
@@ -46,7 +46,7 @@ LoadOpponentTrainerAndPokemon:
 	ld hl, sBTTrainers
 	ld a, [sNrOfBeatenBattleTowerTrainers]
 	ld c, a
-	ld a, b
+	ld a, b ; a now contains the nr of the trainer
 	ld b, 0
 	add hl, bc
 	ld [hl], a
@@ -66,7 +66,7 @@ LoadOpponentTrainerAndPokemon:
 
 	ld hl, BattleTowerTrainerData
 	ld bc, BATTLETOWER_TRAINERDATALENGTH
-	call AddNTimes
+	call AddNTimes ; Add bc * a to hl
 	ld bc, BATTLETOWER_TRAINERDATALENGTH
 .copy_bt_trainer_data_loop
 	ld a, BANK(BattleTowerTrainerData)
@@ -85,17 +85,15 @@ LoadOpponentTrainerAndPokemon:
 	ret
 
 LoadRandomBattleTowerMon:
-	ld c, BATTLETOWER_PARTY_LENGTH
+	ld c, BATTLETOWER_PARTY_LENGTH ; 3
 .loop
 	push bc
 	ld a, BANK(sBTMonOfTrainers)
 	call OpenSRAM
 
 .FindARandomBattleTowerMon:
-; From Which LevelGroup are the mon loaded
-; a = 1..10
-	ld a, [wBTChoiceOfLvlGroup]
-	dec a
+	xor a ; right now just skip 0 mons since we don't have different tiers
+
 	ld hl, BattleTowerMons
 	ld bc, BATTLETOWER_NUM_UNIQUE_MON * NICKNAMED_MON_STRUCT_LENGTH
 	call AddNTimes ; Add bc * a to hl, skips over all mon below selected level group
@@ -106,61 +104,141 @@ LoadRandomBattleTowerMon:
 	call Random
 	ldh a, [hRandomAdd]
 	add b
-	ld b, a
-	maskbits BATTLETOWER_NUM_UNIQUE_MON
-	cp BATTLETOWER_NUM_UNIQUE_MON
+	ld b, a ; b holds the nr of the current mon
+	maskbits 145 ; current number of PU mons to test with
+	cp 145
 	jr nc, .resample
-; in register 'a' is the chosen mon of the LevelGroup
 
-; Check if mon was already loaded before
-; Check current and the 2 previous teams
-; includes check if item is double at the current team
-	ld bc, NICKNAMED_MON_STRUCT_LENGTH
-	call AddNTimes
-	ld a, [hli]
+	ld bc, 8 ; species + item + moves + dvs bytes in the custom struct
+	call AddNTimes ; Add bc * a to hl, gets the random pokemon pointer
+
+	ld a, [hl] ; hl points to the first byte, species
 	ld b, a
-	ld a, [hld]
-	ld c, a
-; b stores the species, c stores the item. Check for any copies of either
-	ld a, [wBT_OTMon1]
+
+	ld a, [wBT_OTMon1] ; Check for any copies of the mon in the team
 	cp b
-	jr z, .FindARandomBattleTowerMon
-	ld a, [wBT_OTMon1Item]
-	cp c
 	jr z, .FindARandomBattleTowerMon
 	ld a, [wBT_OTMon2]
 	cp b
 	jr z, .FindARandomBattleTowerMon
-	ld a, [wBT_OTMon2Item]
-	cp c
-	jr z, .FindARandomBattleTowerMon
 	ld a, [wBT_OTMon3]
 	cp b
 	jr z, .FindARandomBattleTowerMon
-	ld a, [wBT_OTMon3Item]
-	cp c
-	jr z, .FindARandomBattleTowerMon
-	ld a, [sBTMonPrevTrainer1]
-	cp b
-	jr z, .FindARandomBattleTowerMon
-	ld a, [sBTMonPrevTrainer2]
-	cp b
-	jr z, .FindARandomBattleTowerMon
-	ld a, [sBTMonPrevTrainer3]
-	cp b
-	jr z, .FindARandomBattleTowerMon
-	ld a, [sBTMonPrevPrevTrainer1]
-	cp b
-	jr z, .FindARandomBattleTowerMon
-	ld a, [sBTMonPrevPrevTrainer2]
-	cp b
-	jr z, .FindARandomBattleTowerMon
-	ld a, [sBTMonPrevPrevTrainer3]
-	cp b
-	jr z, .FindARandomBattleTowerMon
 
-	ld bc, NICKNAMED_MON_STRUCT_LENGTH
-	call CopyBytes ; copy bc bytes from hl to de (points to wBT_OTTrainer)
+; We could replace the part loading the entire struct with a template that maxes stat exp and happiness
+; But for now just do it manually
+
+	ld a, [de] ; load species in
+    ld [wCurSpecies], a
+
+; Species
+	ld bc, 1
+	ld a, MON_SPECIES
+	call CopyBCBytes ; Copies bc bytes from hl to de+a. Preserves de but (deliberately) not hl.
+
+; Item
+	ld bc, 1
+	ld a, MON_ITEM
+	call CopyBCBytes
+
+; Moves
+	ld bc, NUM_MOVES
+	ld a, MON_MOVES
+	call CopyBCBytes
+
+; DVs
+	ld bc, 2
+	ld a, MON_DVS
+	call CopyBCBytes
+
+; PP
+	ld hl, MON_MOVES
+	add hl, de ; Load hl the ram location for the 4 moves
+	push de ; save de to be the first byte of the ram struct
+	push hl
+	ld hl, MON_PP
+	add hl, de
+	ld d, h
+	ld e, l ; load de the ram location for the 4 pp locations
+	pop hl
+	predef FillPP
+	pop de
+
+; Stat EXP, confirmed working
+	ld a, $FF
+	ld hl, MON_STAT_EXP
+	add hl, de
+	ld bc, 10
+	call ByteFill ; fill bc bytes with the value of a, starting at hl
+
+; Happiness
+	ld hl, MON_HAPPINESS
+	add hl, de
+	ld [hl], $FF
+
+; Level
+	ld hl, MON_LEVEL
+	add hl, de
+	ld [hl], 50
+
+	ld a, 50 ; load level in
+    ld [wCurPartyLevel], a
+
+; Clear Status
+	xor a
+	ld hl, MON_STATUS
+	add hl, de
+	ld bc, 2
+	call ByteFill
+
+; Stats
+;	push hl
+;	ld hl, MON_STAT_EXP
+;	add hl, de ; Load hl the location for the stat exp
+;	push de ; save de to be the first byte of the mon struct
+;	push hl
+;	ld hl, MON_STATS
+;	add hl, de
+;	ld d, h
+;	ld e, l ; load de the location for the 7 stat values
+;	pop hl
+;	ld b, TRUE
+;	predef CalcMonStats
+; Calculates all 6 Stats of a mon
+; b: Take into account stat EXP if TRUE
+; 'c' counts from 1-6 and points with 'wBaseStats' to the base value
+; hl is the path to the Stat EXP
+; de points to where the final stats will be saved
+;	pop de
+;	pop hl
+
+; Store the max hp into current hp
+	push de
+	ld hl, MON_MAXHP
+	add hl, de
+	ld b, h
+	ld c, l
+	ld hl, MON_HP
+	add hl, de
+	ld a, [bc]
+	inc bc
+	ld [hli], a
+	ld a, [bc]
+	ld [hl], a
+	pop de
+
+
+	ld a, e
+    add a, NICKNAMED_MON_STRUCT_LENGTH
+    ld e, a
+    jr nc, .next_mon
+    inc d
+.next_mon
+
+	xor a
+    ld [wCurSpecies], a
+    ld [wCurPartyLevel], a
+
 ; de now points to wBT_OTMon(n+1)
 ; Since NICKNAMED_MON_STRUCT_LENGTH fits wBT_OTMon(n) and wBT_OTMon(n)Name
 
@@ -203,6 +281,18 @@ LoadRandomBattleTowerMon:
 	ld a, [wBT_OTMon3]
 	ld [sBTMonPrevTrainer3], a
 	call CloseSRAM
+	ret
+
+CopyBCBytes:
+; Copies bc bytes from hl to de+a. Preserves de but (deliberately) not hl.
+	push de
+	add e
+	ld e, a
+	adc d
+	sub e
+	ld d, a
+	call CopyBytes
+	pop de
 	ret
 
 INCLUDE "data/battle_tower/classes.asm"

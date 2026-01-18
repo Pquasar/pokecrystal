@@ -44,7 +44,7 @@ _CheckForBattleTowerRules:
 .Functions:
 	dw CheckBTRule_PartyCountEq3
 	dw CheckBTRule_PartySpeciesAreUnique
-	dw CheckBTRule_PartyItemsAreUnique
+;	dw CheckBTRule_PartyItemsAreUnique ; Don't care about repeat items for now
 	dw CheckBTRule_HasPartyAnEgg
 
 .TextPointers:

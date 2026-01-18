@@ -1106,3 +1106,9 @@ BattleText_NoTimeLeftToday: ; unreferenced
 	text "There is no time"
 	line "left today!"
 	done
+
+BattleText_PrintNumber:
+	text "Stat: @"
+	text_decimal wTextDecimalByte, 1, 1
+	text "!"
+	prompt

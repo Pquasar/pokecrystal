@@ -180,6 +180,9 @@ CyndaquilPokeBallScript:
 	waitsfx
 	promptbutton
 	givepoke CYNDAQUIL, 100, BERRY
+	givepoke GOLEM, 70, LEFTOVERS
+	givepoke MEGANIUM, 70, LEFTOVERS
+	givepoke CROBAT, 70, LEFTOVERS
 	closetext
 	readvar VAR_FACING
 	ifequal RIGHT, ElmDirectionsScript
